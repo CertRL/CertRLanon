@@ -1,0 +1,30 @@
+opam-version: "2.0"
+name: "CertRL"
+version: "~dev"
+synopsis: "CertRL: Formalizing Convergence Proofs for Value and Policy Iteration in Coq"
+maintainer: "anon <anon@anon.com>"
+authors: "anon <anon@anon.com>"
+homepage: "https://github.com/CertRL/CertRLanon"
+depends: [
+  "ocaml" {>= "4.07.0"}
+  "coq" {>= "8.9.1"}
+  "coq-mathcomp-ssreflect"
+  "coq-coquelicot"
+  "coq-flocq"
+  "coq-interval" {<= "3.4.2"}
+  "coq-ext-lib"
+  "ocamlbuild"
+  "base64"
+  "menhir"
+  "csv"
+  "coq-coq2html" {with-doc}
+]
+build: [[make]
+       [make "doc"] {with-doc}
+       [make "test"] {with-test}
+       ]
+install: [make]
+dev-repo: "git+https://github.com/CertRL/CertRLanon.git"
+url {
+  src: "git+https://github.com/CertRL/CertRLanon.git"
+}

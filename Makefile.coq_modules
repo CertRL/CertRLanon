@@ -1,0 +1,52 @@
+QCERT_LIB_UTILS = LibUtilsAssoc LibUtilsBag LibUtilsBindings LibUtilsBindingsNat \
+		  LibUtilsClosure LibUtilsCompat LibUtilsCoqLibAdd LibUtilsDigits \
+		  LibUtilsFresh LibUtilsGroupByDomain LibUtilsInterleaved \
+		  LibUtilsLattice LibUtilsLift LibUtilsLiftIterators LibUtilsListAdd \
+		  LibUtilsResult LibUtilsSortingAdd LibUtilsStringAdd LibUtilsSublist \
+		  LibUtils
+
+ELFIC_UTILS	= R_compl check_sub_structure compatible continuous_linear_map fixed_point \
+		  hierarchyD hilbert linear_map logic_tricks
+
+
+MODULES =  $(addprefix lib_utils/,$(QCERT_LIB_UTILS)) \
+	utils/BasicUtils \
+	$(addprefix converge/LM/,$(ELFIC_UTILS)) \
+	utils/Assoc \
+	utils/CoquelicotAdd \
+	utils/ExtrFloatishIEEE \
+	utils/improper_integrals \
+	utils/Isomorphism \
+	utils/ListAdd \
+	utils/Finite \
+	utils/PairEncoding \
+	utils/RealAdd \
+	utils/RiemannAdd \
+	utils/StreamAdd \
+	utils/StreamLimits \
+	utils/Sums \
+	utils/nvector \
+	utils/Vector \
+	utils/Utils \
+	utils/Floatish/FloatishDef \
+	utils/Floatish/FloatishOps \
+	utils/Floatish/FloatishRealOps \
+	utils/Floatish/FloatishInterval \
+	utils/Floatish/FloatishIEEE \
+	utils/Floatish/FloatishReal \
+	utils/Floatish \
+	converge/pmf_monad \
+	converge/mdp \
+	converge/mdp_turtle \
+	converge/finite_time \
+	converge/cond_expt \
+	AxiomaticNormedRealVectorSpace \
+	BorelSigmaAlgebra \
+	DefinedFunctions \
+	derivlemmas \
+	Gaussian \
+	Gen_NN \
+	ProbSpace \
+	SigmaAlgebras \
+	sumtest
+	
