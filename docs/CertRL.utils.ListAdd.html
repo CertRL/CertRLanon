@@ -1,0 +1,966 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.utils.ListAdd</title>
+<meta name="description" content="Documentation of Coq module CertRL.utils.ListAdd" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.utils.ListAdd</h1>
+<div class="coq">
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html">List</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html">Permutation</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.RelationClasses.html">RelationClasses</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html">Morphisms</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.omega.Omega.html">Omega</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.micromega.Lra.html">Lra</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbase.html">Rbase</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html">Relation_Definitions</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html">Sorted</a></span>.<br/>
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="CertRL.lib_utils.LibUtils.html">LibUtils</a></span>.<br/>
+<br/>
+<span class="kwd">Import</span> <span class="id">ListNotations</span>.<br/>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="Map">Map</a></span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="removelast_map">removelast_map</a></span> {<span class="id">A</span> <span class="id">B</span> : <span class="kwd">Type</span>} (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) (<span class="id">l</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#removelast">removelast</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#removelast">removelast</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1266')">Proof.</div>
+<div class="proofscript" id="proof1266">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="tl_map">tl_map</a></span> {<span class="id">A</span> <span class="id">B</span> : <span class="kwd">Type</span>} (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) (<span class="id">l</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#tl">tl</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#tl">tl</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1267')">Proof.</div>
+<div class="proofscript" id="proof1267">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.utils.ListAdd.html#Map">Map</a></span>.<br/>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="Fold">Fold</a></span>.<br/>
+&nbsp;&nbsp;<span class="kwd">Context</span> {<span class="id">A</span> <span class="id">B</span> <span class="id">C</span>: <span class="kwd">Type</span>}.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="fold_right_map">fold_right_map</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#Fold.C">C</a></span> -&gt; <span class="id"><a href="CertRL.utils.ListAdd.html#Fold.A">A</a></span> -&gt; <span class="id"><a href="CertRL.utils.ListAdd.html#Fold.A">A</a></span>) (<span class="id">g</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#Fold.B">B</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#Fold.C">C</a></span>) (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#Fold.B">B</a></span>) (<span class="id">init</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#Fold.A">A</a></span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#init">init</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#g">g</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> (<span class="kwd">fun</span> <span class="id">a</span> <span class="id">b</span> =&gt; <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#g">g</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#a">a</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#b">b</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#init">init</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1268')">Proof.</div>
+<div class="proofscript" id="proof1268">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">revert</span> <span class="id">init</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.utils.ListAdd.html#Fold">Fold</a></span>.<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="fold_right_assoc_abs">fold_right_assoc_abs</a></span> {<span class="id">A</span>} (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">init</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">l</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">assoc</span>:<span class="kwd">forall</span> <span class="id">x</span> <span class="id">y</span> <span class="id">z</span> : <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>, <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#z">z</a></span>) = <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#z">z</a></span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">abs</span>:<span class="kwd">forall</span> <span class="id">x</span>, <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#init">init</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span> = <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#init">init</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#concat">concat</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) =<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#init">init</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#init">init</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1269')">Proof.</div>
+<div class="proofscript" id="proof1269">
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#fold_right_map">fold_right_map</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right_app">fold_right_app</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> &lt;- <span class="id">IHl</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> <span class="id">f</span> <span class="id">init</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#concat">concat</a></span> <span class="id">l</span>)); <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">a</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">auto</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id">IHa</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> <span class="id">f</span> <span class="id">init</span> <span class="id">a1</span>); <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">assoc</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="fold_right_plus_concat">fold_right_plus_concat</a></span> (<span class="id">l</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>)) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Rplus">Rplus</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R0">R0</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#concat">concat</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) =<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Rplus">Rplus</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R0">R0</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Rplus">Rplus</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R0">R0</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1270')">Proof.</div>
+<div class="proofscript" id="proof1270">
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.ListAdd.html#fold_right_assoc_abs">fold_right_assoc_abs</a></span>; <span class="tactic">intros</span>; <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="fold_right_plus_acc">fold_right_plus_acc</a></span> <span class="id">f</span> <span class="id">acc</span> <span class="id">l</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> (<span class="kwd">fun</span> (<span class="id">a</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>) (<span class="id">b</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) =&gt; <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#a">a</a></span> + <span class="id"><a href="CertRL.utils.ListAdd.html#b">b</a></span>)%<span class="id">R</span> <span class="id"><a href="CertRL.utils.ListAdd.html#acc">acc</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> =<br/>
+&nbsp;&nbsp;(<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> (<span class="kwd">fun</span> (<span class="id">a</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>) (<span class="id">b</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) =&gt; <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#a">a</a></span> + <span class="id"><a href="CertRL.utils.ListAdd.html#b">b</a></span>)%<span class="id">R</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R0">R0</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> + <span class="id"><a href="CertRL.utils.ListAdd.html#acc">acc</a></span>)%<span class="id">R</span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1271')">Proof.</div>
+<div class="proofscript" id="proof1271">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;- <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id">IHl</span>; <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="Seq">Seq</a></span>.<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="seq_shiftn">seq_shiftn</a></span> {<span class="id">A</span>:<span class="kwd">Type</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>)  (<span class="id">n</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span> + <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>)%<span class="id">nat</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> 0 (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>)).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1272')">Proof.</div>
+<div class="proofscript" id="proof1272">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">n</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id">erewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_ext">map_ext</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">erewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_id">map_id</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">intros</span>; <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">rewrite</span> &lt;- <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq_shift">seq_shift</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_map">map_map</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_ext">map_ext</a></span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="list_as_nthseq_start">list_as_nthseq_start</a></span> {<span class="id">A</span>:<span class="kwd">Type</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">d</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">c</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>) : <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> <span class="id">n</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>-<span class="id"><a href="CertRL.utils.ListAdd.html#c">c</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#c">c</a></span>%<span class="id">nat</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>)).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1273')">Proof.</div>
+<div class="proofscript" id="proof1273">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> &lt;- <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq_shift">seq_shift</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_map">map_map</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">c</span>-<span class="id">c</span>)%<span class="id">nat</span> <span class="kwd">with</span> 0%<span class="id">nat</span> <span class="tactic">by</span> <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_length">map_length</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq_length">seq_length</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_ext_in">map_ext_in</a></span>; <span class="tactic">intros</span> <span class="id">x</span> <span class="id">inn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#in_seq">in_seq</a></span> <span class="kwd">in</span> <span class="id">inn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> &lt;- <span class="id">IHl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">c</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">f_equal</span>; <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">assert</span> (<span class="id">x</span>-<span class="id">c</span> &gt; 0)%<span class="id">nat</span> <span class="tactic">by</span> <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">x</span> - <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id">c</span>)%<span class="id">nat</span> <span class="kwd">with</span> ((<span class="id">x</span> - <span class="id">c</span>) - 1)%<span class="id">nat</span> <span class="tactic">by</span> <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">x</span>-<span class="id">c</span>)%<span class="id">nat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">f_equal</span>; <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="list_as_nthseq">list_as_nthseq</a></span> {<span class="id">A</span>:<span class="kwd">Type</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">d</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) : <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> <span class="id">n</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> 0%<span class="id">nat</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>)).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1274')">Proof.</div>
+<div class="proofscript" id="proof1274">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#list_as_nthseq_start">list_as_nthseq_start</a></span> <span class="id">l</span> <span class="id">d</span> 0) <span class="tactic">at</span> 1.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_ext">map_ext</a></span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">f_equal</span>; <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="seq_Sn">seq_Sn</a></span> <span class="id">s</span> <span class="id">n</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#s">s</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#s">s</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> ++ [(<span class="id"><a href="CertRL.utils.ListAdd.html#s">s</a></span>+<span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>)]%<span class="id">nat</span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1275')">Proof.</div>
+<div class="proofscript" id="proof1275">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id">n</span>) <span class="kwd">with</span> (<span class="id">n</span> + 1)%<span class="id">nat</span> <span class="tactic">by</span> <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.lib_utils.LibUtilsListAdd.html#seq_plus">seq_plus</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="tl_seq">tl_seq</a></span> <span class="id">n</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#tl">tl</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> 0 <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> 1 (<span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>-1).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1276')">Proof.</div>
+<div class="proofscript" id="proof1276">
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">n</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Arith.PeanoNat.html#Nat.sub_0_r">Nat.sub_0_r</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="removelast_seq">removelast_seq</a></span> (<span class="id">n</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#removelast">removelast</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> 0 <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> 0 (<span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>-1).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1277')">Proof.</div>
+<div class="proofscript" id="proof1277">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">n</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Arith.PeanoNat.html#Nat.sub_0_r">Nat.sub_0_r</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> &lt;- <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq_shift">seq_shift</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#removelast_map">removelast_map</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHn</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq_shift">seq_shift</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">n</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Arith.PeanoNat.html#Nat.sub_0_r">Nat.sub_0_r</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="seq_shiftn_map">seq_shiftn_map</a></span> <span class="id">start</span> <span class="id">len</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#start">start</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#len">len</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Peano.html#plus">plus</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#start">start</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> 0 <span class="id"><a href="CertRL.utils.ListAdd.html#len">len</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1278')">Proof.</div>
+<div class="proofscript" id="proof1278">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">start</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_id">map_id</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> &lt;- <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq_shift">seq_shift</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHstart</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_map">map_map</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.utils.ListAdd.html#Seq">Seq</a></span>.<br/>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="fp">fp</a></span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="ForallOrdPairs_impl">ForallOrdPairs_impl</a></span> {<span class="id">A</span>:<span class="kwd">Type</span>} (<span class="id">R</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="kwd">Prop</span>) (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#ForallOrdPairs">ForallOrdPairs</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#ForallOrdPairs">ForallOrdPairs</a></span> (<span class="kwd">fun</span> <span class="id">x</span> <span class="id">y</span> =&gt; <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span> -&gt; <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>) (<span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span>)) <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#ForallOrdPairs">ForallOrdPairs</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1279')">Proof.</div>
+<div class="proofscript" id="proof1279">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">intros</span> <span class="id">FP</span>; <span class="tactic">inversion</span> <span class="id">FP</span>; <span class="tactic">clear</span> <span class="id">FP</span>; <span class="tactic">subst</span>; <span class="tactic">intros</span> <span class="id">FP</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">inversion</span> <span class="id">FP</span>; <span class="tactic">clear</span> <span class="id">FP</span>; <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall_forall">Forall_forall</a></span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">x</span> <span class="id">inn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#in_map_iff">in_map_iff</a></span> <span class="kwd">in</span> <span class="id">inn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">inn</span> <span class="kwd">as</span> [<span class="id">xx</span> [<span class="id">eqxx</span> <span class="id">inxx</span>]]; <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="ForallPairs_all">ForallPairs_all</a></span> {<span class="id">A</span>:<span class="kwd">Type</span>} (<span class="id">R</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="kwd">Prop</span>) (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="kwd">forall</span> <span class="id">x1</span> <span class="id">x2</span>, <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x1">x1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x2">x2</a></span>) -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#ForallPairs">ForallPairs</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1280')">Proof.</div>
+<div class="proofscript" id="proof1280">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.utils.ListAdd.html#fp">fp</a></span>.<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="nth_tl">nth_tl</a></span> {<span class="id">A</span>} <span class="id">idx</span> (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">d</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx">idx</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#tl">tl</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx">idx</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1281')">Proof.</div>
+<div class="proofscript" id="proof1281">
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">idx</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="nth_removelast_in">nth_removelast_in</a></span> {<span class="id">A</span>} <span class="id">idx</span> (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">d</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#idx">idx</a></span> &lt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Peano.html#pred">pred</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx">idx</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#removelast">removelast</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx">idx</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1282')">Proof.</div>
+<div class="proofscript" id="proof1282">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">idx</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>; <span class="tactic">intros</span> <span class="id">idx</span> <span class="id">inn</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">destruct</span> <span class="id">idx</span>; <span class="tactic">simpl</span> <span class="kwd">in</span> *; <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">simpl</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">idx</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHl</span> <span class="tactic">by</span> <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="nth_last">nth_last</a></span> {<span class="id">A</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">d</span>: <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Peano.html#pred">pred</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>)) <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#last">last</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1283')">Proof.</div>
+<div class="proofscript" id="proof1283">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">simpl</span> <span class="kwd">in</span> *; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="nth_hd">nth_hd</a></span> {<span class="id">A</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">d</span>: <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> 0 <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#hd">hd</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1284')">Proof.</div>
+<div class="proofscript" id="proof1284">
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">simpl</span> <span class="kwd">in</span> *; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="hd_app">hd_app</a></span> {<span class="id">A</span>} (<span class="id">l1</span> <span class="id">l2</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">d</span> : <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> &lt;&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#hd">hd</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> ++ <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#hd">hd</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1285')">Proof.</div>
+<div class="proofscript" id="proof1285">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l1</span>; <span class="tactic">simpl</span>; <span class="tactic">congruence</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="last_rev">last_rev</a></span> {<span class="id">A</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">d</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#last">last</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#hd">hd</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#rev">rev</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1286')">Proof.</div>
+<div class="proofscript" id="proof1286">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">simpl</span> <span class="id">rev</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#hd_app">hd_app</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="tactic">f_equal</span> (@<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id">A</span>)) <span class="kwd">in</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">simpl</span> <span class="kwd">in</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#app_length">app_length</a></span> <span class="kwd">in</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">simpl</span> <span class="kwd">in</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">omega</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="last_app">last_app</a></span> {<span class="id">A</span>} (<span class="id">l1</span> <span class="id">l2</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">d</span> : <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span> &lt;&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#last">last</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> ++ <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#last">last</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1287')">Proof.</div>
+<div class="proofscript" id="proof1287">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#last_rev">last_rev</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#rev_app_distr">rev_app_distr</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#hd_app">hd_app</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intro</span> <span class="id">eqq</span>; <span class="tactic">apply</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="tactic">f_equal</span> (@<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#rev">rev</a></span> <span class="id">A</span>)) <span class="kwd">in</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#rev_involutive">rev_involutive</a></span> <span class="kwd">in</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="last_cons">last_cons</a></span> {<span class="id">A</span>} (<span class="id">x</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">l</span> <span class="id">y</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#last">last</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>::<span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#last">last</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1288')">Proof.</div>
+<div class="proofscript" id="proof1288">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">y</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">simpl</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">IHl</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="seq_last">seq_last</a></span> <span class="id">s</span> <span class="id">n</span> <span class="id">d</span> :<br/>
+&nbsp;&nbsp;(<span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> &gt; 0)%<span class="id">nat</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#last">last</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#s">s</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span> = (<span class="id"><a href="CertRL.utils.ListAdd.html#s">s</a></span>+<span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>-1)%<span class="id">nat</span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1289')">Proof.</div>
+<div class="proofscript" id="proof1289">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">n</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">simpl</span>; <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#seq_Sn">seq_Sn</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#last_app">last_app</a></span> <span class="tactic">by</span> <span class="tactic">congruence</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">omega</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="last_map">last_map</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">d</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#last">last</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) (<span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span>) = <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#last">last</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d">d</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1290')">Proof.</div>
+<div class="proofscript" id="proof1290">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="map_nth_in">map_nth_in</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) <span class="id">l</span> <span class="id">d1</span> <span class="id">n</span> <span class="id">d2</span> :<br/>
+&nbsp;&nbsp;(<span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> &lt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>)%<span class="id">nat</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#d1">d1</a></span> = <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d2">d2</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1291')">Proof.</div>
+<div class="proofscript" id="proof1291">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">n</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">destruct</span> <span class="id">n</span>; <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">destruct</span> <span class="id">n</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span>; <span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHl</span>; <span class="tactic">trivial</span>; <span class="tactic">omega</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="map_nth_in_exists">map_nth_in_exists</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) <span class="id">l</span> <span class="id">d1</span> <span class="id">n</span> :<br/>
+&nbsp;&nbsp;(<span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> &lt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>)%<span class="id">nat</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id">exists</span> <span class="id">d2</span>,<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#d1">d1</a></span> = <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d2">d2</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1292')">Proof.</div>
+<div class="proofscript" id="proof1292">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">n</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">destruct</span> <span class="id">n</span>; <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">destruct</span> <span class="id">n</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">intros</span>; <span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">IHl</span> <span class="id">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">rewrite</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="nth_in_default">nth_in_default</a></span> {<span class="id">A</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">d1</span> <span class="id">d2</span> <span class="id">n</span> :<br/>
+&nbsp;&nbsp;(<span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> &lt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>)%<span class="id">nat</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d1">d1</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d2">d2</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1293')">Proof.</div>
+<div class="proofscript" id="proof1293">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">n</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">destruct</span> <span class="id">n</span>; <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">destruct</span> <span class="id">n</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">intros</span>; <span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> (<span class="id">IHl</span> <span class="id">n</span>); <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">omega</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Forall_app_iff">Forall_app_iff</a></span> {<span class="id">A</span>} {<span class="id">P</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="kwd">Prop</span>} {<span class="id">l1</span> <span class="id">l2</span>} :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall">Forall</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#P">P</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> ++ <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>) &lt;-&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall">Forall</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#P">P</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> /\ <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall">Forall</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#P">P</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1294')">Proof.</div>
+<div class="proofscript" id="proof1294">
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall_forall">Forall_forall</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#in_app_iff">in_app_iff</a></span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intuition</span>.<br/>
+Qed.</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="StronglySorted_app_inv">StronglySorted_app_inv</a></span> {<span class="id">A</span>} {<span class="id">R</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html#relation">relation</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>} {<span class="id">l1</span> <span class="id">l2</span>} :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> ++ <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>) -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> /\ <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1295')">Proof.</div>
+<div class="proofscript" id="proof1295">
+&nbsp;&nbsp;<span class="kwd">Hint</span> <span class="id">Constructors</span> <span class="id"><a href="CertRL.utils.ListAdd.html#StronglySorted">StronglySorted</a></span> : <span class="id">list</span>.<br/>
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">l2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l1</span>; <span class="tactic">intros</span> <span class="id">l2</span> <span class="id">ss</span>; <span class="tactic">simpl</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;- <span class="tactic">simpl</span> <span class="kwd">in</span> *; <span class="tactic">split</span>; <span class="tactic">trivial</span> <span class="kwd">with</span> <span class="id">list</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">inversion</span> <span class="id">ss</span>; <span class="tactic">subst</span>; <span class="tactic">clear</span> <span class="id">ss</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">IHl1</span> <span class="id">_</span> <span class="id">H1</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">split</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">constructor</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.ListAdd.html#Forall_app_iff">Forall_app_iff</a></span> <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">tauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="StronglySorted_sub">StronglySorted_sub</a></span> {<span class="id">A</span>} (<span class="id">R1</span> <span class="id">R2</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html#relation">relation</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.RelationClasses.html#subrelation">subrelation</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R1">R1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R2">R2</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">forall</span> <span class="id">l</span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R1">R1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R2">R2</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1296')">Proof.</div>
+<div class="proofscript" id="proof1296">
+&nbsp;&nbsp;<span class="kwd">Hint</span> <span class="id">Constructors</span> <span class="id"><a href="CertRL.utils.ListAdd.html#StronglySorted">StronglySorted</a></span> : <span class="id">list</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">sub</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">intros</span> <span class="id">ssl</span>; <span class="tactic">trivial</span> <span class="kwd">with</span> <span class="id">list</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">inversion</span> <span class="id">ssl</span>; <span class="tactic">clear</span> <span class="id">ssl</span>; <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">simpl</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;<span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">apply</span> <span class="id">IHl</span>; <span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall_forall">Forall_forall</a></span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+Qed.</div>
+&nbsp;&nbsp;<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="StronglySorted_map_in">StronglySorted_map_in</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">R1</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html#relation">relation</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">R2</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html#relation">relation</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) <span class="id">l</span> :<br/>
+&nbsp;&nbsp;(<span class="kwd">forall</span> <span class="id">x</span> <span class="id">y</span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> /\ <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt; <span class="id"><a href="CertRL.utils.ListAdd.html#R1">R1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span> -&gt; <span class="id"><a href="CertRL.utils.ListAdd.html#R2">R2</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>) (<span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span>)) -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R1">R1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R2">R2</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1297')">Proof.</div>
+<div class="proofscript" id="proof1297">
+&nbsp;&nbsp;<span class="kwd">Hint</span> <span class="id">Constructors</span> <span class="id"><a href="CertRL.utils.ListAdd.html#StronglySorted">StronglySorted</a></span> : <span class="id">list</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">prop</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">intros</span> <span class="id">ssl</span>; <span class="tactic">trivial</span> <span class="kwd">with</span> <span class="id">list</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">inversion</span> <span class="id">ssl</span>; <span class="tactic">clear</span> <span class="id">ssl</span>; <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">simpl</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;<span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">apply</span> <span class="id">IHl</span>; <span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall_forall">Forall_forall</a></span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">x</span> <span class="id">inn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#in_map_iff">in_map_iff</a></span> <span class="kwd">in</span> <span class="id">inn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">inn</span> <span class="kwd">as</span> [<span class="id">a</span>' [<span class="id">eqq</span> <span class="id">inn</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">subst</span>; <span class="tactic">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="StronglySorted_map">StronglySorted_map</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">R1</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html#relation">relation</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">R2</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html#relation">relation</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html#Proper">Proper</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#R1">R1</a></span> ==&gt; <span class="id"><a href="CertRL.utils.ListAdd.html#R2">R2</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> <span class="id">l</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R1">R1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R2">R2</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1298')">Proof.</div>
+<div class="proofscript" id="proof1298">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">eapply</span> <span class="id"><a href="CertRL.utils.ListAdd.html#StronglySorted_map_in">StronglySorted_map_in</a></span>; <span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="StronglySorted_compose">StronglySorted_compose</a></span> {<span class="id">A</span> <span class="id">B</span>} <span class="id">R</span> (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) &lt;-&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> (<span class="kwd">fun</span> <span class="id">x</span> <span class="id">y</span> =&gt; <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>) (<span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span>)) <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1299')">Proof.</div>
+<div class="proofscript" id="proof1299">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">split</span>; <span class="tactic">inversion</span> 1; <span class="tactic">subst</span>; <span class="id">constructor</span>; <span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">now</span> <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.lib_utils.LibUtilsCoqLibAdd.html#Forall_map">Forall_map</a></span> <span class="kwd">in</span> <span class="id">H3</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">now</span> <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.lib_utils.LibUtilsCoqLibAdd.html#Forall_map">Forall_map</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="StronglySorted_break">StronglySorted_break</a></span> {<span class="id">A</span>} <span class="id">R</span> (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">x</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id">exists</span> <span class="id">b</span> <span class="id">c</span>, <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> = <span class="id"><a href="CertRL.utils.ListAdd.html#b">b</a></span>++<span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>::<span class="id"><a href="CertRL.utils.ListAdd.html#c">c</a></span> /\ <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall">Forall</a></span> (<span class="kwd">fun</span> <span class="id">y</span> =&gt; <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#b">b</a></span> /\ <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall">Forall</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#c">c</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1300')">Proof.</div>
+<div class="proofscript" id="proof1300">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">intros</span> <span class="id">ss</span> <span class="id">inn</span>; [<span class="tactic">tauto</span> | ].<br/>
+&nbsp;&nbsp;<span class="id">invcs</span> <span class="id">ss</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">inn</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>, <span class="id">l</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">destruct</span> <span class="id">IHl</span> <span class="kwd">as</span> [<span class="id">b</span> [<span class="id">c</span> [<span class="id">p1</span> [<span class="id">p2</span> <span class="id">p3</span>]]]]; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> (<span class="id">a</span>::<span class="id">b</span>), <span class="id">c</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">simpl</span>; <span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">constructor</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall_forall">Forall_forall</a></span> <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H2</span> <span class="id">x</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#in_app_iff">in_app_iff</a></span> <span class="kwd">in</span> <span class="id">H2</span>; <span class="tactic">simpl</span> <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="StronglySorted_nth_lt">StronglySorted_nth_lt</a></span> {<span class="id">A</span>} <span class="id">R</span> (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">idx1</span> <span class="id">idx2</span> <span class="id">d1</span> <span class="id">d2</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt;<br/>
+&nbsp;&nbsp;(<span class="id"><a href="CertRL.utils.ListAdd.html#idx2">idx2</a></span> &lt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>)%<span class="id">nat</span> -&gt;<br/>
+&nbsp;&nbsp;(<span class="id"><a href="CertRL.utils.ListAdd.html#idx1">idx1</a></span> &lt; <span class="id"><a href="CertRL.utils.ListAdd.html#idx2">idx2</a></span>)%<span class="id">nat</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx1">idx1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d1">d1</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx2">idx2</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d2">d2</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1301')">Proof.</div>
+<div class="proofscript" id="proof1301">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> (@<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth_split">nth_split</a></span> <span class="id">_</span> <span class="id">idx1</span> <span class="id">l</span> <span class="id">d1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">as</span> [<span class="id">l1</span> [<span class="id">l2</span> [<span class="id">leqq</span> <span class="id">l1len</span>]]]<br/>
+&nbsp;&nbsp;; [ <span class="tactic">omega</span> | ].<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">leqq</span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.ListAdd.html#StronglySorted_app_inv">StronglySorted_app_inv</a></span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H</span> <span class="kwd">as</span> [ <span class="id">_</span> <span class="id">ssl2</span>].<br/>
+&nbsp;&nbsp;<span class="tactic">inversion</span> <span class="id">ssl2</span>; <span class="tactic">clear</span> <span class="id">ssl2</span>; <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">leqq</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#app_length">app_length</a></span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">simpl</span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">H4</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id">l1</span>) <span class="id">l</span> <span class="id">d1</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">clear</span> <span class="id">l</span> <span class="id">leqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">a</span> <span class="id">Fa</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall_forall">Forall_forall</a></span> <span class="kwd">in</span> <span class="id">Fa</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Fa</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#app_nth2">app_nth2</a></span> <span class="tactic">by</span> <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id">case_eq</span> (<span class="id">idx2</span> - <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id">l1</span>); <span class="tactic">try</span> <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth_In">nth_In</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">omega</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="StronglySorted_nth_le">StronglySorted_nth_le</a></span> {<span class="id">A</span>} <span class="id">R</span> (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">idx1</span> <span class="id">idx2</span> <span class="id">d1</span> <span class="id">d2</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html#reflexive">reflexive</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt;<br/>
+&nbsp;&nbsp;(<span class="id"><a href="CertRL.utils.ListAdd.html#idx2">idx2</a></span> &lt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>)%<span class="id">nat</span> -&gt;<br/>
+&nbsp;&nbsp;(<span class="id"><a href="CertRL.utils.ListAdd.html#idx1">idx1</a></span> &lt;= <span class="id"><a href="CertRL.utils.ListAdd.html#idx2">idx2</a></span>)%<span class="id">nat</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx1">idx1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d1">d1</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx2">idx2</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d2">d2</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1302')">Proof.</div>
+<div class="proofscript" id="proof1302">
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">refl</span> ?? <span class="id">leq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">leq</span>.<br/>
+&nbsp;&nbsp;- <span class="id">erewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#nth_in_default">nth_in_default</a></span>; <span class="tactic">try</span> <span class="tactic">apply</span> <span class="id">refl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.ListAdd.html#StronglySorted_nth_lt">StronglySorted_nth_lt</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">omega</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="bucket">bucket</a></span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Context</span> {<span class="id">A</span>:<span class="kwd">Type</span>} {<span class="id">R</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html#relation">relation</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>} (<span class="id">R_dec</span> : <span class="kwd">forall</span> <span class="id">x</span> <span class="id">y</span>, {<span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span>} + {~ <span class="id"><a href="CertRL.utils.ListAdd.html#R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span>}).<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Fixpoint</span> <span class="id"><a name="find_bucket">find_bucket</a></span> (<span class="id">needle</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.A">A</a></span>) (<span class="id">haystack</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.A">A</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="kwd">match</span> <span class="id"><a href="CertRL.utils.ListAdd.html#haystack">haystack</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">x</span>::((<span class="id">y</span>::<span class="id">_</span>) <span class="kwd">as</span> <span class="id">more</span>) =&gt; <span class="kwd">if</span> <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">x</span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">then</span> <span class="kwd">if</span> <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> <span class="id">y</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">then</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id">x</span>,<span class="id">y</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">else</span> <span class="id"><a href="CertRL.utils.ListAdd.html#find_bucket">find_bucket</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> <span class="id">more</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">else</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>.<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="find_bucket_break">find_bucket_break</a></span> {<span class="id">needle</span> <span class="id">l</span> <span class="id">a1</span> <span class="id">a2</span>}:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#find_bucket">find_bucket</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#a1">a1</a></span>, <span class="id"><a href="CertRL.utils.ListAdd.html#a2">a2</a></span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> <span class="id">l1</span> <span class="id">l2</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> = <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> ++ [<span class="id"><a href="CertRL.utils.ListAdd.html#a1">a1</a></span>; <span class="id"><a href="CertRL.utils.ListAdd.html#a2">a2</a></span>] ++ <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1303')">Proof.</div>
+<div class="proofscript" id="proof1303">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">try</span> <span class="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">try</span> <span class="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">a</span> <span class="id">needle</span>); <span class="tactic">try</span> <span class="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">needle</span> <span class="id">a0</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">inversion</span> 1; <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>, <span class="id">l</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">intros</span> <span class="id">HH</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">IHl</span> <span class="id">HH</span>) <span class="kwd">as</span> [<span class="id">l1</span> [<span class="id">l2</span> <span class="id">eqq</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> (<span class="id">a</span>::<span class="id">l1</span>), <span class="id">l2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="middle_find_bucket">middle_find_bucket</a></span> <span class="id">needle</span> <span class="id">l1</span> <span class="id">l2</span> <span class="id">a1</span> <span class="id">a2</span>:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html#transitive">transitive</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html#antisymmetric">antisymmetric</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span>++[<span class="id"><a href="CertRL.utils.ListAdd.html#a1">a1</a></span>]) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#a1">a1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#a2">a2</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;~ <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#a1">a1</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#find_bucket">find_bucket</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> ++ <span class="id"><a href="CertRL.utils.ListAdd.html#a1">a1</a></span>::<span class="id"><a href="CertRL.utils.ListAdd.html#a2">a2</a></span>::<span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#a1">a1</a></span>, <span class="id"><a href="CertRL.utils.ListAdd.html#a2">a2</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1304')">Proof.</div>
+<div class="proofscript" id="proof1304">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">trans</span> <span class="id">antisymm</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">sorted</span> <span class="id">r1</span> <span class="id">r2</span> <span class="id">nr1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">revert</span> <span class="id">sorted</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l1</span>; <span class="tactic">intros</span> <span class="id">sorted</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">a1</span> <span class="id">needle</span>); [ | <span class="tactic">tauto</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">needle</span> <span class="id">a2</span>); [ | <span class="tactic">tauto</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">simpl</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">inversion</span> <span class="id">sorted</span>; <span class="tactic">clear</span> <span class="id">sorted</span>; <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">IHl1</span> <span class="id">H1</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHl1</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">a</span> <span class="id">needle</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">destruct</span> <span class="id">l1</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">needle</span> <span class="id">a1</span>); <span class="tactic">tauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">needle</span> <span class="id">a0</span>); <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">elim</span> <span class="id">nr1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id">trans</span> <span class="id">_</span> <span class="id">a0</span>); <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">inversion</span> <span class="id">H1</span>; <span class="tactic">clear</span> <span class="id">H1</span>; <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall_forall">Forall_forall</a></span> <span class="kwd">in</span> <span class="id">H4</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">H4</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#in_app_iff">in_app_iff</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">simpl</span>; <span class="tactic">tauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall_forall">Forall_forall</a></span> <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">elim</span> <span class="id">n</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id">trans</span> <span class="id">_</span> <span class="id">a1</span>); <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#in_app_iff">in_app_iff</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">simpl</span>; <span class="tactic">tauto</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="find_bucket_nth_finds">find_bucket_nth_finds</a></span> <span class="id">needle</span> <span class="id">l</span> <span class="id">idx</span> <span class="id">d1</span> <span class="id">d2</span>:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html#transitive">transitive</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html#antisymmetric">antisymmetric</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx">idx</a></span> &lt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx">idx</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d1">d1</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx">idx</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d2">d2</a></span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;~ <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx">idx</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d1">d1</a></span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#find_bucket">find_bucket</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx">idx</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d1">d1</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#idx">idx</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d2">d2</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1305')">Proof.</div>
+<div class="proofscript" id="proof1305">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">trans</span> <span class="id">antisymm</span> <span class="id">ss</span> <span class="id">idx_bound</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">idx_bound</span>':<span class="id">idx</span> &lt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id">l</span>) <span class="tactic">by</span> <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth_split">nth_split</a></span> <span class="id">l</span> <span class="id">d1</span> <span class="id">idx_bound</span>') <span class="kwd">as</span> [<span class="id">l1</span> [<span class="id">l2</span> [<span class="id">eqq</span> <span class="id">leneq</span>]]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">revert</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id">idx</span> <span class="id">l</span> <span class="id">d1</span>); <span class="tactic">intros</span> <span class="id">a1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">eqq</span> <span class="id">r1</span> <span class="id">r2</span> <span class="id">nr1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#app_nth2">app_nth2</a></span> <span class="kwd">in</span> * <span class="tactic">by</span> <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> ((<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id">l1</span>) - <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id">l1</span>)) <span class="kwd">with</span> 1 <span class="kwd">in</span> * <span class="tactic">by</span> <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#app_length">app_length</a></span> <span class="kwd">in</span> <span class="id">idx_bound</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">simpl</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l2</span>; <span class="tactic">simpl</span> <span class="kwd">in</span> *; [ <span class="tactic">omega</span> | ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.ListAdd.html#middle_find_bucket">middle_find_bucket</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">l1</span> ++ <span class="id">a1</span> :: <span class="id">a</span> :: <span class="id">l2</span>) <span class="kwd">with</span> ((<span class="id">l1</span> ++ <span class="id">a1</span>::<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>) ++ (<span class="id">a</span> :: <span class="id">l2</span>)) <span class="kwd">in</span> <span class="id">ss</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.ListAdd.html#StronglySorted_app_inv">StronglySorted_app_inv</a></span> <span class="kwd">in</span> <span class="id">ss</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">tauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#app_ass">app_ass</a></span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="find_bucket_needle_in">find_bucket_needle_in</a></span> <span class="id">needle</span> <span class="id">l</span> <span class="id">a1</span> <span class="id">a2</span>:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#find_bucket">find_bucket</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#a1">a1</a></span>, <span class="id"><a href="CertRL.utils.ListAdd.html#a2">a2</a></span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#a1">a1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> /\ <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#a2">a2</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1306')">Proof.</div>
+<div class="proofscript" id="proof1306">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">try</span> <span class="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">try</span> <span class="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">a</span> <span class="id">needle</span>); <span class="tactic">try</span> <span class="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">needle</span> <span class="id">a0</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">inversion</span> 1; <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">tauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="find_bucket_bucket_in">find_bucket_bucket_in</a></span> <span class="id">needle</span> <span class="id">l</span> <span class="id">a1</span> <span class="id">a2</span> <span class="id">d1</span> <span class="id">d2</span>:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html#reflexive">reflexive</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#find_bucket">find_bucket</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#a1">a1</a></span>, <span class="id"><a href="CertRL.utils.ListAdd.html#a2">a2</a></span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#hd">hd</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d1">d1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#a1">a1</a></span> /\ <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#a2">a2</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#last">last</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d2">d2</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1307')">Proof.</div>
+<div class="proofscript" id="proof1307">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">refl</span> <span class="id">ssl</span> <span class="id">eqq1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#find_bucket_break">find_bucket_break</a></span> <span class="id">eqq1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">as</span> [<span class="id">l1</span> [<span class="id">l2</span> <span class="id">eqq2</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">l1</span> ++ [<span class="id">a1</span>; <span class="id">a2</span>] ++ <span class="id">l2</span>) <span class="kwd">with</span> ((<span class="id">l1</span> ++ <span class="id">a1</span>::<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>) ++ (<span class="id">a2</span>::<span class="id">l2</span>)) <span class="kwd">in</span> <span class="id">eqq2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.ListAdd.html#StronglySorted_app_inv">StronglySorted_app_inv</a></span> <span class="kwd">in</span> <span class="id">ssl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">ssl</span> <span class="kwd">as</span> [<span class="id">ssl1</span> <span class="id">ssl2</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">destruct</span> <span class="id">l1</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">apply</span> <span class="id">refl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">inversion</span> <span class="id">ssl1</span>; <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall_forall">Forall_forall</a></span> <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#in_app_iff">in_app_iff</a></span>; <span class="tactic">simpl</span>; <span class="tactic">tauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">inversion</span> <span class="id">ssl2</span>; <span class="tactic">clear</span> <span class="id">ssl2</span>; <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#last_app">last_app</a></span> <span class="tactic">by</span> <span class="tactic">congruence</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall_forall">Forall_forall</a></span> <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">apply</span> <span class="id">refl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">apply</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">clear</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id">revert</span> <span class="id">a</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">simpl</span>; <span class="tactic">tauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">simpl</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#app_ass">app_ass</a></span>; <span class="tactic">simpl</span>; <span class="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="find_bucket_bounded_le_exists">find_bucket_bounded_le_exists</a></span> <span class="id">a</span> <span class="id">b</span> <span class="id">l</span> (<span class="id">needle</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.A">A</a></span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="kwd">forall</span> <span class="id">x</span> <span class="id">y</span>, <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span> \/ <span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#a">a</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R">R</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#b">b</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> <span class="id">lower</span> <span class="id">upper</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#find_bucket">find_bucket</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#needle">needle</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#a">a</a></span>::<span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>++[<span class="id"><a href="CertRL.utils.ListAdd.html#b">b</a></span>]) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#lower">lower</a></span>, <span class="id"><a href="CertRL.utils.ListAdd.html#upper">upper</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1308')">Proof.</div>
+<div class="proofscript" id="proof1308">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">total</span> <span class="id">r1</span> <span class="id">r2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">a</span> <span class="id">needle</span>); [ | <span class="tactic">tauto</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">needle</span> <span class="id">b</span>); [ | <span class="tactic">tauto</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">destruct</span> (<span class="id">IHl</span>) <span class="kwd">as</span> [<span class="id">lower</span> [<span class="id">upper</span> <span class="id">eqq</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">needle</span> <span class="id">a0</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">clear</span> <span class="id">IHl</span> <span class="id">r</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">a0</span> <span class="id">needle</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">simpl</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">needle</span> <span class="id">b</span>); <span class="tactic">simpl</span>; <span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">destruct</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#bucket.R_dec">R_dec</a></span> <span class="id">needle</span> <span class="id">a1</span>); <span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">destruct</span> (<span class="id">total</span> <span class="id">needle</span> <span class="id">a0</span>); <span class="tactic">tauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.utils.ListAdd.html#bucket">bucket</a></span>.<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="StronglySorted_seq">StronglySorted_seq</a></span> <span class="id">s</span> <span class="id">n</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Peano.html#lt">lt</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#s">s</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1309')">Proof.</div>
+<div class="proofscript" id="proof1309">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">n</span>; <span class="tactic">intros</span> <span class="id">s</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;- <span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;- <span class="id">constructor</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#Forall_forall">Forall_forall</a></span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#in_seq">in_seq</a></span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">omega</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="length_S_tl">length_S_tl</a></span> {<span class="id">A</span> : <span class="kwd">Type</span>} (<span class="id">l</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> &lt;&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#tl">tl</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>)).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1310')">Proof.</div>
+<div class="proofscript" id="proof1310">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">congruence</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="tl_length">tl_length</a></span> {<span class="id">A</span> : <span class="kwd">Type</span>} (<span class="id">l</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#tl">tl</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Peano.html#pred">pred</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1311')">Proof.</div>
+<div class="proofscript" id="proof1311">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">congruence</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="removelast_length">removelast_length</a></span> {<span class="id">A</span> : <span class="kwd">Type</span>} (<span class="id">l</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#removelast">removelast</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Peano.html#pred">pred</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1312')">Proof.</div>
+<div class="proofscript" id="proof1312">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">simpl</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHl</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="combining">combining</a></span>.<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="combine_nth_in">combine_nth_in</a></span> {<span class="id">A</span> <span class="id">B</span> : <span class="kwd">Type</span>} (<span class="id">l</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">l</span>' : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) (<span class="id">n</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>) (<span class="id">x</span> : <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">y</span> : <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> &lt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Peano.html#min">min</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id">l</span>') -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine">combine</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id">l</span>') (<span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>, <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span>) = (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> <span class="id">l</span>' <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1313')">Proof.</div>
+<div class="proofscript" id="proof1313">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">l</span>' <span class="id">n</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">intros</span> <span class="id">l</span>' <span class="id">n</span> <span class="id">nlt</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">destruct</span> <span class="id">l</span>'; <span class="tactic">simpl</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">destruct</span> <span class="id">n</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">IHl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">omega</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="combine_map">combine_map</a></span> {<span class="id">A</span> <span class="id">B</span> <span class="id">C</span> <span class="id">D</span>:<span class="kwd">Type</span>} (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#C">C</a></span>) (<span class="id">g</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#D">D</a></span>) (<span class="id">l1</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">l2</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine">combine</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#g">g</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> '(<span class="id">x</span>,<span class="id">y</span>) =&gt; (<span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>, <span class="id"><a href="CertRL.utils.ListAdd.html#g">g</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span>)) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine">combine</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1314')">Proof.</div>
+<div class="proofscript" id="proof1314">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">l2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l1</span>; <span class="tactic">intros</span> <span class="id">l2</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l2</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="combine_self">combine_self</a></span> {<span class="id">A</span>:<span class="kwd">Type</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine">combine</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; (<span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>,<span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>)) <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1315')">Proof.</div>
+<div class="proofscript" id="proof1315">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">f_equal</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="combine_nil_l">combine_nil_l</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine">combine</a></span> (@<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1316')">Proof.</div>
+<div class="proofscript" id="proof1316">
+&nbsp;&nbsp;<span class="tactic">reflexivity</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="combine_nil_r">combine_nil_r</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine">combine</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> (@<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1317')">Proof.</div>
+<div class="proofscript" id="proof1317">
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="combine_swap">combine_swap</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">l1</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">l2</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine">combine</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> <span class="id">xy</span> =&gt; (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#snd">snd</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#xy">xy</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#xy">xy</a></span>)) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine">combine</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1318')">Proof.</div>
+<div class="proofscript" id="proof1318">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">l2</span>; <span class="tactic">induction</span> <span class="id">l1</span>; <span class="tactic">simpl</span>; <span class="tactic">intros</span><br/>
+&nbsp;&nbsp;; <span class="tactic">destruct</span> <span class="id">l2</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHl1</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="combine_domain_eq">combine_domain_eq</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">y</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span> -&gt; <span class="id"><a href="CertRL.lib_utils.LibUtilsAssoc.html#domain">domain</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine">combine</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span>) = <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1319')">Proof.</div>
+<div class="proofscript" id="proof1319">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">y</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">x</span>; <span class="tactic">destruct</span> <span class="id">y</span>; <span class="tactic">simpl</span> <span class="kwd">in</span> *; <span class="tactic">intros</span><br/>
+&nbsp;&nbsp;; <span class="tactic">try</span> <span class="id">easy</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">inversion</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHx</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="list_prod_map">list_prod_map</a></span> {<span class="id">A</span> <span class="id">B</span> <span class="id">C</span> <span class="id">D</span>:<span class="kwd">Type</span>} (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#C">C</a></span>) (<span class="id">g</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#D">D</a></span>) (<span class="id">l1</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">l2</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#list_prod">list_prod</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#g">g</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> '(<span class="id">x</span>,<span class="id">y</span>) =&gt; (<span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>, <span class="id"><a href="CertRL.utils.ListAdd.html#g">g</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span>)) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#list_prod">list_prod</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1320')">Proof.</div>
+<div class="proofscript" id="proof1320">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">l2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l1</span>; <span class="tactic">intros</span> <span class="id">l2</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_app">map_app</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_map">map_map</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHl1</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="list_prod_nil_l">list_prod_nil_l</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#list_prod">list_prod</a></span> (@<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1321')">Proof.</div>
+<div class="proofscript" id="proof1321">
+&nbsp;&nbsp;<span class="tactic">reflexivity</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="list_prod_nil_r">list_prod_nil_r</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#list_prod">list_prod</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> (@<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1322')">Proof.</div>
+<div class="proofscript" id="proof1322">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="list_prod_cons2_pred">list_prod_cons2_pred</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">l1</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">a</span> (<span class="id">l2</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation">Permutation</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#list_prod">list_prod</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#a">a</a></span> :: <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>)) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> <span class="id">x</span> : <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span> =&gt; (<span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>, <span class="id"><a href="CertRL.utils.ListAdd.html#a">a</a></span>)) <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> ++ <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#list_prod">list_prod</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1323')">Proof.</div>
+<div class="proofscript" id="proof1323">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">a</span> <span class="id">l2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l1</span>; <span class="tactic">simpl</span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id">IHl1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation_cons">Permutation_cons</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> &lt;- <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#app_ass">app_ass</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation_app">Permutation_app</a></span>; [ | <span class="tactic">reflexivity</span> ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation_app_swap">Permutation_app_swap</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">reflexivity</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="list_prod_swap">list_prod_swap</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">l1</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">l2</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation">Permutation</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#list_prod">list_prod</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> <span class="id">xy</span> =&gt; (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#snd">snd</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#xy">xy</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#xy">xy</a></span>)) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#list_prod">list_prod</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span>)).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1324')">Proof.</div>
+<div class="proofscript" id="proof1324">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">l1</span>; <span class="tactic">induction</span> <span class="id">l2</span>; <span class="tactic">simpl</span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#list_prod_nil_r">list_prod_nil_r</a></span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_app">map_app</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> &lt;- <span class="id">IHl2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_map">map_map</a></span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.ListAdd.html#list_prod_cons2_pred">list_prod_cons2_pred</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Instance</span> <span class="id"><a name="list_prod_perm_proper1">list_prod_perm_proper1</a></span> {<span class="id">A</span> <span class="id">B</span>} : <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html#Proper">Proper</a></span> ((@<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation">Permutation</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) ==&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#eq">eq</a></span> ==&gt; (@<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation">Permutation</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>*<span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>))) (@<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#list_prod">list_prod</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1325')">Proof.</div>
+<div class="proofscript" id="proof1325">
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">l1</span> <span class="id">l1</span>' <span class="id">perm1</span> <span class="id">l2</span>' <span class="id">l2</span> <span class="id">eqq</span>; <span class="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">l1</span> <span class="id">l1</span>' <span class="id">perm1</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation_ind_bis">Permutation_ind_bis</a></span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">H0</span>; <span class="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> &lt;- <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#app_ass">app_ass</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation_app">Permutation_app</a></span>; [ | <span class="tactic">reflexivity</span> ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation_app_swap">Permutation_app_swap</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id">etransitivity</span>; <span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Global</span> <span class="kwd">Instance</span> <span class="id"><a name="list_prod_perm_proper">list_prod_perm_proper</a></span> {<span class="id">A</span> <span class="id">B</span>} : <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html#Proper">Proper</a></span> ((@<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation">Permutation</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) ==&gt; (@<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation">Permutation</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) ==&gt; (@<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation">Permutation</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>*<span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>))) (@<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#list_prod">list_prod</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1326')">Proof.</div>
+<div class="proofscript" id="proof1326">
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">l1</span> <span class="id">l1</span>' <span class="id">perm1</span> <span class="id">l2</span> <span class="id">l2</span>' <span class="id">perm2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">transitivity</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#list_prod">list_prod</a></span> <span class="id">l1</span>' <span class="id">l2</span>).<br/>
+&nbsp;&nbsp;- <span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.ListAdd.html#list_prod_perm_proper1">list_prod_perm_proper1</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#list_prod_swap">list_prod_swap</a></span> <span class="id">l1</span>' <span class="id">l2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> (<span class="id"><a href="CertRL.utils.ListAdd.html#list_prod_swap">list_prod_swap</a></span> <span class="id">l1</span>' <span class="id">l2</span>').<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html#Permutation_map">Permutation_map</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.ListAdd.html#list_prod_perm_proper1">list_prod_perm_proper1</a></span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="combine_incl_list_prod">combine_incl_list_prod</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">l1</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) (<span class="id">l2</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#incl">incl</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine">combine</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#list_prod">list_prod</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l1">l1</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l2">l2</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1327')">Proof.</div>
+<div class="proofscript" id="proof1327">
+&nbsp;&nbsp;<span class="tactic">intros</span> [<span class="id">x</span> <span class="id">y</span>] <span class="id">inn</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#in_prod_iff">in_prod_iff</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">split</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">eapply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#in_combine_l">in_combine_l</a></span>; <span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">eapply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#in_combine_r">in_combine_r</a></span>; <span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.utils.ListAdd.html#combining">combining</a></span>.<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="adjacent_pairs">adjacent_pairs</a></span> {<span class="id">A</span>:<span class="kwd">Type</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) := (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine">combine</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#tl">tl</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>)).<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="adjacent_pairs_alt">adjacent_pairs_alt</a></span> {<span class="id">A</span>:<span class="kwd">Type</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) := (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine">combine</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#removelast">removelast</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#tl">tl</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>)).<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="adjacent_pairs_alt_eq">adjacent_pairs_alt_eq</a></span> {<span class="id">A</span>:<span class="kwd">Type</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs">adjacent_pairs</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> = <span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs_alt">adjacent_pairs_alt</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1328')">Proof.</div>
+<div class="proofscript" id="proof1328">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs">adjacent_pairs</a></span>, <span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs_alt">adjacent_pairs_alt</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">l</span>; <span class="tactic">simpl</span> <span class="kwd">in</span> *; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="adjacent_pairs_length">adjacent_pairs_length</a></span> {<span class="id">A</span>:<span class="kwd">Type</span>} (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs">adjacent_pairs</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Peano.html#pred">pred</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1329')">Proof.</div>
+<div class="proofscript" id="proof1329">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs">adjacent_pairs</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine_length">combine_length</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#tl_length">tl_length</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Arith.PeanoNat.html#Nat.min_r">Nat.min_r</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">omega</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="adjacent_pairs_nth_in">adjacent_pairs_nth_in</a></span> {<span class="id">A</span>:<span class="kwd">Type</span>} <span class="id">n</span> (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) <span class="id">d1</span> <span class="id">d2</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> &lt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> (<span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs">adjacent_pairs</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) (<span class="id"><a href="CertRL.utils.ListAdd.html#d1">d1</a></span>,<span class="id"><a href="CertRL.utils.ListAdd.html#d2">d2</a></span>) = (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d1">d1</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>) <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#d2">d2</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1330')">Proof.</div>
+<div class="proofscript" id="proof1330">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs">adjacent_pairs</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#combine_nth_in">combine_nth_in</a></span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#nth_tl">nth_tl</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#tl_length">tl_length</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Arith.PeanoNat.html#Nat.min_r">Nat.min_r</a></span>; <span class="tactic">omega</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="adjacent_pairs_map">adjacent_pairs_map</a></span> {<span class="id">A</span> <span class="id">B</span>:<span class="kwd">Type</span>} (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>-&gt;<span class="id"><a href="CertRL.utils.ListAdd.html#B">B</a></span>) (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#A">A</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs">adjacent_pairs</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> '(<span class="id">x</span>,<span class="id">y</span>) =&gt; (<span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#x">x</a></span>, <span class="id"><a href="CertRL.utils.ListAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#y">y</a></span>)) (<span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs">adjacent_pairs</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#l">l</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1331')">Proof.</div>
+<div class="proofscript" id="proof1331">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs">adjacent_pairs</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.ListAdd.html#tl_map">tl_map</a></span>, <span class="id"><a href="CertRL.utils.ListAdd.html#combine_map">combine_map</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="adjacent_pairs_seq">adjacent_pairs_seq</a></span> <span class="id">s</span> <span class="id">n</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs">adjacent_pairs</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#s">s</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> <span class="id">i</span> =&gt; (<span class="id"><a href="CertRL.utils.ListAdd.html#i">i</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#i">i</a></span>)) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#s">s</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Peano.html#pred">pred</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html#n">n</a></span>)).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1332')">Proof.</div>
+<div class="proofscript" id="proof1332">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs">adjacent_pairs</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">n</span>; <span class="tactic">simpl</span>; <span class="tactic">intros</span> <span class="id">s</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">n</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">IHn</span>.<br/>
+Qed.</div>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

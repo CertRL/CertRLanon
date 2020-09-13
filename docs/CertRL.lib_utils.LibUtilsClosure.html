@@ -1,0 +1,48 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.lib_utils.LibUtilsClosure</title>
+<meta name="description" content="Documentation of Coq module CertRL.lib_utils.LibUtilsClosure" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.lib_utils.LibUtilsClosure</h1>
+<div class="coq">
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html">String</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html">List</a></span>.<br/>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="Closure">Closure</a></span>.<br/>
+<div class="doc">Function closures over code <span class="bracket"><span class="id">C</span></span> and types <span class="bracket"><span class="id">T</span></span> </div>
+&nbsp;&nbsp;<span class="kwd">Context</span> {<span class="id">C</span>:<span class="kwd">Set</span>}.<br/>
+&nbsp;&nbsp;<span class="kwd">Context</span> {<span class="id">T</span>:<span class="kwd">Set</span>}.<br/>
+<br/>
+<div class="doc">Assuming we can compute free variables in code </div>
+&nbsp;&nbsp;<span class="kwd">Context</span> {<span class="id">free_vars</span> : <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#Closure.C">C</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span>}.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="code_closed_for_params">code_closed_for_params</a></span> (<span class="id">params</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span>) (<span class="id">c</span>:<span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#Closure.C">C</a></span>) : <span class="kwd">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">forall</span> <span class="id">v</span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#v">v</a></span> (<span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#Closure.free_vars">free_vars</a></span> <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#c">c</a></span>) -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#v">v</a></span> <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#params">params</a></span>.<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="kwd">Record</span> <span class="id"><a name="closure">closure</a></span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a name="mkClosure">mkClosure</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id"><a name="closure_params">closure_params</a></span>: <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span> * <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#Closure.T">T</a></span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a name="closure_output">closure_output</a></span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#Closure.T">T</a></span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a name="closure_body">closure_body</a></span> : <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#Closure.C">C</a></span>; }.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="closure_is_closed">closure_is_closed</a></span> (<span class="id">f</span>:<span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#closure">closure</a></span>) : <span class="kwd">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#code_closed_for_params">code_closed_for_params</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#f">f</a></span>.(<span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#closure_params">closure_params</a></span>)) <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#f">f</a></span>.(<span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#closure_body">closure_body</a></span>).<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="closed_closure">closed_closure</a></span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id">c</span> : <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#closure">closure</a></span> | <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#closure_is_closed">closure_is_closed</a></span> <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#c">c</a></span> }.<br/>
+&nbsp;&nbsp;<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.lib_utils.LibUtilsClosure.html#Closure">Closure</a></span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

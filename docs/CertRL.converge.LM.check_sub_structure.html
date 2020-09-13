@@ -1,0 +1,277 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.converge.LM.check_sub_structure</title>
+<meta name="description" content="Documentation of Coq module CertRL.converge.LM.check_sub_structure" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.converge.LM.check_sub_structure</h1>
+<div class="coq">
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Export</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Reals.html">Reals</a></span> <span class="id">Coquelicot.Coquelicot</span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Export</span> <span class="id"><a href="CertRL.converge.LM.compatible.html">compatible</a></span> <span class="id"><a href="CertRL.converge.LM.hilbert.html">hilbert</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Export</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.ProofIrrelevance.html">ProofIrrelevance</a></span>.<br/>
+<br/>
+<div class="doc">Sub-groups </div>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="Subgroups">Subgroups</a></span>.<br/>
+<br/>
+<span class="kwd">Context</span> {<span class="id">G</span> : <span class="id">AbelianGroup</span>}.<br/>
+<span class="kwd">Context</span> {<span class="id">P</span>: <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subgroups.G">G</a></span> -&gt; <span class="kwd">Prop</span>}.<br/>
+<span class="kwd">Context</span> {<span class="id">CCP</span>: <span class="id"><a href="CertRL.converge.LM.compatible.html#compatible_g">compatible_g</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subgroups.P">P</a></span>}.<br/>
+<br/>
+<span class="kwd">Record</span> <span class="id"><a name="Sg">Sg</a></span>:= <span class="id"><a name="mk_Sg">mk_Sg</a></span> {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a name="val">val</a></span> :&gt; <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subgroups.G">G</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a name="H">H</a></span>: <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subgroups.P">P</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#val">val</a></span><br/>
+}.<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_eq">Sg_eq</a></span>: <span class="kwd">forall</span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>), (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#val">val</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> = <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#val">val</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span>) -&gt; <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> = <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1003')">Proof.</div>
+<div class="proofscript" id="proof1003">
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">H</span>.<br/>
+<span class="tactic">destruct</span> <span class="id">x</span>; <span class="tactic">destruct</span> <span class="id">y</span>.<br/>
+<span class="tactic">simpl</span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+<span class="id">revert</span> <span class="id">H0</span> <span class="id">H1</span>.<br/>
+<span class="tactic">rewrite</span> &lt;- <span class="id">H</span>.<br/>
+<span class="tactic">intros</span> <span class="id">H0</span> <span class="id">H1</span>; <span class="tactic">f_equal</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.ProofIrrelevance.html#proof_irrelevance">proof_irrelevance</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="Sg_zero">Sg_zero</a></span> : <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> := <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#mk_Sg">mk_Sg</a></span> <span class="id">zero</span> (<span class="id"><a href="CertRL.converge.LM.compatible.html#compatible_g_zero">compatible_g_zero</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subgroups.P">P</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subgroups.CCP">CCP</a></span>).<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="Sg_plus">Sg_plus</a></span> (<span class="id">x</span> <span class="id">y</span> : <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>) : <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#mk_Sg">mk_Sg</a></span> (<span class="id">plus</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="CertRL.converge.LM.compatible.html#compatible_g_plus">compatible_g_plus</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subgroups.P">P</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#val">val</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>) (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#val">val</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span>) <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subgroups.CCP">CCP</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#H">H</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>) (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#H">H</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span>)).<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="Sg_opp">Sg_opp</a></span> (<span class="id">x</span> : <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>) : <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#mk_Sg">mk_Sg</a></span> (<span class="id">opp</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="CertRL.converge.LM.compatible.html#compatible_g_opp">compatible_g_opp</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subgroups.P">P</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#val">val</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>) <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subgroups.CCP">CCP</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#H">H</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>)).<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_plus_comm">Sg_plus_comm</a></span>: <span class="kwd">forall</span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>), <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span> = <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1004')">Proof.</div>
+<div class="proofscript" id="proof1004">
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span>; <span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_eq">Sg_eq</a></span>.<br/>
+<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span>; <span class="tactic">simpl</span>.<br/>
+<span class="tactic">apply</span> <span class="id">plus_comm</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_plus_assoc">Sg_plus_assoc</a></span>:<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">z</span>:<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> ), <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#z">z</a></span>) = <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span>) <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#z">z</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1005')">Proof.</div>
+<div class="proofscript" id="proof1005">
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">z</span>; <span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_eq">Sg_eq</a></span>.<br/>
+<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span>; <span class="tactic">simpl</span>.<br/>
+<span class="tactic">apply</span> <span class="id">plus_assoc</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_plus_zero_r">Sg_plus_zero_r</a></span>: <span class="kwd">forall</span> <span class="id">x</span>:<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>, <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_zero">Sg_zero</a></span> = <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1006')">Proof.</div>
+<div class="proofscript" id="proof1006">
+<span class="tactic">intros</span> <span class="id">x</span>; <span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_eq">Sg_eq</a></span>.<br/>
+<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span>; <span class="tactic">simpl</span>.<br/>
+<span class="tactic">apply</span> <span class="id">plus_zero_r</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_plus_opp_r">Sg_plus_opp_r</a></span>: <span class="kwd">forall</span> <span class="id">x</span>:<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>, <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_opp">Sg_opp</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>) = <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_zero">Sg_zero</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1007')">Proof.</div>
+<div class="proofscript" id="proof1007">
+<span class="tactic">intros</span> <span class="id">x</span>; <span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_eq">Sg_eq</a></span>.<br/>
+<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span>; <span class="tactic">simpl</span>.<br/>
+<span class="tactic">apply</span> <span class="id">plus_opp_r</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="Sg_AbelianGroup_mixin">Sg_AbelianGroup_mixin</a></span> :=<br/>
+&nbsp;&nbsp;<span class="id">AbelianGroup.Mixin</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_opp">Sg_opp</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_zero">Sg_zero</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus_comm">Sg_plus_comm</a></span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus_assoc">Sg_plus_assoc</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus_zero_r">Sg_plus_zero_r</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus_opp_r">Sg_plus_opp_r</a></span>.<br/>
+<br/>
+<span class="id">Canonical</span> <span class="id"><a name="Sg_AbelianGroup">Sg_AbelianGroup</a></span> :=<br/>
+&nbsp;&nbsp;<span class="id">AbelianGroup.Pack</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_AbelianGroup_mixin">Sg_AbelianGroup_mixin</a></span>) <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>.<br/>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subgroups">Subgroups</a></span>.<br/>
+<br/>
+<div class="doc">Sub-modules </div>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="Submodules">Submodules</a></span>.<br/>
+<br/>
+<span class="kwd">Context</span> {<span class="id">G</span> : <span class="id">ModuleSpace</span> <span class="id">R_Ring</span>}.<br/>
+<span class="kwd">Context</span> {<span class="id">P</span>: <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules.G">G</a></span> -&gt; <span class="kwd">Prop</span>}.<br/>
+<br/>
+<span class="kwd">Hypothesis</span> <span class="id"><a name="Submodules.CPM">CPM</a></span>: <span class="id"><a href="CertRL.converge.LM.compatible.html#compatible_m">compatible_m</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules.P">P</a></span>.<br/>
+<br/>
+<span class="kwd">Let</span> <span class="id"><a name="Submodules.Sg_Mplus">Sg_Mplus</a></span> := (@<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules.P">P</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#proj1">proj1</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules.CPM">CPM</a></span>)).<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="Sg_scal">Sg_scal</a></span> <span class="id">a</span> (<span class="id">x</span>: <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>) : (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>):=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#mk_Sg">mk_Sg</a></span> (<span class="id">scal</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#a">a</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#val">val</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="CertRL.converge.LM.compatible.html#compatible_m_scal">compatible_m_scal</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules.P">P</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#a">a</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#val">val</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>) <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules.CPM">CPM</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#H">H</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>)).<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_mult_one_l">Sg_mult_one_l</a></span> : <span class="kwd">forall</span> (<span class="id">x</span> : <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>), <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span> (@<span class="id">one</span> <span class="id">R_Ring</span>) <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> = <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1008')">Proof.</div>
+<div class="proofscript" id="proof1008">
+<span class="tactic">intros</span> <span class="id">x</span>; <span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_eq">Sg_eq</a></span>.<br/>
+<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span>; <span class="tactic">simpl</span>.<br/>
+<span class="tactic">apply</span> <span class="id">scal_one</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_mult_assoc">Sg_mult_assoc</a></span> : <span class="kwd">forall</span> <span class="id">x</span> <span class="id">y</span> (<span class="id">f</span>: <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>), <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#f">f</a></span>) = <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span> (<span class="id">mult</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span>) <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#f">f</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1009')">Proof.</div>
+<div class="proofscript" id="proof1009">
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">f</span>; <span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_eq">Sg_eq</a></span>.<br/>
+<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span>; <span class="tactic">simpl</span>.<br/>
+<span class="tactic">apply</span> <span class="id">scal_assoc</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_mult_distr_l">Sg_mult_distr_l</a></span>  : <span class="kwd">forall</span> <span class="id">x</span> (<span class="id">u</span> <span class="id">v</span>: <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>),<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span>  <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules.Sg_Mplus">Sg_Mplus</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#u">u</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#v">v</a></span>) = <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules.Sg_Mplus">Sg_Mplus</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#u">u</a></span>) (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#v">v</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1010')">Proof.</div>
+<div class="proofscript" id="proof1010">
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">u</span> <span class="id">v</span>; <span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_eq">Sg_eq</a></span>.<br/>
+<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span>; <span class="tactic">simpl</span>.<br/>
+<span class="tactic">apply</span> <span class="id">scal_distr_l</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_mult_distr_r">Sg_mult_distr_r</a></span>  : <span class="kwd">forall</span> <span class="id">x</span> <span class="id">y</span> <span class="id">u</span>,<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span> (<span class="id">plus</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span>) <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#u">u</a></span> = <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules.Sg_Mplus">Sg_Mplus</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#u">u</a></span>) (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#u">u</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1011')">Proof.</div>
+<div class="proofscript" id="proof1011">
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">u</span>; <span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_eq">Sg_eq</a></span>.<br/>
+<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span>; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span>; <span class="tactic">simpl</span>.<br/>
+<span class="tactic">apply</span> <span class="id">scal_distr_r</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="Sg_MAbelianGroup_mixin">Sg_MAbelianGroup_mixin</a></span> :=<br/>
+&nbsp;&nbsp;<span class="id">AbelianGroup.Mixin</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules.Sg_Mplus">Sg_Mplus</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_opp">Sg_opp</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_zero">Sg_zero</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus_comm">Sg_plus_comm</a></span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus_assoc">Sg_plus_assoc</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus_zero_r">Sg_plus_zero_r</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus_opp_r">Sg_plus_opp_r</a></span>.<br/>
+<br/>
+<span class="id">Canonical</span> <span class="id"><a name="Sg_MAbelianGroup">Sg_MAbelianGroup</a></span> :=<br/>
+&nbsp;&nbsp;<span class="id">AbelianGroup.Pack</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_MAbelianGroup_mixin">Sg_MAbelianGroup_mixin</a></span>) (@<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules.P">P</a></span>).<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="Sg_ModuleSpace_mixin">Sg_ModuleSpace_mixin</a></span> :=<br/>
+<span class="id">ModuleSpace.Mixin</span> <span class="id">R_Ring</span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_MAbelianGroup">Sg_MAbelianGroup</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;<span class="id">_</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_mult_assoc">Sg_mult_assoc</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_mult_one_l">Sg_mult_one_l</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_mult_distr_l">Sg_mult_distr_l</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_mult_distr_r">Sg_mult_distr_r</a></span>.<br/>
+<br/>
+<span class="id">Canonical</span> <span class="id"><a name="Sg_ModuleSpace">Sg_ModuleSpace</a></span> :=<br/>
+&nbsp;&nbsp;<span class="id">ModuleSpace.Pack</span> <span class="id">R_Ring</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> (<span class="id">ModuleSpace.Class</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_ModuleSpace_mixin">Sg_ModuleSpace_mixin</a></span>) (@<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules.G">G</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules.P">P</a></span>).<br/>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Submodules">Submodules</a></span>.<br/>
+<br/>
+<div class="doc">Sub-prehilbert </div>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="Subprehilbert">Subprehilbert</a></span>.<br/>
+<br/>
+<span class="kwd">Context</span> {<span class="id">G</span> : <span class="id"><a href="CertRL.converge.LM.hilbert.html#PreHilbert.Exports.PreHilbert">PreHilbert</a></span>}.<br/>
+<span class="kwd">Context</span> {<span class="id">P</span>: <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.G">G</a></span> -&gt; <span class="kwd">Prop</span>}.<br/>
+<span class="kwd">Hypothesis</span> <span class="id"><a name="Subprehilbert.CPM">CPM</a></span>: <span class="id"><a href="CertRL.converge.LM.compatible.html#compatible_m">compatible_m</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.P">P</a></span>.<br/>
+<br/>
+<span class="kwd">Let</span> <span class="id"><a name="Subprehilbert.Sg_plus">Sg_plus</a></span> := (@<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.P">P</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#proj1">proj1</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.CPM">CPM</a></span>)).<br/>
+<span class="kwd">Let</span> <span class="id"><a name="Subprehilbert.Sg_scal">Sg_scal</a></span> := (@<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.P">P</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.CPM">CPM</a></span>).<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="Sg_inner">Sg_inner</a></span> (<span class="id">x</span> <span class="id">y</span> : @<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.G">G</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.P">P</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="CertRL.converge.LM.hilbert.html#inner">inner</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#val">val</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>) (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#val">val</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span>)).<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_inner_comm">Sg_inner_comm</a></span> : <span class="kwd">forall</span> (<span class="id">x</span> <span class="id">y</span> : <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner">Sg_inner</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span> = <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner">Sg_inner</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1012')">Proof.</div>
+<div class="proofscript" id="proof1012">
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.hilbert.html#inner_sym">inner_sym</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_inner_pos">Sg_inner_pos</a></span> : <span class="kwd">forall</span> (<span class="id">x</span> : <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 &lt;= <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner">Sg_inner</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1013')">Proof.</div>
+<div class="proofscript" id="proof1013">
+<span class="tactic">intros</span> <span class="id">x</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.hilbert.html#inner_ge_0">inner_ge_0</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_inner_def">Sg_inner_def</a></span> : <span class="kwd">forall</span> (<span class="id">x</span> : <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner">Sg_inner</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>= 0 -&gt; <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> = @<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_zero">Sg_zero</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.G">G</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.P">P</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#proj1">proj1</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.CPM">CPM</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1014')">Proof.</div>
+<div class="proofscript" id="proof1014">
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">Hx</span>; <span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_eq">Sg_eq</a></span>; <span class="tactic">simpl</span>.<br/>
+<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.hilbert.html#inner_eq_0">inner_eq_0</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_inner_scal">Sg_inner_scal</a></span> : <span class="kwd">forall</span> (<span class="id">x</span> <span class="id">y</span>: <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>) (<span class="id">l</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner">Sg_inner</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.Sg_scal">Sg_scal</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#l">l</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>) <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span> = <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#l">l</a></span> * (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner">Sg_inner</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span>).<br/>
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">l</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.hilbert.html#inner_scal_l">inner_scal_l</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_inner_plus">Sg_inner_plus</a></span> : <span class="kwd">forall</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">z</span>: <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner">Sg_inner</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.Sg_plus">Sg_plus</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span>) <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#z">z</a></span> = <span class="id">plus</span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner">Sg_inner</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#z">z</a></span>) (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner">Sg_inner</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#y">y</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#z">z</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1015')">Proof.</div>
+<div class="proofscript" id="proof1015">
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">z</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="CertRL.converge.LM.hilbert.html#inner_plus_l">inner_plus_l</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="Sg_PreHilbert_mixin">Sg_PreHilbert_mixin</a></span> :=<br/>
+&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.hilbert.html#PreHilbert.Mixin">PreHilbert.Mixin</a></span> (@<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_ModuleSpace">Sg_ModuleSpace</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.G">G</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.P">P</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.CPM">CPM</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">_</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner_comm">Sg_inner_comm</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner_pos">Sg_inner_pos</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner_def">Sg_inner_def</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner_scal">Sg_inner_scal</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_inner_plus">Sg_inner_plus</a></span>.<br/>
+<br/>
+<span class="id">Canonical</span> <span class="id"><a name="Sg_PreHilbert">Sg_PreHilbert</a></span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.hilbert.html#PreHilbert.Pack">PreHilbert.Pack</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> (<span class="id"><a href="CertRL.converge.LM.hilbert.html#PreHilbert.Class">PreHilbert.Class</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_PreHilbert_mixin">Sg_PreHilbert_mixin</a></span>) (@<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.G">G</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert.P">P</a></span>).<br/>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subprehilbert">Subprehilbert</a></span>.<br/>
+<br/>
+<div class="doc">Sub-hilbert </div>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="Subhilbert">Subhilbert</a></span>.<br/>
+<br/>
+<span class="kwd">Context</span> {<span class="id">G</span> : <span class="id"><a href="CertRL.converge.LM.hilbert.html#Hilbert.Exports.Hilbert">Hilbert</a></span>}.<br/>
+<span class="kwd">Context</span> {<span class="id">P</span>: <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subhilbert.G">G</a></span> -&gt; <span class="kwd">Prop</span>}.<br/>
+<br/>
+<span class="kwd">Hypothesis</span> <span class="id"><a name="Subhilbert.CPM">CPM</a></span>: <span class="id"><a href="CertRL.converge.LM.compatible.html#compatible_m">compatible_m</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subhilbert.P">P</a></span>.<br/>
+<br/>
+<span class="kwd">Let</span> <span class="id"><a name="Subhilbert.Sg_plus">Sg_plus</a></span> := (@<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_plus">Sg_plus</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subhilbert.P">P</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#proj1">proj1</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subhilbert.CPM">CPM</a></span>)).<br/>
+<span class="kwd">Let</span> <span class="id"><a name="Subhilbert.Sg_scal">Sg_scal</a></span> := (@<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_scal">Sg_scal</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subhilbert.P">P</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subhilbert.CPM">CPM</a></span>).<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="Sg_cleanFilter">Sg_cleanFilter</a></span> (<span class="id">Fi</span> : (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> -&gt; <span class="kwd">Prop</span>) -&gt; <span class="kwd">Prop</span>) : (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subhilbert.G">G</a></span> -&gt; <span class="kwd">Prop</span>) -&gt; <span class="kwd">Prop</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="kwd">fun</span> <span class="id">A</span> : ((<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subhilbert.G">G</a></span> -&gt; <span class="kwd">Prop</span>)) =&gt; <span class="id">exists</span> <span class="id">V</span> : (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> -&gt; <span class="kwd">Prop</span>), <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Fi">Fi</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#V">V</a></span> /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="kwd">forall</span> <span class="id">f</span> : (@<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subhilbert.G">G</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subhilbert.P">P</a></span>), <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#V">V</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#f">f</a></span> -&gt; <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#A">A</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#val">val</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#f">f</a></span>)).<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Sg_cleanFilterProper">Sg_cleanFilterProper</a></span>: <span class="kwd">forall</span> (<span class="id">Fi</span>: (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> -&gt; <span class="kwd">Prop</span>) -&gt; <span class="kwd">Prop</span>),<br/>
+&nbsp;&nbsp;<span class="id">ProperFilter</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Fi">Fi</a></span> -&gt; <span class="id">ProperFilter</span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_cleanFilter">Sg_cleanFilter</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Fi">Fi</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1016')">Proof.</div>
+<div class="proofscript" id="proof1016">
+<span class="tactic">intros</span> <span class="id">Fi</span> (<span class="id">FF1</span>,<span class="id">FF2</span>).<br/>
+<span class="id">constructor</span>.<br/>
+<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_cleanFilter">Sg_cleanFilter</a></span>.<br/>
+<span class="tactic">intros</span> <span class="id">P0</span> (<span class="id">V</span>,(<span class="id">HV1</span>,<span class="id">HV2</span>)).<br/>
+<span class="tactic">destruct</span> (<span class="id">FF1</span> <span class="id">V</span> <span class="id">HV1</span>) <span class="kwd">as</span> (<span class="id">f</span>,<span class="id">Hf</span>).<br/>
+<span class="id">specialize</span> (<span class="id">HV2</span> <span class="id">f</span>).<br/>
+<span class="id">exists</span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#val">val</a></span> <span class="id">f</span>).<br/>
+<span class="tactic">apply</span> <span class="id">HV2</span>; <span class="tactic">trivial</span>.<br/>
+<span class="id">constructor</span>; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_cleanFilter">Sg_cleanFilter</a></span>.<br/>
+<span class="id">exists</span> (<span class="kwd">fun</span> <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#True">True</a></span>); <span class="tactic">split</span>; <span class="tactic">try</span> <span class="id">easy</span>.<br/>
+<span class="tactic">apply</span> <span class="id">FF2</span>.<br/>
+<span class="tactic">intros</span> <span class="id">P0</span> <span class="id">Q</span> (<span class="id">Vp</span>,(<span class="id">HP1</span>,<span class="id">HP2</span>)) (<span class="id">Vq</span>,(<span class="id">HQ1</span>,<span class="id">HQ2</span>)).<br/>
+<span class="id">exists</span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id">Vp</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span> /\ <span class="id">Vq</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#x">x</a></span>); <span class="tactic">split</span>.<br/>
+<span class="id">now</span> <span class="tactic">apply</span> <span class="id">FF2</span>.<br/>
+<span class="tactic">intros</span> <span class="id">f</span> (<span class="id">Hf1</span>,<span class="id">Hf2</span>).<br/>
+<span class="tactic">split</span>.<br/>
+<span class="id">now</span> <span class="tactic">apply</span> <span class="id">HP2</span>.<br/>
+<span class="id">now</span> <span class="tactic">apply</span> <span class="id">HQ2</span>.<br/>
+<span class="tactic">intros</span> <span class="id">P0</span> <span class="id">Q</span> <span class="id">H</span> (<span class="id">Vp</span>,(<span class="id">HP1</span>,<span class="id">HP2</span>)).<br/>
+<span class="id">exists</span> <span class="id">Vp</span>; <span class="tactic">split</span>.<br/>
+<span class="id">easy</span>.<br/>
+<span class="tactic">intros</span> <span class="id">f</span> <span class="id">Hf</span>.<br/>
+<span class="id">now</span> <span class="tactic">apply</span> <span class="id">H</span>, <span class="id">HP2</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="Sg_lim_v">Sg_lim_v</a></span> (<span class="id">Fi</span> : (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg">Sg</a></span> -&gt; <span class="kwd">Prop</span>) -&gt; <span class="kwd">Prop</span>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.hilbert.html#lim">lim</a></span> (<span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Sg_cleanFilter">Sg_cleanFilter</a></span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Fi">Fi</a></span>).<br/>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.converge.LM.check_sub_structure.html#Subhilbert">Subhilbert</a></span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

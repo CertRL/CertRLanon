@@ -1,0 +1,126 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.utils.Isomorphism</title>
+<meta name="description" content="Documentation of Coq module CertRL.utils.Isomorphism" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.utils.Isomorphism</h1>
+<div class="coq">
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.NArith.NArith.html">NArith</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RList.html">RList</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html">List</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbase.html">Rbase</a></span>.<br/>
+<br/>
+<span class="kwd">Class</span> <span class="id"><a name="Isomorphism">Isomorphism</a></span> (<span class="id">A</span> <span class="id">B</span>:<span class="kwd">Type</span>) :=<br/>
+&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a name="iso_f">iso_f</a></span> : <span class="id"><a href="CertRL.utils.Isomorphism.html#A">A</a></span> -&gt; <span class="id"><a href="CertRL.utils.Isomorphism.html#B">B</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a name="iso_b">iso_b</a></span> : <span class="id"><a href="CertRL.utils.Isomorphism.html#B">B</a></span> -&gt; <span class="id"><a href="CertRL.utils.Isomorphism.html#A">A</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a name="iso_f_b">iso_f_b</a></span> : <span class="kwd">forall</span> <span class="id">b</span>, <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> (<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#b">b</a></span>) = <span class="id"><a href="CertRL.utils.Isomorphism.html#b">b</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a name="iso_b_f">iso_b_f</a></span> : <span class="kwd">forall</span> <span class="id">a</span>, <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> (<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#a">a</a></span>) = <span class="id"><a href="CertRL.utils.Isomorphism.html#a">a</a></span><br/>
+&nbsp;&nbsp;}.<br/>
+<br/>
+<br/>
+<span class="kwd">Global</span> <span class="kwd">Instance</span> <span class="id"><a name="Isomorphism_refl">Isomorphism_refl</a></span> {<span class="id">A</span>} : <span class="id"><a href="CertRL.utils.Isomorphism.html#Isomorphism">Isomorphism</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#A">A</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#A">A</a></span><br/>
+&nbsp;&nbsp;:= {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id">a</span> := <span class="id"><a href="CertRL.utils.Isomorphism.html#a">a</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> <span class="id">a</span> := <span class="id"><a href="CertRL.utils.Isomorphism.html#a">a</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f_b">iso_f_b</a></span> := @<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#eq_refl">eq_refl</a></span> <span class="id">A</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b_f">iso_b_f</a></span> := @<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#eq_refl">eq_refl</a></span> <span class="id">A</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+<br/>
+<span class="kwd">Instance</span> <span class="id"><a name="Isomorphism_symm">Isomorphism_symm</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">iso</span>:<span class="id"><a href="CertRL.utils.Isomorphism.html#Isomorphism">Isomorphism</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#A">A</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#B">B</a></span>) : <span class="id"><a href="CertRL.utils.Isomorphism.html#Isomorphism">Isomorphism</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#B">B</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#A">A</a></span><br/>
+&nbsp;&nbsp;:= {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> := <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> := <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f_b">iso_f_b</a></span> := <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b_f">iso_b_f</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b_f">iso_b_f</a></span> := <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f_b">iso_f_b</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+<br/>
+<span class="kwd">Program</span> <span class="kwd">Instance</span> <span class="id"><a name="Isomorphism_trans">Isomorphism_trans</a></span> {<span class="id">A</span> <span class="id">B</span> <span class="id">C</span>} (<span class="id">iso1</span>:<span class="id"><a href="CertRL.utils.Isomorphism.html#Isomorphism">Isomorphism</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#A">A</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#B">B</a></span>) (<span class="id">iso2</span>:<span class="id"><a href="CertRL.utils.Isomorphism.html#Isomorphism">Isomorphism</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#B">B</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#C">C</a></span>) : <span class="id"><a href="CertRL.utils.Isomorphism.html#Isomorphism">Isomorphism</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#A">A</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#C">C</a></span><br/>
+&nbsp;&nbsp;:= {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> <span class="id">a</span> := @<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">iso2</span> (@<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">iso1</span> <span class="id"><a href="CertRL.utils.Isomorphism.html#a">a</a></span>) ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id">b</span> := @<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">iso1</span> (@<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">iso2</span> <span class="id"><a href="CertRL.utils.Isomorphism.html#b">b</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1258')">Next Obligation.</div>
+<div class="proofscript" id="proof1258">
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f_b">iso_f_b</a></span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof1259')">Next Obligation.</div>
+<div class="proofscript" id="proof1259">
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b_f">iso_b_f</a></span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Program</span> <span class="kwd">Instance</span> <span class="id"><a name="Isomorphism_prod">Isomorphism_prod</a></span> {<span class="id">A</span> <span class="id">B</span> <span class="id">C</span> <span class="id">D</span>} (<span class="id">iso1</span>:<span class="id"><a href="CertRL.utils.Isomorphism.html#Isomorphism">Isomorphism</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#A">A</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#C">C</a></span>) (<span class="id">iso2</span>:<span class="id"><a href="CertRL.utils.Isomorphism.html#Isomorphism">Isomorphism</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#B">B</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#D">D</a></span>) : <span class="id"><a href="CertRL.utils.Isomorphism.html#Isomorphism">Isomorphism</a></span> (<span class="id"><a href="CertRL.utils.Isomorphism.html#A">A</a></span>*<span class="id"><a href="CertRL.utils.Isomorphism.html#B">B</a></span>) (<span class="id"><a href="CertRL.utils.Isomorphism.html#C">C</a></span>*<span class="id"><a href="CertRL.utils.Isomorphism.html#D">D</a></span>)<br/>
+&nbsp;&nbsp;:= {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> '(<span class="id">a</span>,<span class="id">c</span>) := (<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#a">a</a></span>, <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#c">c</a></span>) ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> '(<span class="id">b</span>,<span class="id">d</span>) := (<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#b">b</a></span>, <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#d">d</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1260')">Next Obligation.</div>
+<div class="proofscript" id="proof1260">
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f_b">iso_f_b</a></span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof1261')">Next Obligation.</div>
+<div class="proofscript" id="proof1261">
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b_f">iso_b_f</a></span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Program</span> <span class="kwd">Instance</span> <span class="id"><a name="Isomorphism_list">Isomorphism_list</a></span> {<span class="id">A</span> <span class="id">B</span>} (<span class="id">iso1</span>:<span class="id"><a href="CertRL.utils.Isomorphism.html#Isomorphism">Isomorphism</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#A">A</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#B">B</a></span>) : <span class="id"><a href="CertRL.utils.Isomorphism.html#Isomorphism">Isomorphism</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#A">A</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#B">B</a></span>)<br/>
+&nbsp;&nbsp;:= {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1262')">Next Obligation.</div>
+<div class="proofscript" id="proof1262">
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_map">map_map</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">erewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_ext">map_ext</a></span>; <span class="tactic">try</span> <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_id">map_id</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f_b">iso_f_b</a></span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof1263')">Next Obligation.</div>
+<div class="proofscript" id="proof1263">
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_map">map_map</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">erewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_ext">map_ext</a></span>; <span class="tactic">try</span> <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map_id">map_id</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b_f">iso_b_f</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Global</span> <span class="kwd">Instance</span> <span class="id"><a name="nat_to_N_iso">nat_to_N_iso</a></span> : <span class="id"><a href="CertRL.utils.Isomorphism.html#Isomorphism">Isomorphism</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Numbers.BinNums.html#N">N</a></span><br/>
+&nbsp;&nbsp;:= {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.NArith.BinNat.html#N.of_nat">N.of_nat</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.NArith.BinNat.html#N.to_nat">N.to_nat</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f_b">iso_f_b</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.NArith.Nnat.html#N2Nat.id">N2Nat.id</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b_f">iso_b_f</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.NArith.Nnat.html#Nat2N.id">Nat2N.id</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+<br/>
+<span class="kwd">Global</span> <span class="kwd">Program</span> <span class="kwd">Instance</span> <span class="id"><a name="Rlist_to_list_iso">Rlist_to_list_iso</a></span> : <span class="id"><a href="CertRL.utils.Isomorphism.html#Isomorphism">Isomorphism</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RList.html#Rlist">Rlist</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>)<br/>
+&nbsp;&nbsp;:= {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> := (<span class="id">fix</span> <span class="id">iso_f</span> (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RList.html#Rlist">Rlist</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="kwd">match</span> <span class="id"><a href="CertRL.utils.Isomorphism.html#l">l</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RList.html#nil">RList.nil</a></span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nil">nil</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RList.html#cons">RList.cons</a></span> <span class="id">x</span> <span class="id">y</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#cons">cons</a></span> <span class="id">x</span> (<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> <span class="id">y</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>) ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> := (<span class="id">fix</span> <span class="id">iso_b</span> (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RList.html#Rlist">Rlist</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="kwd">match</span> <span class="id"><a href="CertRL.utils.Isomorphism.html#l">l</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">nil</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RList.html#nil">RList.nil</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">cons</span> <span class="id">x</span> <span class="id">y</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RList.html#cons">RList.cons</a></span> <span class="id">x</span> (<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id">y</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>)<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1264')">Next Obligation.</div>
+<div class="proofscript" id="proof1264">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">b</span>; <span class="tactic">simpl</span>; <span class="tactic">congruence</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof1265')">Next Obligation.</div>
+<div class="proofscript" id="proof1265">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">a</span>; <span class="tactic">simpl</span>; <span class="tactic">congruence</span>.<br/>
+Qed.</div>
+<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.utils.Floatish.FloatishDef</title>
+<meta name="description" content="Documentation of Coq module CertRL.utils.Floatish.FloatishDef" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.utils.Floatish.FloatishDef</h1>
+<div class="coq">
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.ZArith.BinInt.html">BinInt</a></span>.<br/>
+<br/>
+<span class="kwd">Class</span> <span class="id"><a name="floatish">floatish</a></span> : <span class="kwd">Type</span> :=<br/>
+&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a name="float">float</a></span> : <span class="kwd">Type</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fzero">Fzero</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fopp">Fopp</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fplus">Fplus</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fminus">Fminus</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fmult">Fmult</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fdiv">Fdiv</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fsqrt">Fsqrt</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fabs">Fabs</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fexp">Fexp</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fln">Fln</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fsin">Fsin</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fcos">Fcos</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fpi">Fpi</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="FfromZ">FfromZ</a></span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Numbers.BinNums.html#Z">Z</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Feq">Feq</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fneq">Fneq</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Flt">Flt</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fle">Fle</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fgt">Fgt</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a name="Fge">Fge</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span><br/>
+&nbsp;&nbsp;}.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+<span class="kwd">Notation</span> "0" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fzero">Fzero</a></span>) : <span class="id">float</span>.<br/>
+<span class="kwd">Notation</span> "1" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#FfromZ">FfromZ</a></span> 1) : <span class="id">float</span>.<br/>
+<span class="kwd">Notation</span> "2" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#FfromZ">FfromZ</a></span> 2) : <span class="id">float</span>.<br/>
+<span class="kwd">Notation</span> "- <span class="id">x</span>" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fopp">Fopp</a></span> <span class="id">x</span>) (<span class="tactic">at</span> <span class="id">level</span> 35, <span class="id">right</span> <span class="id">associativity</span>) : <span class="id">float</span>.<br/>
+<span class="kwd">Notation</span> "<span class="id">x</span> + <span class="id">y</span>" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fplus">Fplus</a></span> <span class="id">x</span> <span class="id">y</span>) (<span class="tactic">at</span> <span class="id">level</span> 50, <span class="id">left</span> <span class="id">associativity</span>) : <span class="id">float</span>.<br/>
+<span class="kwd">Notation</span> "<span class="id">x</span> - <span class="id">y</span>" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fminus">Fminus</a></span> <span class="id">x</span> <span class="id">y</span>) (<span class="tactic">at</span> <span class="id">level</span> 50, <span class="id">left</span> <span class="id">associativity</span>) : <span class="id">float</span>.<br/>
+<span class="kwd">Notation</span> "<span class="id">x</span> * <span class="id">y</span>" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fmult">Fmult</a></span> <span class="id">x</span> <span class="id">y</span>) (<span class="tactic">at</span> <span class="id">level</span> 40, <span class="id">left</span> <span class="id">associativity</span>) : <span class="id">float</span>.<br/>
+<span class="kwd">Notation</span> "<span class="id">x</span> / <span class="id">y</span>" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fdiv">Fdiv</a></span> <span class="id">x</span> <span class="id">y</span>) (<span class="tactic">at</span> <span class="id">level</span> 40, <span class="id">left</span> <span class="id">associativity</span>) : <span class="id">float</span>.<br/>
+<br/>
+<br/>
+<span class="kwd">Notation</span> "<span class="id">x</span> ==<span class="id">b</span> <span class="id">y</span>" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Feq">Feq</a></span> <span class="id">x</span> <span class="id">y</span>) (<span class="tactic">at</span> <span class="id">level</span> 70, <span class="id">no</span> <span class="id">associativity</span>) : <span class="id">float</span>.<br/>
+<span class="kwd">Notation</span> "<span class="id">x</span> != <span class="id">y</span>" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fneq">Fneq</a></span> <span class="id">x</span> <span class="id">y</span>) (<span class="tactic">at</span> <span class="id">level</span> 70, <span class="id">no</span> <span class="id">associativity</span>) : <span class="id">float</span>.<br/>
+<span class="kwd">Notation</span> "<span class="id">x</span> &lt; <span class="id">y</span>" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Flt">Flt</a></span> <span class="id">x</span> <span class="id">y</span>)  (<span class="tactic">at</span> <span class="id">level</span> 70, <span class="id">no</span> <span class="id">associativity</span>) : <span class="id">float</span>.<br/>
+<span class="kwd">Notation</span> "<span class="id">x</span> &lt;= <span class="id">y</span>" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fle">Fle</a></span> <span class="id">x</span> <span class="id">y</span>) (<span class="tactic">at</span> <span class="id">level</span> 70, <span class="id">no</span> <span class="id">associativity</span>) : <span class="id">float</span>.<br/>
+<span class="kwd">Notation</span> "<span class="id">x</span> &gt; <span class="id">y</span>" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fgt">Fgt</a></span> <span class="id">x</span> <span class="id">y</span>)  (<span class="tactic">at</span> <span class="id">level</span> 70, <span class="id">no</span> <span class="id">associativity</span>) : <span class="id">float</span>.<br/>
+<span class="kwd">Notation</span> "<span class="id">x</span> &gt;= <span class="id">y</span>" := (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fge">Fge</a></span> <span class="id">x</span> <span class="id">y</span>) (<span class="tactic">at</span> <span class="id">level</span> 70, <span class="id">no</span> <span class="id">associativity</span>) : <span class="id">float</span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

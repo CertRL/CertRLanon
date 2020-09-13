@@ -1,0 +1,797 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.derivlemmas</title>
+<meta name="description" content="Documentation of Coq module CertRL.derivlemmas" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.derivlemmas</h1>
+<div class="coq">
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Reals.html">Reals</a></span> <span class="id">Coquelicot.Coquelicot</span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.micromega.Lra.html">Lra</a></span>.<br/>
+<br/>
+<span class="kwd">Set</span> <span class="id">Bullet</span> <span class="id">Behavior</span> "<span class="kwd">Strict</span> <span class="id">Subproofs</span>".<br/>
+<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="ball_abs">ball_abs</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id">R_AbsRing</span>) (<span class="id">eps</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#posreal">posreal</a></span>):<br/>
+&nbsp;&nbsp;<span class="id">ball</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#eps">eps</a></span> <span class="id"><a href="CertRL.derivlemmas.html#y">y</a></span> &lt;-&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>(<span class="id"><a href="CertRL.derivlemmas.html#y">y</a></span> - <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) &lt; <span class="id"><a href="CertRL.derivlemmas.html#eps">eps</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2111')">Proof.</div>
+<div class="proofscript" id="proof2111">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">ball</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">AbsRing_ball</span>; <span class="tactic">simpl</span>; <span class="tactic">tauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Derive_Rabs">Derive_Rabs</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id">ex_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> &lt;&gt; 0 -&gt; <span class="id">Derive</span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = <span class="id">sign</span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) * <span class="id">Derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2112')">Proof.</div>
+<div class="proofscript" id="proof2112">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_unique</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_Rabs</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Derive_correct</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="derivable_pt_lim_Rabs_df0">derivable_pt_lim_Rabs_df0</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = 0 -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Ranalysis1.html#derivable_pt_lim">derivable_pt_lim</a></span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> 0 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Ranalysis1.html#derivable_pt_lim">derivable_pt_lim</a></span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> 0.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2113')">Proof.</div>
+<div class="proofscript" id="proof2113">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Ranalysis1.html#derivable_pt_lim">derivable_pt_lim</a></span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H0</span> <span class="id">eps</span> <span class="id">H1</span>);  <span class="tactic">destruct</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id">exists</span> <span class="id">x0</span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H0</span> <span class="id">h</span> <span class="id">H2</span> <span class="id">H3</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">H</span>; <span class="tactic">rewrite</span> <span class="id">H</span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs_R0">Rabs_R0</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">do</span> 2 <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">do</span> 2 <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">Rabs_div</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs_Rabsolu">Rabs_Rabsolu</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> &lt;- <span class="id">Rabs_div</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_Rabs_df0">is_derive_Rabs_df0</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> 0 -&gt; <span class="id">is_derive</span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> 0.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2114')">Proof.</div>
+<div class="proofscript" id="proof2114">
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Req_EM_T">Req_EM_T</a></span> (<span class="id">f</span> <span class="id">x</span>) 0).<br/>
+&nbsp;&nbsp;<span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">do</span> 2 <span class="tactic">rewrite</span> <span class="id">is_derive_Reals</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#derivable_pt_lim_Rabs_df0">derivable_pt_lim_Rabs_df0</a></span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">intros</span>. <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (0) <span class="kwd">with</span> ((<span class="id">sign</span> (<span class="id">f</span> <span class="id">x</span>)) * 0) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_Rabs</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="at_left_close">at_left_close</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> <span class="id">l1</span> <span class="id">l2</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id">filterlim</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> (<span class="id">at_left</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#l1">l1</a></span>) -&gt; <span class="id">filterlim</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> (<span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#l2">l2</a></span>) -&gt;<br/>
+&nbsp;&nbsp;<span class="id">close</span> <span class="id"><a href="CertRL.derivlemmas.html#l2">l2</a></span> <span class="id"><a href="CertRL.derivlemmas.html#l1">l1</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2115')">Proof.</div>
+<div class="proofscript" id="proof2115">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filterlim_locally_close</span>.<br/>
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filterlim_filter_le_1</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">at_left</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filter_le_within</span>.<br/>
+Qed.</div>
+&nbsp;&nbsp;<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="at_right_close">at_right_close</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> <span class="id">l1</span> <span class="id">l2</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id">filterlim</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> (<span class="id">at_right</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#l1">l1</a></span>) -&gt; <span class="id">filterlim</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> (<span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#l2">l2</a></span>) -&gt;<br/>
+&nbsp;&nbsp;<span class="id">close</span> <span class="id"><a href="CertRL.derivlemmas.html#l2">l2</a></span> <span class="id"><a href="CertRL.derivlemmas.html#l1">l1</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2116')">Proof.</div>
+<div class="proofscript" id="proof2116">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filterlim_locally_close</span>.<br/>
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filterlim_filter_le_1</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">at_right</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filter_le_within</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="one_sided_limits_differ">one_sided_limits_differ</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> <span class="id">l1</span> <span class="id">l2</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id">filterlim</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> (<span class="id">at_left</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#l1">l1</a></span>) -&gt;<br/>
+&nbsp;&nbsp;<span class="id">filterlim</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> (<span class="id">at_right</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#l2">l2</a></span>) -&gt;  <br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.derivlemmas.html#l1">l1</a></span> &lt;&gt; <span class="id"><a href="CertRL.derivlemmas.html#l2">l2</a></span> -&gt; ~ (<span class="id">exists</span> <span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>, <span class="id">filterlim</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> (<span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#l">l</a></span>)).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2117')">Proof.</div>
+<div class="proofscript" id="proof2117">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">l1</span> = <span class="id">l2</span>).<br/>
+&nbsp;&nbsp;- <span class="tactic">apply</span> <span class="id">eq_close</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id">close_trans</span> <span class="id">l1</span> <span class="id">x0</span> <span class="id">l2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">apply</span> <span class="id">close_sym</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> (<span class="id"><a href="CertRL.derivlemmas.html#at_left_close">at_left_close</a></span> <span class="id">f</span> <span class="id">x</span> <span class="id">l1</span> <span class="id">x0</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">now</span> <span class="tactic">apply</span> (<span class="id"><a href="CertRL.derivlemmas.html#at_right_close">at_right_close</a></span> <span class="id">f</span> <span class="id">x</span> <span class="id">l2</span> <span class="id">x0</span>).<br/>
+&nbsp;&nbsp;- <span class="id">easy</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id">locally</span>'<span class="id">_proper_filter</span> : <span class="kwd">forall</span> (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>),<br/>
+&nbsp;&nbsp;<span class="id">ProperFilter</span> (<span class="id">locally</span>' <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2118')">Proof.</div>
+<div class="proofscript" id="proof2118">
+&nbsp;&nbsp;<span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">P</span> [<span class="id">d</span> <span class="id">Hd</span>].<br/>
+&nbsp;&nbsp;<span class="id">exists</span> (<span class="id">x</span> + <span class="id">d</span> / 2).<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Hd</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> @<span class="id">norm_compat1</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">norm</span>, <span class="id">minus</span>, <span class="id">plus</span>, <span class="id">opp</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id">ring_simplify</span> (<span class="id">x</span> + <span class="id">d</span> / 2 + - <span class="id">x</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs_pos_eq">Rabs_pos_eq</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Rlt_div_l</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.setoid_ring.RealField.html#Rlt_0_2">Rlt_0_2</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Rminus_lt_0</span> ; <span class="id">ring_simplify</span> ; <span class="id">now</span> <span class="tactic">apply</span> <span class="id">d</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rlt_le">Rlt_le</a></span>, <span class="id">is_pos_div_2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rgt_not_eq">Rgt_not_eq</a></span>; <span class="tactic">apply</span> <span class="id">Rminus_lt_0</span> ; <span class="id">ring_simplify</span>; <span class="id">now</span> <span class="tactic">apply</span> <span class="id">is_pos_div_2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">within_filter</span>, <span class="id">locally_filter</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id">locally</span>'<span class="id">_within_pos_proper_filter</span> : <span class="kwd">forall</span> (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>),<br/>
+&nbsp;&nbsp;<span class="id">ProperFilter</span> (<span class="id">within</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&gt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id">locally</span>' <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2119')">Proof.</div>
+<div class="proofscript" id="proof2119">
+&nbsp;&nbsp;<span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">P</span> [<span class="id">d</span> <span class="id">Hd</span>].<br/>
+&nbsp;&nbsp;<span class="id">exists</span> (<span class="id">x</span> + <span class="id">d</span> / 2).<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Hd</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> @<span class="id">norm_compat1</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">norm</span>, <span class="id">minus</span>, <span class="id">plus</span>, <span class="id">opp</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id">ring_simplify</span> (<span class="id">x</span> + <span class="id">d</span> / 2 + - <span class="id">x</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs_pos_eq">Rabs_pos_eq</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Rlt_div_l</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.setoid_ring.RealField.html#Rlt_0_2">Rlt_0_2</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Rminus_lt_0</span> ; <span class="id">ring_simplify</span> ; <span class="id">now</span> <span class="tactic">apply</span> <span class="id">d</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rlt_le">Rlt_le</a></span>, <span class="id">is_pos_div_2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rgt_not_eq">Rgt_not_eq</a></span>; <span class="tactic">apply</span> <span class="id">Rminus_lt_0</span>; <span class="id">ring_simplify</span>; <span class="id">now</span> <span class="tactic">apply</span> <span class="id">is_pos_div_2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Rminus_lt_0</span>; <span class="id">ring_simplify</span>; <span class="id">now</span> <span class="tactic">apply</span> <span class="id">is_pos_div_2</span>.  <br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">within_filter</span>, <span class="id">within_filter</span>, <span class="id">locally_filter</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id">locally</span>'<span class="id">_within_neg_proper_filter</span> : <span class="kwd">forall</span> (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>),<br/>
+&nbsp;&nbsp;<span class="id">ProperFilter</span> (<span class="id">within</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&lt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id">locally</span>' <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2120')">Proof.</div>
+<div class="proofscript" id="proof2120">
+&nbsp;&nbsp;<span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">P</span> [<span class="id">d</span> <span class="id">Hd</span>].<br/>
+&nbsp;&nbsp;<span class="id">exists</span> (<span class="id">x</span> - <span class="id">d</span> / 2).<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Hd</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> @<span class="id">norm_compat1</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">norm</span>, <span class="id">minus</span>, <span class="id">plus</span>, <span class="id">opp</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id">ring_simplify</span> (<span class="id">x</span> - <span class="id">d</span> / 2 + - <span class="id">x</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs_Ropp">Rabs_Ropp</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs_pos_eq">Rabs_pos_eq</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Rlt_div_l</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.setoid_ring.RealField.html#Rlt_0_2">Rlt_0_2</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Rminus_lt_0</span> ; <span class="id">ring_simplify</span> ; <span class="id">now</span> <span class="tactic">apply</span> <span class="id">d</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rlt_le">Rlt_le</a></span>, <span class="id">is_pos_div_2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rlt_not_eq">Rlt_not_eq</a></span>, <span class="id">Rminus_lt_0</span> ; <span class="id">ring_simplify</span> ; <span class="id">now</span> <span class="tactic">apply</span> <span class="id">is_pos_div_2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Rminus_lt_0</span> ; <span class="id">ring_simplify</span> ; <span class="id">now</span> <span class="tactic">apply</span> <span class="id">is_pos_div_2</span>.  <br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">within_filter</span>, <span class="id">within_filter</span>, <span class="id">locally_filter</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="locally_pos">locally_pos</a></span> (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> &gt; 0 -&gt; <span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> (<span class="kwd">fun</span> <span class="id">t</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&gt;0).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2121')">Proof.</div>
+<div class="proofscript" id="proof2121">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">locally</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">x</span>/2 &gt; 0) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#mkposreal">mkposreal</a></span> (<span class="id">x</span>/2) <span class="id">H0</span>); <span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.derivlemmas.html#ball_abs">ball_abs</a></span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rcase_abs">Rcase_abs</a></span> (<span class="id">y</span>-<span class="id">x</span>)); <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="locally_neg">locally_neg</a></span> (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> &lt; 0 -&gt; <span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> (<span class="kwd">fun</span> <span class="id">t</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&lt;0).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2122')">Proof.</div>
+<div class="proofscript" id="proof2122">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">locally</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> (-<span class="id">x</span>/2 &gt; 0) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#mkposreal">mkposreal</a></span> (-<span class="id">x</span>/2) <span class="id">H0</span>); <span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.derivlemmas.html#ball_abs">ball_abs</a></span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rcase_abs">Rcase_abs</a></span> (<span class="id">y</span>-<span class="id">x</span>)); <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="not_ex_derive_Rabs_f0_1">not_ex_derive_Rabs_f0_1</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> <span class="id">df</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = 0 -&gt; <span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span> -&gt; <span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span> &gt; 0 -&gt;<br/>
+&nbsp;&nbsp;~ <span class="id">ex_derive</span> (<span class="kwd">fun</span> <span class="id">x0</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2123')">Proof.</div>
+<div class="proofscript" id="proof2123">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">ex_derive</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">is_derive_Reals</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span>; <span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">is_derive_Reals</span> <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Ranalysis1.html#uniqueness_step2">uniqueness_step2</a></span>, <span class="id">is_lim_Reals_1</span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Ranalysis1.html#uniqueness_step2">uniqueness_step2</a></span>, <span class="id">is_lim_Reals_1</span> <span class="kwd">in</span> <span class="id">H2</span>.  <br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">is_lim</span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">is_lim</span> <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">Rbar_locally</span> <span class="id">df</span>) <span class="kwd">with</span> (<span class="id">locally</span> <span class="id">df</span>) <span class="kwd">in</span> <span class="id">H0</span> <span class="tactic">by</span> <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">Rbar_locally</span>' 0) <span class="kwd">with</span> (<span class="id">locally</span>' 0) <span class="kwd">in</span> <span class="id">H0</span> <span class="tactic">by</span> <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">Rbar_locally</span> <span class="id">x0</span>) <span class="kwd">with</span> (<span class="id">locally</span> <span class="id">x0</span>) <span class="kwd">in</span> <span class="id">H2</span> <span class="tactic">by</span> <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">Rbar_locally</span>' 0) <span class="kwd">with</span> (<span class="id">locally</span>' 0) <span class="kwd">in</span> <span class="id">H2</span> <span class="tactic">by</span> <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">H0b</span> := <span class="id">H0</span>);  <span class="tactic">assert</span> (<span class="id">H2b</span> := <span class="id">H2</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="CertRL.derivlemmas.html#locally_pos">locally_pos</a></span> <span class="id">df</span> <span class="id">H1</span>); <span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (@<span class="id">filterlim_filter_le_1</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">within</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&gt; 0) (<span class="id">locally</span>' 0))) <span class="kwd">in</span> <span class="id">H2</span><br/>
+&nbsp;&nbsp;; [| <span class="tactic">apply</span> <span class="id">filter_le_within</span>].<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (@<span class="id">filterlim_filter_le_1</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">within</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&gt; 0) (<span class="id">locally</span>' 0))) <span class="kwd">in</span> <span class="id">H0</span><br/>
+&nbsp;&nbsp;; [| <span class="tactic">apply</span> <span class="id">filter_le_within</span>].  <br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (@<span class="id">filterlim_filter_le_1</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">within</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&lt; 0) (<span class="id">locally</span>' 0))) <span class="kwd">in</span> <span class="id">H2b</span><br/>
+&nbsp;&nbsp;; [| <span class="tactic">apply</span> <span class="id">filter_le_within</span>].<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (@<span class="id">filterlim_filter_le_1</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">within</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&lt; 0) (<span class="id">locally</span>' 0))) <span class="kwd">in</span> <span class="id">H0b</span><br/>
+&nbsp;&nbsp;; [| <span class="tactic">apply</span> <span class="id">filter_le_within</span>].  <br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id">locally</span>'<span class="id">_within_pos_proper_filter</span> 0); <span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id">locally</span>'<span class="id">_within_neg_proper_filter</span> 0); <span class="tactic">intro</span>.  <br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">H</span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs_R0">Rabs_R0</a></span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filterlim_ext_loc</span> <span class="kwd">with</span> (<span class="id">g</span> :=(<span class="kwd">fun</span> <span class="id">h</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id">f</span> (<span class="id">x</span> + <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)/<span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)) <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filterlim_within_ext</span> <span class="kwd">with</span> (<span class="id">g</span> :=(<span class="kwd">fun</span> <span class="id">h</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id">f</span> (<span class="id">x</span> + <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)/<span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)) <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filterlim_ext_loc</span> <span class="kwd">with</span> (<span class="id">g</span> :=(<span class="kwd">fun</span> <span class="id">h</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id">opp</span> (<span class="id">f</span> (<span class="id">x</span> + <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)/<span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>))) <span class="kwd">in</span> <span class="id">H2b</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filterlim_within_ext</span> <span class="kwd">with</span> (<span class="id">g</span> :=(<span class="kwd">fun</span> <span class="id">h</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id">f</span> (<span class="id">x</span> + <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)/<span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)) <span class="kwd">in</span> <span class="id">H0b</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">apply</span> <span class="id">filterlim_locally_close</span> <span class="kwd">with</span> (<span class="id">l</span> := <span class="id">df</span>) <span class="kwd">in</span> <span class="id">H2</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id">filterlim_opp</span> <span class="id">x0</span>); <span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">filterlim</span> (<span class="kwd">fun</span> <span class="id">h</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id">opp</span> (<span class="id">opp</span> (<span class="id">f</span> (<span class="id">x</span> + <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>) / <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">within</span> (<span class="kwd">fun</span> <span class="id">t</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> &lt; 0) (<span class="id">locally</span>' 0)) (<span class="id">locally</span> (-<span class="id">x0</span>))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">revert</span> <span class="id">H6</span>; <span class="id">revert</span> <span class="id">H2b</span>; <span class="tactic">apply</span> <span class="id">filterlim_comp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">apply</span> <span class="id">filterlim_within_ext</span> <span class="kwd">with</span> (<span class="id">g</span> :=(<span class="kwd">fun</span> <span class="id">h</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; (<span class="id">f</span> (<span class="id">x</span> + <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)/<span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>))) <span class="kwd">in</span> <span class="id">H7</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">apply</span> <span class="id">filterlim_locally_close</span> <span class="kwd">with</span> (<span class="id">l</span> := <span class="id">df</span>) <span class="kwd">in</span> <span class="id">H7</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">df</span> = -<span class="id">x0</span>); [<span class="id">now</span> <span class="tactic">apply</span> <span class="id">eq_close</span>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">df</span> = <span class="id">x0</span>); [<span class="id">now</span> <span class="tactic">apply</span> <span class="id">eq_close</span>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="id">now</span> <span class="tactic">intros</span>; <span class="tactic">rewrite</span> <span class="id">opp_opp</span>.<br/>
+&nbsp;&nbsp;- <span class="id">now</span> <span class="tactic">intros</span>; <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">unfold</span> <span class="id">within</span>, <span class="id">locally</span>', <span class="id">within</span>; <span class="tactic">unfold</span> <span class="id">opp</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">filterlim</span>, <span class="id">filter_le</span>, <span class="id">filtermap</span> <span class="kwd">in</span> <span class="id">H0b</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H0b</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> &gt; 0)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">within</span>, <span class="id">locally</span>', <span class="id">within</span> <span class="kwd">in</span> <span class="id">H0b</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H0b</span> <span class="id">H3</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">revert</span> <span class="id">H0b</span>; <span class="tactic">apply</span> <span class="id">filter_imp</span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H6</span> <span class="id">H7</span> <span class="id">H8</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span>; <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span> <span class="kwd">in</span> <span class="id">H6</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#Rdiv">Rdiv</a></span> <span class="kwd">in</span> <span class="id">H6</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rinv_lt_0_compat">Rinv_lt_0_compat</a></span> <span class="kwd">in</span> <span class="id">H8</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">f</span> (<span class="id">x</span> + <span class="id">x1</span>) * / <span class="id">x1</span>) <span class="kwd">with</span> ((-<span class="id">f</span> (<span class="id">x</span> + <span class="id">x1</span>)) * (-/ <span class="id">x1</span>)) <span class="kwd">in</span> <span class="id">H6</span> <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (0) <span class="kwd">with</span> (0 * (-/ <span class="id">x1</span>)) <span class="kwd">in</span> <span class="id">H6</span> <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rmult_lt_reg_r">Rmult_lt_reg_r</a></span> <span class="kwd">in</span> <span class="id">H6</span>; [|<span class="id">lra</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rcase_abs">Rcase_abs</a></span> (<span class="id">f</span> (<span class="id">x</span> + <span class="id">x1</span>))); <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;- <span class="id">now</span> <span class="tactic">intros</span>; <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">unfold</span> <span class="id">within</span>, <span class="id">locally</span>', <span class="id">within</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">filterlim</span>, <span class="id">filter_le</span>, <span class="id">filtermap</span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H0</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> &gt; 0)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">within</span>, <span class="id">locally</span>', <span class="id">within</span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H0</span> <span class="id">H3</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">revert</span> <span class="id">H0</span>; <span class="tactic">apply</span> <span class="id">filter_imp</span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H0</span> <span class="id">H6</span> <span class="id">H7</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span>; <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#Rdiv">Rdiv</a></span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rinv_0_lt_compat">Rinv_0_lt_compat</a></span> <span class="kwd">in</span> <span class="id">H7</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#Rmult_comm">Rmult_comm</a></span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (0) <span class="kwd">with</span> (/ <span class="id">x1</span> * 0) <span class="kwd">in</span> <span class="id">H0</span> <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rmult_lt_reg_l">Rmult_lt_reg_l</a></span> <span class="kwd">in</span> <span class="id">H0</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rcase_abs">Rcase_abs</a></span> (<span class="id">f</span> (<span class="id">x</span> + <span class="id">x1</span>))); <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="not_ex_derive_Rabs_f0_2">not_ex_derive_Rabs_f0_2</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> <span class="id">df</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = 0 -&gt; <span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span> -&gt; <span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span> &lt; 0 -&gt;<br/>
+&nbsp;&nbsp;~ <span class="id">ex_derive</span> (<span class="kwd">fun</span> <span class="id">x0</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2124')">Proof.</div>
+<div class="proofscript" id="proof2124">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">ex_derive</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">is_derive_Reals</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span>; <span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">is_derive_Reals</span> <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Ranalysis1.html#uniqueness_step2">uniqueness_step2</a></span>, <span class="id">is_lim_Reals_1</span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Ranalysis1.html#uniqueness_step2">uniqueness_step2</a></span>, <span class="id">is_lim_Reals_1</span> <span class="kwd">in</span> <span class="id">H2</span>.  <br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">is_lim</span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">is_lim</span> <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">Rbar_locally</span> <span class="id">df</span>) <span class="kwd">with</span> (<span class="id">locally</span> <span class="id">df</span>) <span class="kwd">in</span> <span class="id">H0</span> <span class="tactic">by</span> <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">Rbar_locally</span>' 0) <span class="kwd">with</span> (<span class="id">locally</span>' 0) <span class="kwd">in</span> <span class="id">H0</span> <span class="tactic">by</span> <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">Rbar_locally</span> <span class="id">x0</span>) <span class="kwd">with</span> (<span class="id">locally</span> <span class="id">x0</span>) <span class="kwd">in</span> <span class="id">H2</span> <span class="tactic">by</span> <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">Rbar_locally</span>' 0) <span class="kwd">with</span> (<span class="id">locally</span>' 0) <span class="kwd">in</span> <span class="id">H2</span> <span class="tactic">by</span> <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">H0b</span> := <span class="id">H0</span>);  <span class="tactic">assert</span> (<span class="id">H2b</span> := <span class="id">H2</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="CertRL.derivlemmas.html#locally_neg">locally_neg</a></span> <span class="id">df</span> <span class="id">H1</span>); <span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (@<span class="id">filterlim_filter_le_1</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">within</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&gt; 0) (<span class="id">locally</span>' 0))) <span class="kwd">in</span> <span class="id">H2</span>; [| <span class="tactic">apply</span> <span class="id">filter_le_within</span>].<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (@<span class="id">filterlim_filter_le_1</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">within</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&gt; 0) (<span class="id">locally</span>' 0))) <span class="kwd">in</span> <span class="id">H0</span>; [| <span class="tactic">apply</span> <span class="id">filter_le_within</span>].  <br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (@<span class="id">filterlim_filter_le_1</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">within</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&lt; 0) (<span class="id">locally</span>' 0))) <span class="kwd">in</span> <span class="id">H2b</span>; [| <span class="tactic">apply</span> <span class="id">filter_le_within</span>].<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (@<span class="id">filterlim_filter_le_1</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">within</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&lt; 0) (<span class="id">locally</span>' 0))) <span class="kwd">in</span> <span class="id">H0b</span>; [| <span class="tactic">apply</span> <span class="id">filter_le_within</span>].  <br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id">locally</span>'<span class="id">_within_pos_proper_filter</span> 0); <span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id">locally</span>'<span class="id">_within_neg_proper_filter</span> 0); <span class="tactic">intro</span>.  <br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">H</span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs_R0">Rabs_R0</a></span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filterlim_ext_loc</span> <span class="kwd">with</span> (<span class="id">g</span> :=(<span class="kwd">fun</span> <span class="id">h</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id">opp</span> (<span class="id">f</span> (<span class="id">x</span> + <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)/<span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>))) <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filterlim_within_ext</span> <span class="kwd">with</span> (<span class="id">g</span> :=(<span class="kwd">fun</span> <span class="id">h</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id">f</span> (<span class="id">x</span> + <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)/<span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)) <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filterlim_ext_loc</span> <span class="kwd">with</span> (<span class="id">g</span> :=(<span class="kwd">fun</span> <span class="id">h</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; (<span class="id">f</span> (<span class="id">x</span> + <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)/<span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>))) <span class="kwd">in</span> <span class="id">H2b</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filterlim_within_ext</span> <span class="kwd">with</span> (<span class="id">g</span> :=(<span class="kwd">fun</span> <span class="id">h</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id">f</span> (<span class="id">x</span> + <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)/<span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)) <span class="kwd">in</span> <span class="id">H0b</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">apply</span> <span class="id">filterlim_locally_close</span> <span class="kwd">with</span> (<span class="id">l</span> := <span class="id">df</span>) <span class="kwd">in</span> <span class="id">H2b</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id">filterlim_opp</span> <span class="id">x0</span>); <span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">filterlim</span> (<span class="kwd">fun</span> <span class="id">h</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id">opp</span> (<span class="id">opp</span> (<span class="id">f</span> (<span class="id">x</span> + <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>) / <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">within</span> (<span class="kwd">fun</span> <span class="id">t</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> &gt; 0) (<span class="id">locally</span>' 0)) (<span class="id">locally</span> (-<span class="id">x0</span>))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">revert</span> <span class="id">H6</span>; <span class="id">revert</span> <span class="id">H2</span>; <span class="tactic">apply</span> <span class="id">filterlim_comp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">apply</span> <span class="id">filterlim_within_ext</span> <span class="kwd">with</span> (<span class="id">g</span> :=(<span class="kwd">fun</span> <span class="id">h</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; (<span class="id">f</span> (<span class="id">x</span> + <span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>)/<span class="id"><a href="CertRL.derivlemmas.html#h">h</a></span>))) <span class="kwd">in</span> <span class="id">H7</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">apply</span> <span class="id">filterlim_locally_close</span> <span class="kwd">with</span> (<span class="id">l</span> := <span class="id">df</span>) <span class="kwd">in</span> <span class="id">H7</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">df</span> = -<span class="id">x0</span>); [<span class="id">now</span> <span class="tactic">apply</span> <span class="id">eq_close</span>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">df</span> = <span class="id">x0</span>); [<span class="id">now</span> <span class="tactic">apply</span> <span class="id">eq_close</span>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="id">now</span> <span class="tactic">intros</span>; <span class="tactic">rewrite</span> <span class="id">opp_opp</span>.<br/>
+&nbsp;&nbsp;- <span class="id">now</span> <span class="tactic">intros</span>; <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">unfold</span> <span class="id">within</span>, <span class="id">locally</span>', <span class="id">within</span>; <span class="tactic">unfold</span> <span class="id">opp</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">filterlim</span>, <span class="id">filter_le</span>, <span class="id">filtermap</span> <span class="kwd">in</span> <span class="id">H0b</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H0b</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> &lt; 0)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">within</span>, <span class="id">locally</span>', <span class="id">within</span> <span class="kwd">in</span> <span class="id">H0b</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H0b</span> <span class="id">H3</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">revert</span> <span class="id">H0b</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filter_imp</span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H6</span> <span class="id">H7</span> <span class="id">H8</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span>; <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span> <span class="kwd">in</span> <span class="id">H6</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#Rdiv">Rdiv</a></span> <span class="kwd">in</span> <span class="id">H6</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rinv_lt_0_compat">Rinv_lt_0_compat</a></span> <span class="kwd">in</span> <span class="id">H8</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">f</span> (<span class="id">x</span> + <span class="id">x1</span>) * / <span class="id">x1</span>) <span class="kwd">with</span> ((-<span class="id">f</span> (<span class="id">x</span> + <span class="id">x1</span>)) * (-/ <span class="id">x1</span>)) <span class="kwd">in</span> <span class="id">H6</span> <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (0) <span class="kwd">with</span> (0 * (-/ <span class="id">x1</span>)) <span class="kwd">in</span> <span class="id">H6</span> <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rmult_lt_reg_r">Rmult_lt_reg_r</a></span> <span class="kwd">in</span> <span class="id">H6</span>; [|<span class="id">lra</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rcase_abs">Rcase_abs</a></span> (<span class="id">f</span> (<span class="id">x</span> + <span class="id">x1</span>))); <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;- <span class="id">now</span> <span class="tactic">intros</span>; <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">unfold</span> <span class="id">within</span>, <span class="id">locally</span>', <span class="id">within</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">filterlim</span>, <span class="id">filter_le</span>, <span class="id">filtermap</span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H0</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> &lt; 0)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">within</span>, <span class="id">locally</span>', <span class="id">within</span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H0</span> <span class="id">H3</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">revert</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filter_imp</span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H0</span> <span class="id">H6</span> <span class="id">H7</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span>; <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rminus_0_r">Rminus_0_r</a></span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#Rdiv">Rdiv</a></span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rinv_0_lt_compat">Rinv_0_lt_compat</a></span> <span class="kwd">in</span> <span class="id">H7</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#Rmult_comm">Rmult_comm</a></span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (0) <span class="kwd">with</span> (/ <span class="id">x1</span> * 0) <span class="kwd">in</span> <span class="id">H0</span> <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rmult_lt_reg_l">Rmult_lt_reg_l</a></span> <span class="kwd">in</span> <span class="id">H0</span>; <span class="tactic">trivial</span>; <span class="tactic">unfold</span> <span class="id">opp</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rcase_abs">Rcase_abs</a></span> (<span class="id">f</span> (<span class="id">x</span> + <span class="id">x1</span>))); <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="not_ex_derive_Rabs_f0">not_ex_derive_Rabs_f0</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> <span class="id">df</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = 0 -&gt; <span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span> -&gt; <span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span> &lt;&gt; 0 -&gt;<br/>
+&nbsp;&nbsp;~ <span class="id">ex_derive</span> (<span class="kwd">fun</span> <span class="id">x0</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2125')">Proof.</div>
+<div class="proofscript" id="proof2125">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rdichotomy">Rdichotomy</a></span> <span class="id">df</span> 0); <span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H2</span> <span class="id">H1</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;- <span class="id">revert</span> <span class="id">H2</span>; <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#not_ex_derive_Rabs_f0_2">not_ex_derive_Rabs_f0_2</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;- <span class="id">revert</span> <span class="id">H2</span>; <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#not_ex_derive_Rabs_f0_1">not_ex_derive_Rabs_f0_1</a></span>; <span class="tactic">trivial</span>.  <br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_exp">is_derive_exp</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : <span class="id">is_derive</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rtrigo_def.html#exp">exp</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rtrigo_def.html#exp">exp</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2126')">Proof.</div>
+<div class="proofscript" id="proof2126">
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">is_derive_Reals</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Exp_prop.html#derivable_pt_lim_exp">derivable_pt_lim_exp</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Derive_exp">Derive_exp</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : <span class="id">Derive</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rtrigo_def.html#exp">exp</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rtrigo_def.html#exp">exp</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2127')">Proof.</div>
+<div class="proofscript" id="proof2127">
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_unique</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_exp">is_derive_exp</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_ln">is_derive_ln</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : 0 &lt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">is_derive</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rpower.html#ln">ln</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> (/ <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2128')">Proof.</div>
+<div class="proofscript" id="proof2128">
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">is_derive_Reals</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rpower.html#derivable_pt_lim_ln">derivable_pt_lim_ln</a></span> <span class="id">x</span>).<br/>
+Qed.</div>
+&nbsp;&nbsp;<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Derive_ln">Derive_ln</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : 0 &lt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">Derive</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rpower.html#ln">ln</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = /<span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2129')">Proof.</div>
+<div class="proofscript" id="proof2129">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_unique</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_ln">is_derive_ln</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_abs_pos">is_derive_abs_pos</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>): 0 &lt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">is_derive</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> 1.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2130')">Proof.</div>
+<div class="proofscript" id="proof2130">
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">is_derive_Reals</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Ranalysis4.html#Rabs_derive_1">Rabs_derive_1</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Derive_abs_pos">Derive_abs_pos</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>): 0 &lt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">Derive</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = 1.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2131')">Proof.</div>
+<div class="proofscript" id="proof2131">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_unique</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_abs_pos">is_derive_abs_pos</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_abs_neg">is_derive_abs_neg</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>): 0 &gt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">is_derive</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> (-1).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2132')">Proof.</div>
+<div class="proofscript" id="proof2132">
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">is_derive_Reals</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Ranalysis4.html#Rabs_derive_2">Rabs_derive_2</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Derive_abs_neg">Derive_abs_neg</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>): 0 &gt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">Derive</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = -1.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2133')">Proof.</div>
+<div class="proofscript" id="proof2133">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_unique</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_abs_neg">is_derive_abs_neg</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_abs">is_derive_abs</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>): 0 &lt;&gt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">is_derive</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> (<span class="id">sign</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2134')">Proof.</div>
+<div class="proofscript" id="proof2134">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rdichotomy">Rdichotomy</a></span>); <span class="tactic">trivial</span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">H0</span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">sign</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#total_order_T">total_order_T</a></span> 0 <span class="id">x</span>); <span class="tactic">trivial</span>; [|<span class="id">lra</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">s</span>; [|<span class="id">lra</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_abs_pos">is_derive_abs_pos</a></span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#total_order_T">total_order_T</a></span> 0 <span class="id">x</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">destruct</span> <span class="id">s</span>; [<span class="id">lra</span>|<span class="id">lra</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_abs_neg">is_derive_abs_neg</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Derive_abs">Derive_abs</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>): 0 &lt;&gt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">Derive</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = <span class="id">sign</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2135')">Proof.</div>
+<div class="proofscript" id="proof2135">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_unique</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_abs">is_derive_abs</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_sqr">is_derive_sqr</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>): <span class="id">is_derive</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rsqr">Rsqr</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> (2 * <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2136')">Proof.</div>
+<div class="proofscript" id="proof2136">
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">is_derive_Reals</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Ranalysis1.html#derivable_pt_lim_Rsqr">derivable_pt_lim_Rsqr</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Derive_sqr">Derive_sqr</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>): <span class="id">Derive</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rsqr">Rsqr</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = 2 * <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2137')">Proof.</div>
+<div class="proofscript" id="proof2137">
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_unique</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_sqr">is_derive_sqr</a></span>.<br/>
+Qed.</div>
+&nbsp;&nbsp;<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_sign_pos">is_derive_sign_pos</a></span> :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>), 0&lt;<span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">is_derive</span> <span class="id">sign</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> 0.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2138')">Proof.</div>
+<div class="proofscript" id="proof2138">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id">is_derive_ext_loc</span> (<span class="kwd">fun</span> <span class="id">_</span> =&gt; 1) <span class="id">sign</span> <span class="id">x</span> 0).<br/>
+&nbsp;&nbsp;- <span class="tactic">unfold</span> <span class="id">locally</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> ( 0 &lt; <span class="id">x</span>/2) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#mkposreal">mkposreal</a></span> (<span class="id">x</span>/2) <span class="id">H0</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.derivlemmas.html#ball_abs">ball_abs</a></span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rcase_abs">Rcase_abs</a></span> (<span class="id">y</span> - <span class="id">x</span>)) <span class="kwd">in</span> <span class="id">H1</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">assert</span> (0&lt;<span class="id">y</span>) <span class="tactic">by</span> <span class="id">lra</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#sym_eq">sym_eq</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id">now</span> <span class="tactic">apply</span> <span class="id">sign_eq_1</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">apply</span> (@<span class="id">is_derive_const</span> <span class="id">R_AbsRing</span>).<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_sign_neg">is_derive_sign_neg</a></span> :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>), 0&gt;<span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">is_derive</span> <span class="id">sign</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> 0.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2139')">Proof.</div>
+<div class="proofscript" id="proof2139">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id">is_derive_ext_loc</span> (<span class="kwd">fun</span> <span class="id">_</span> =&gt; -1) <span class="id">sign</span> <span class="id">x</span> 0).<br/>
+&nbsp;&nbsp;- <span class="tactic">unfold</span> <span class="id">locally</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> ( 0 &lt; -<span class="id">x</span>/2) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#mkposreal">mkposreal</a></span> (-<span class="id">x</span>/2) <span class="id">H0</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.derivlemmas.html#ball_abs">ball_abs</a></span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rcase_abs">Rcase_abs</a></span> (<span class="id">y</span> - <span class="id">x</span>)) <span class="kwd">in</span> <span class="id">H1</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">assert</span> (0&gt;<span class="id">y</span>) <span class="tactic">by</span> <span class="id">lra</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#sym_eq">sym_eq</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id">now</span> <span class="tactic">apply</span> <span class="id">sign_eq_m1</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">apply</span> (@<span class="id">is_derive_const</span> <span class="id">R_AbsRing</span>).<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_sign">is_derive_sign</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : 0 &lt;&gt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">is_derive</span> <span class="id">sign</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> 0.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2140')">Proof.</div>
+<div class="proofscript" id="proof2140">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rdichotomy">Rdichotomy</a></span>); <span class="tactic">trivial</span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">H0</span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;+ <span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_sign_pos">is_derive_sign_pos</a></span>.<br/>
+&nbsp;&nbsp;+ <span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_sign_neg">is_derive_sign_neg</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Derive_sign">Derive_sign</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : 0 &lt;&gt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">Derive</span> <span class="id">sign</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = 0.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2141')">Proof.</div>
+<div class="proofscript" id="proof2141">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_unique</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_sign">is_derive_sign</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="psign">psign</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) := <span class="kwd">if</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rge_dec">Rge_dec</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> 0 <span class="kwd">then</span> 1 <span class="kwd">else</span> -1.<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_psign_pos">is_derive_psign_pos</a></span> :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>), 0&lt;<span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#psign">psign</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> 0.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2142')">Proof.</div>
+<div class="proofscript" id="proof2142">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id">is_derive_ext_loc</span> (<span class="kwd">fun</span> <span class="id">_</span> =&gt; 1) <span class="id"><a href="CertRL.derivlemmas.html#psign">psign</a></span> <span class="id">x</span> 0).<br/>
+&nbsp;&nbsp;- <span class="tactic">unfold</span> <span class="id">locally</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> ( 0 &lt; <span class="id">x</span>/2) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#mkposreal">mkposreal</a></span> (<span class="id">x</span>/2) <span class="id">H0</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.derivlemmas.html#ball_abs">ball_abs</a></span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.derivlemmas.html#psign">psign</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rcase_abs">Rcase_abs</a></span> (<span class="id">y</span> - <span class="id">x</span>)) <span class="kwd">in</span> <span class="id">H1</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">assert</span> (0&lt;<span class="id">y</span>) <span class="tactic">by</span> <span class="id">lra</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#sym_eq">sym_eq</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">now</span> <span class="tactic">destruct</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rge_dec">Rge_dec</a></span>; [|<span class="id">lra</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">now</span> <span class="tactic">destruct</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rge_dec">Rge_dec</a></span>; [|<span class="id">lra</span>].<br/>
+&nbsp;&nbsp;- <span class="tactic">apply</span> (@<span class="id">is_derive_const</span> <span class="id">R_AbsRing</span>).<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_psign_neg">is_derive_psign_neg</a></span> :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>), 0&gt;<span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#psign">psign</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> 0.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2143')">Proof.</div>
+<div class="proofscript" id="proof2143">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id">is_derive_ext_loc</span> (<span class="kwd">fun</span> <span class="id">_</span> =&gt; -1) <span class="id"><a href="CertRL.derivlemmas.html#psign">psign</a></span> <span class="id">x</span> 0).<br/>
+&nbsp;&nbsp;- <span class="tactic">unfold</span> <span class="id">locally</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> ( 0 &lt; -<span class="id">x</span>/2) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#mkposreal">mkposreal</a></span> (-<span class="id">x</span>/2) <span class="id">H0</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.derivlemmas.html#ball_abs">ball_abs</a></span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.derivlemmas.html#psign">psign</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rcase_abs">Rcase_abs</a></span> (<span class="id">y</span> - <span class="id">x</span>)) <span class="kwd">in</span> <span class="id">H1</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">assert</span> (0&gt;<span class="id">y</span>) <span class="tactic">by</span> <span class="id">lra</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#sym_eq">sym_eq</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">now</span> <span class="tactic">destruct</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rge_dec">Rge_dec</a></span>; [<span class="id">lra</span>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">now</span> <span class="tactic">destruct</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rge_dec">Rge_dec</a></span>; [<span class="id">lra</span>|].<br/>
+&nbsp;&nbsp;- <span class="tactic">apply</span> (@<span class="id">is_derive_const</span> <span class="id">R_AbsRing</span>).<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_psign">is_derive_psign</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : 0 &lt;&gt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#psign">psign</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> 0.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2144')">Proof.</div>
+<div class="proofscript" id="proof2144">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rdichotomy">Rdichotomy</a></span>); <span class="tactic">trivial</span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">H0</span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;+ <span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_psign_pos">is_derive_psign_pos</a></span>.<br/>
+&nbsp;&nbsp;+ <span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_psign_neg">is_derive_psign_neg</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Derive_psign">Derive_psign</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : 0 &lt;&gt; <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt; <span class="id">Derive</span> <span class="id"><a href="CertRL.derivlemmas.html#psign">psign</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = 0.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2145')">Proof.</div>
+<div class="proofscript" id="proof2145">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_unique</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_psign">is_derive_psign</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="max_abs">max_abs</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#y">y</a></span>  = (<span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> + <span class="id"><a href="CertRL.derivlemmas.html#y">y</a></span> + <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>(<span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>-<span class="id"><a href="CertRL.derivlemmas.html#y">y</a></span>))/2.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2146')">Proof.</div>
+<div class="proofscript" id="proof2146">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rle_dec">Rle_dec</a></span> <span class="id">x</span> <span class="id">y</span>);<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rcase_abs">Rcase_abs</a></span> (<span class="id">x</span> - <span class="id">y</span>)); <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="not_ex_derive_Rmax_eq">not_ex_derive_Rmax_eq</a></span> (<span class="id">f</span> <span class="id">g</span>: <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>-&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> <span class="id">df</span> <span class="id">dg</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> - <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> = 0 -&gt; <span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span> -&gt; <span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#dg">dg</a></span> -&gt; <span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span> - <span class="id"><a href="CertRL.derivlemmas.html#dg">dg</a></span> &lt;&gt; 0 -&gt;<br/>
+&nbsp;&nbsp;~<span class="id">ex_derive</span> (<span class="kwd">fun</span> <span class="id">x0</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>) (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2147')">Proof.</div>
+<div class="proofscript" id="proof2147">
+&nbsp;&nbsp;<span class="tactic">intros</span>; <span class="tactic">unfold</span> <span class="id">ex_derive</span>; <span class="tactic">intro</span>; <span class="tactic">destruct</span> <span class="id">H3</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_ext</span> <span class="kwd">with</span> (<span class="id">g0</span>:= (<span class="kwd">fun</span> <span class="id">x</span> =&gt; (<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> + <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> + <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>(<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> - <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>))/2)) <span class="kwd">in</span> <span class="id">H3</span><br/>
+&nbsp;&nbsp;; [|<span class="tactic">intro</span>; <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#max_abs">max_abs</a></span>].<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_scal</span> <span class="kwd">with</span> (<span class="id">k</span> := 2) <span class="kwd">in</span> <span class="id">H3</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_ext</span> <span class="kwd">with</span> (<span class="id">g0</span> := (<span class="kwd">fun</span> <span class="id">x</span> =&gt; (<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> + <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) + <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> (<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> - <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>))) <span class="kwd">in</span> <span class="id">H3</span><br/>
+&nbsp;&nbsp;; [|<span class="tactic">intro</span>; <span class="id">lra</span>].<br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id">is_derive_plus</span> <span class="id">f</span> <span class="id">g</span> <span class="id">x</span> <span class="id">df</span> <span class="id">dg</span>); <span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H4</span> <span class="id">H0</span> <span class="id">H1</span>); <span class="tactic">unfold</span> <span class="id">plus</span> <span class="kwd">in</span> <span class="id">H4</span>; <span class="tactic">simpl</span> <span class="kwd">in</span> <span class="id">H4</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_minus</span> <span class="kwd">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">f0</span> := (<span class="kwd">fun</span> <span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> + <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> + <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> (<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> - <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>))) (<span class="id">df0</span> := 2*<span class="id">x0</span>) <span class="kwd">in</span> <span class="id">H4</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_ext</span> <span class="kwd">with</span> (<span class="id">g0</span> := (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span> (<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> - <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>))) <span class="kwd">in</span> <span class="id">H4</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">generalize</span> (<span class="id"><a href="CertRL.derivlemmas.html#not_ex_derive_Rabs_f0">not_ex_derive_Rabs_f0</a></span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> - <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) <span class="id">x</span> (<span class="id">df</span> - <span class="id">dg</span>)); <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id">is_derive_minus</span> <span class="id">f</span> <span class="id">g</span> <span class="id">x</span> <span class="id">df</span> <span class="id">dg</span>); <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H6</span> <span class="id">H0</span> <span class="id">H1</span>); <span class="id">specialize</span> (<span class="id">H5</span> <span class="id">H</span> <span class="id">H6</span> <span class="id">H2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">ex_derive</span> <span class="kwd">in</span> <span class="id">H5</span>; <span class="tactic">destruct</span> <span class="id">H5</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> (<span class="id">minus</span> (2 * <span class="id">x0</span>) (<span class="id">df</span> + <span class="id">dg</span>)); <span class="tactic">tauto</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">intro</span>; <span class="tactic">unfold</span> <span class="id">minus</span>, <span class="id">plus</span>, <span class="id">opp</span>; <span class="tactic">simpl</span>; <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_max_abs">is_derive_max_abs</a></span> :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">f</span> <span class="id">g</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">df</span> <span class="id">dg</span> <span class="id">da</span>: <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>),<br/>
+&nbsp;&nbsp;(<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) &lt;&gt; (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) -&gt;<br/>
+&nbsp;&nbsp;<span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#dg">dg</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id">is_derive</span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> + <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> + <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>(<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> - <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>))/2) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#da">da</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id">is_derive</span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#da">da</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2148')">Proof.</div>
+<div class="proofscript" id="proof2148">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id">is_derive_ext</span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; (<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> + <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> + <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>(<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> - <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>))/2)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span> (<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>))); <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.derivlemmas.html#max_abs">max_abs</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_scal_div">is_derive_scal_div</a></span> :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> <span class="id">k</span> <span class="id">df</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>),<br/>
+&nbsp;&nbsp;<span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id">is_derive</span> (<span class="kwd">fun</span> <span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)/<span class="id"><a href="CertRL.derivlemmas.html#k">k</a></span>) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span>/<span class="id"><a href="CertRL.derivlemmas.html#k">k</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2149')">Proof.</div>
+<div class="proofscript" id="proof2149">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id">is_derive_ext</span> (<span class="kwd">fun</span> <span class="id">x0</span> =&gt; (/<span class="id">k</span>)*<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>) (<span class="kwd">fun</span> <span class="id">x0</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> =&gt; <span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span> / <span class="id">k</span>)); <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">df</span> / <span class="id">k</span>) <span class="kwd">with</span> (/<span class="id">k</span> * <span class="id">df</span>) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_scal</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+&nbsp;&nbsp;<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_max">is_derive_max</a></span> :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">f</span> <span class="id">g</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">df</span> <span class="id">dg</span>: <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>),<br/>
+&nbsp;&nbsp;(<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) &lt;&gt; (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) -&gt;<br/>
+&nbsp;&nbsp;<span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#dg">dg</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id">is_derive</span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> ((<span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span> + <span class="id"><a href="CertRL.derivlemmas.html#dg">dg</a></span> + (<span class="id"><a href="CertRL.derivlemmas.html#df">df</a></span>-<span class="id"><a href="CertRL.derivlemmas.html#dg">dg</a></span>)*<span class="id">sign</span>(<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> - <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>))/2).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2150')">Proof.</div>
+<div class="proofscript" id="proof2150">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_max_abs">is_derive_max_abs</a></span> <span class="kwd">with</span> (<span class="id">df</span> := <span class="id">df</span>) (<span class="id">dg</span> := <span class="id">dg</span>); <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_scal_div">is_derive_scal_div</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_plus</span> <span class="kwd">with</span> (<span class="id">f0</span> := <span class="kwd">fun</span> <span class="id">x0</span> =&gt; <span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span> + <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>) (<span class="id">g0</span> := <span class="kwd">fun</span> <span class="id">x0</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>(<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span> - <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>)).<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_plus</span> <span class="kwd">with</span> (<span class="id">f0</span> := <span class="id">f</span>) (<span class="id">g0</span> := <span class="id">g</span>); <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_comp</span> <span class="kwd">with</span> (<span class="id">f0</span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>) (<span class="id">g0</span> := <span class="kwd">fun</span> <span class="id">x0</span> =&gt; <span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span> - <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>).<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_abs">is_derive_abs</a></span>; <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_minus</span> <span class="kwd">with</span> (<span class="id">f0</span> := <span class="id">f</span>) (<span class="id">g0</span> := <span class="id">g</span>); <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="locally_gt">locally_gt</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : <br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> &gt; 0 -&gt; <span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&gt;0).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2151')">Proof.</div>
+<div class="proofscript" id="proof2151">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">locally</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">assert</span> (0 &lt; <span class="id">x</span>/2) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;<span class="id">exists</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#mkposreal">mkposreal</a></span> (<span class="id">x</span>/2) <span class="id">H0</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.derivlemmas.html#ball_abs">ball_abs</a></span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rcase_abs">Rcase_abs</a></span>(<span class="id">y</span> - <span class="id">x</span>)); <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="locally_lt">locally_lt</a></span> (<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : <br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> &lt; 0 -&gt; <span class="id">locally</span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>&lt;0).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2152')">Proof.</div>
+<div class="proofscript" id="proof2152">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">locally</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">assert</span> (0 &lt; -<span class="id">x</span>/2) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;<span class="id">exists</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#mkposreal">mkposreal</a></span> (-<span class="id">x</span>/2) <span class="id">H0</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.derivlemmas.html#ball_abs">ball_abs</a></span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rcase_abs">Rcase_abs</a></span>(<span class="id">y</span> - <span class="id">x</span>)); <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_max2">is_derive_max2</a></span> :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">f</span> <span class="id">g</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">dfg</span>: <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">continuous</span> (<span class="kwd">fun</span> <span class="id">x0</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span> - <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) &gt; (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) -&gt; <span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#dfg">dfg</a></span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&gt; <span class="id">is_derive</span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#dfg">dfg</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2153')">Proof.</div>
+<div class="proofscript" id="proof2153">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">f</span> <span class="id">x</span> - <span class="id">g</span> <span class="id">x</span> &gt; 0) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id">is_derive_ext_loc</span> <span class="id">f</span> (<span class="kwd">fun</span> <span class="id">x0</span> : <span class="id">R_AbsRing</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span> (<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>) (<span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>)) <span class="id">x</span> <span class="id">dfg</span>); <span class="tactic">trivial</span>. <br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">continuous</span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">filterlim</span>, <span class="id">filter_le</span>,<span class="id">filtermap</span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> &gt; 0)); <span class="tactic">simpl</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">locally</span> (<span class="id">f</span> <span class="id">x</span> - <span class="id">g</span> <span class="id">x</span>) (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> &gt; 0)) <span class="tactic">by</span> (<span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#locally_gt">locally_gt</a></span>; <span class="tactic">trivial</span>).<br/>
+&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H</span> <span class="id">H3</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filter_imp</span> <span class="kwd">with</span> (<span class="id">P</span> := <span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> - <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> &gt; 0); <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rle_dec">Rle_dec</a></span> (<span class="id">f</span> <span class="id">x0</span>) (<span class="id">g</span> <span class="id">x0</span>)); <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_max3">is_derive_max3</a></span> :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">f</span> <span class="id">g</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">dfg</span>: <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">continuous</span> (<span class="kwd">fun</span> <span class="id">x0</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span> - <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) &lt; (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) -&gt; <span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#dfg">dfg</a></span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&gt; <span class="id">is_derive</span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#dfg">dfg</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2154')">Proof.</div>
+<div class="proofscript" id="proof2154">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">f</span> <span class="id">x</span> - <span class="id">g</span> <span class="id">x</span> &lt; 0) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id">is_derive_ext_loc</span> <span class="id">g</span> (<span class="kwd">fun</span> <span class="id">x0</span> : <span class="id">R_AbsRing</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span> (<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>) (<span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>)) <span class="id">x</span> <span class="id">dfg</span>); <span class="tactic">trivial</span>. <br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">continuous</span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">filterlim</span>, <span class="id">filter_le</span>,<span class="id">filtermap</span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> &lt; 0)); <span class="tactic">simpl</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">locally</span> (<span class="id">f</span> <span class="id">x</span> - <span class="id">g</span> <span class="id">x</span>) (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> &lt; 0)) <span class="tactic">by</span> (<span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#locally_lt">locally_lt</a></span>; <span class="tactic">trivial</span>).<br/>
+&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H</span> <span class="id">H3</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">filter_imp</span> <span class="kwd">with</span> (<span class="id">P</span> := <span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> - <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> &lt; 0); <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rle_dec">Rle_dec</a></span> (<span class="id">f</span> <span class="id">x0</span>) (<span class="id">g</span> <span class="id">x0</span>)); <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_max_alt">is_derive_max_alt</a></span> :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">f</span> <span class="id">g</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">dfg</span>: <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">continuous</span> (<span class="kwd">fun</span> <span class="id">x0</span> =&gt; <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span> - <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x0">x0</a></span>) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) &lt;&gt; (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) -&gt; <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> &gt; <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) /\ <span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#dfg">dfg</a></span>) \/ ((<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> &lt; <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) /\ <span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#dfg">dfg</a></span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&gt; <span class="id">is_derive</span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#dfg">dfg</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2155')">Proof.</div>
+<div class="proofscript" id="proof2155">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">do</span> 2 <span class="tactic">destruct</span> <span class="id">H1</span>.<br/>
+&nbsp;&nbsp;- <span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_max2">is_derive_max2</a></span>.<br/>
+&nbsp;&nbsp;- <span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_max3">is_derive_max3</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_derive_max_alt2">is_derive_max_alt2</a></span> :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">f</span> <span class="id">g</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">dfg</span>: <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#dfg">dfg</a></span> -&gt; <span class="id">is_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#dfg">dfg</a></span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&gt; <span class="id">is_derive</span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> <span class="id"><a href="CertRL.derivlemmas.html#dfg">dfg</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2156')">Proof.</div>
+<div class="proofscript" id="proof2156">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id">is_derive_ext</span> (<span class="kwd">fun</span> <span class="id">t</span> =&gt; (<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> + <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> + <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span>(<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span> - <span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>))/2) (<span class="kwd">fun</span> <span class="id">t</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span> (<span class="id">f</span> <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>) (<span class="id">g</span> <span class="id"><a href="CertRL.derivlemmas.html#t">t</a></span>))).<br/>
+&nbsp;&nbsp;- <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.derivlemmas.html#max_abs">max_abs</a></span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">replace</span> <span class="id">dfg</span> <span class="kwd">with</span> (((<span class="id">dfg</span> + <span class="id">dfg</span>)+0)/2) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_scal_div">is_derive_scal_div</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> (@<span class="id">is_derive_plus</span> <span class="id">R_AbsRing</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> (@<span class="id">is_derive_plus</span> <span class="id">R_AbsRing</span>); <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_Rabs_df0">is_derive_Rabs_df0</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> 0 <span class="kwd">with</span> (<span class="id">dfg</span> - <span class="id">dfg</span>) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">apply</span> (@<span class="id">is_derive_minus</span> <span class="id">R_AbsRing</span>).<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Derive_max">Derive_max</a></span> : <br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">f</span> <span class="id">g</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>),<br/>
+&nbsp;&nbsp;(<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) &lt;&gt; (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) -&gt;<br/>
+&nbsp;&nbsp;<span class="id">ex_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id">ex_derive</span> <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id">Derive</span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rmax">Rmax</a></span> (<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>) (<span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)) <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>  = <br/>
+&nbsp;&nbsp;(<span class="id">Derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> + <span class="id">Derive</span> <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> + (<span class="id">Derive</span> <span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> - <span class="id">Derive</span> <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>)*<span class="id">sign</span>(<span class="id"><a href="CertRL.derivlemmas.html#f">f</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span> - <span class="id"><a href="CertRL.derivlemmas.html#g">g</a></span> <span class="id"><a href="CertRL.derivlemmas.html#x">x</a></span>))/2.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2157')">Proof.</div>
+<div class="proofscript" id="proof2157">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">is_derive_unique</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.derivlemmas.html#is_derive_max">is_derive_max</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Derive_correct</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">Derive_correct</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.utils.ExtrFloatishIEEE</title>
+<meta name="description" content="Documentation of Coq module CertRL.utils.ExtrFloatishIEEE" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.utils.ExtrFloatishIEEE</h1>
+<div class="coq">
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.extraction.Extraction.html">Extraction</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html">FloatishIEEE</a></span>.<br/>
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.extraction.ExtrOcamlZInt.html">ExtrOcamlZInt</a></span>.<br/>
+<br/>
+<span class="id">Extract</span> <span class="id">Constant</span> <span class="id">IEEE_float</span> =&gt; "<span class="id">float</span>".<br/>
+<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_zero</span> =&gt; "0.".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_opp</span> =&gt; "<span class="id">Float.neg</span>".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_plus</span> =&gt; "<span class="id">Float.add</span>".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_minus</span> =&gt; "<span class="id">Float.sub</span>".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_mult</span>  =&gt; "<span class="id">Float.mul</span>".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_div</span>   =&gt; "<span class="id">Float.div</span>".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_sqrt</span>  =&gt; "<span class="id">Float.sqrt</span>".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_abs</span>   =&gt; "<span class="id">Float.abs</span>".<br/>
+<br/>
+<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_exp</span>   =&gt; "<span class="id">Float.exp</span>".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_ln</span>    =&gt; "<span class="id">Float.log</span>".<br/>
+<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_pi</span>    =&gt; "<span class="id">Float.pi</span>".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_sin</span>   =&gt; "<span class="id">Float.sin</span>".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_cos</span>   =&gt; "<span class="id">Float.cos</span>".<br/>
+<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_fromZ</span> =&gt; "<span class="id">Float.of_int</span>".<br/>
+<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_eq</span>    =&gt; "<span class="id">Float.equal</span>".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_neq</span>   =&gt; "(<span class="kwd">fun</span> <span class="id">x</span> <span class="id">y</span> -&gt; <span class="id">x</span> &lt;&gt; <span class="id">y</span>)".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_lt</span>    =&gt; "(<span class="kwd">fun</span> <span class="id">x</span> <span class="id">y</span> -&gt; <span class="id">x</span> &lt; <span class="id">y</span>)".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_le</span>    =&gt; "(<span class="kwd">fun</span> <span class="id">x</span> <span class="id">y</span> -&gt; <span class="id">x</span> &lt;= <span class="id">y</span>)".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_gt</span>    =&gt; "(<span class="kwd">fun</span> <span class="id">x</span> <span class="id">y</span> -&gt; <span class="id">x</span> &gt; <span class="id">y</span>)".<br/>
+<span class="id">Extract</span> <span class="id">Inlined</span> <span class="id">Constant</span> <span class="id">IEEE_ge</span>    =&gt; "(<span class="kwd">fun</span> <span class="id">x</span> <span class="id">y</span> -&gt; <span class="id">x</span> &gt;= <span class="id">y</span>)".<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

@@ -1,0 +1,504 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.SigmaAlgebras</title>
+<meta name="description" content="Documentation of Coq module CertRL.SigmaAlgebras" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.SigmaAlgebras</h1>
+<div class="coq">
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Classical.html">Classical</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.ClassicalChoice.html">ClassicalChoice</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.FinFun.html">FinFun</a></span>.<br/>
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html">List</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html">Morphisms</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.EquivDec.html">EquivDec</a></span>.<br/>
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="CertRL.utils.Utils.html">Utils</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="CertRL.ProbSpace.html">ProbSpace</a></span>.<br/>
+<br/>
+<span class="kwd">Import</span> <span class="id">ListNotations</span>.<br/>
+<br/>
+<span class="kwd">Local</span> <span class="kwd">Open</span> <span class="kwd">Scope</span> <span class="id">prob</span>.<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="classic_event_lem">classic_event_lem</a></span> {<span class="id">T</span>} : <span class="kwd">forall</span> <span class="id">a</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>, <span class="id"><a href="CertRL.ProbSpace.html#event_lem">event_lem</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#a">a</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2357')">Proof.</div>
+<div class="proofscript" id="proof2357">
+&nbsp;&nbsp;<span class="tactic">intros</span> ??; <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Classical_Prop.html#classic">classic</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="event_complement_swap_classic">event_complement_swap_classic</a></span> {<span class="id">T</span>} (<span class="id">A</span> <span class="id">B</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>) : ¬ <span class="id"><a href="CertRL.SigmaAlgebras.html#A">A</a></span> === <span class="id"><a href="CertRL.SigmaAlgebras.html#B">B</a></span> &lt;-&gt; <span class="id"><a href="CertRL.SigmaAlgebras.html#A">A</a></span> === ¬ <span class="id"><a href="CertRL.SigmaAlgebras.html#B">B</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2358')">Proof.</div>
+<div class="proofscript" id="proof2358">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.ProbSpace.html#event_complement_swap">event_complement_swap</a></span>; <span class="tactic">auto</span> <span class="kwd">using</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#classic_event_lem">classic_event_lem</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Program</span> <span class="kwd">Instance</span> <span class="id"><a name="trivial_sa">trivial_sa</a></span> (<span class="id">T</span>:<span class="kwd">Type</span>) : <span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span><br/>
+&nbsp;&nbsp;:= {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> (<span class="id">f</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id">T</span>) := (<span class="id"><a href="CertRL.SigmaAlgebras.html#f">f</a></span> === ∅ \/ <span class="id"><a href="CertRL.SigmaAlgebras.html#f">f</a></span> === Ω)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2359')">Next Obligation.</div>
+<div class="proofscript" id="proof2359">
+&nbsp;&nbsp;<span class="tactic">intros</span> ?? <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">tauto</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2360')">Next Obligation.</div>
+<div class="proofscript" id="proof2360">
+&nbsp;&nbsp;<span class="tactic">auto</span> <span class="kwd">using</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#classic_event_lem">classic_event_lem</a></span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2361')">Next Obligation.</div>
+<div class="proofscript" id="proof2361">
+&nbsp;&nbsp;<span class="comment">(*&nbsp;sigh.&nbsp;more&nbsp;classical&nbsp;reasoning&nbsp;needed&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Classical_Prop.html#classic">classic</a></span> (<span class="id">exists</span> <span class="id">n</span>, <span class="id">collection</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span> === Ω))<br/>
+&nbsp;&nbsp;; [<span class="id">right</span>|<span class="id">left</span>]; <span class="tactic">firstorder</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2362')">Next Obligation.</div>
+<div class="proofscript" id="proof2362">
+&nbsp;&nbsp;<span class="tactic">firstorder</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2363')">Next Obligation.</div>
+<div class="proofscript" id="proof2363">
+&nbsp;&nbsp;<span class="tactic">firstorder</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Program</span> <span class="kwd">Instance</span> <span class="id"><a name="discrete_sa">discrete_sa</a></span> (<span class="id">T</span>:<span class="kwd">Type</span>) : <span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span><br/>
+&nbsp;&nbsp;:= {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> := <span class="kwd">fun</span> <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#True">True</a></span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+<span class="kwd">Solve</span> <span class="kwd">Obligations</span> <span class="kwd">with</span> (<span class="tactic">auto</span> <span class="kwd">using</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#classic_event_lem">classic_event_lem</a></span> || <span class="tactic">firstorder</span>).<br/>
+<br/>
+<span class="kwd">Program</span> <span class="kwd">Instance</span> <span class="id"><a name="subset_sa">subset_sa</a></span> (<span class="id">T</span>:<span class="kwd">Type</span>) (<span class="id">A</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>) : <span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span><br/>
+&nbsp;&nbsp;:= {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> <span class="id">f</span> := (<span class="id"><a href="CertRL.SigmaAlgebras.html#f">f</a></span> === ∅ \/ <span class="id"><a href="CertRL.SigmaAlgebras.html#f">f</a></span> === <span class="id">A</span> \/ <span class="id"><a href="CertRL.SigmaAlgebras.html#f">f</a></span> === ¬ <span class="id">A</span> \/ <span class="id"><a href="CertRL.SigmaAlgebras.html#f">f</a></span> === Ω)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2364')">Next Obligation.</div>
+<div class="proofscript" id="proof2364">
+&nbsp;&nbsp;<span class="tactic">intros</span> ?? <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">tauto</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2365')">Next Obligation.</div>
+<div class="proofscript" id="proof2365">
+&nbsp;&nbsp;<span class="tactic">auto</span> <span class="kwd">using</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#classic_event_lem">classic_event_lem</a></span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2366')">Next Obligation.</div>
+<div class="proofscript" id="proof2366">
+&nbsp;&nbsp;<span class="comment">(*&nbsp;sigh.&nbsp;more&nbsp;classical&nbsp;reasoning&nbsp;needed&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Classical_Prop.html#classic">classic</a></span> (<span class="id">exists</span> <span class="id">n</span>, <span class="id">collection</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span> === Ω))<br/>
+&nbsp;&nbsp;; [<span class="tactic">repeat</span> <span class="id">right</span>; <span class="tactic">firstorder</span> | ].<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Classical_Prop.html#classic">classic</a></span> (<span class="id">exists</span> <span class="id">n</span>, <span class="id">collection</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span> === <span class="id">A</span>))<br/>
+&nbsp;&nbsp;; <span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Classical_Prop.html#classic">classic</a></span> (<span class="id">exists</span> <span class="id">n</span>, <span class="id">collection</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span> === ¬ <span class="id">A</span>)).<br/>
+&nbsp;&nbsp;+ <span class="id">right</span>; <span class="id">right</span>; <span class="id">right</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Equivalence.html#equiv">equiv</a></span>, <span class="id"><a href="CertRL.ProbSpace.html#event_equiv">event_equiv</a></span>; <span class="tactic">intros</span> <span class="id">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">split</span>; [<span class="tactic">firstorder</span> | ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Classical_Prop.html#classic">classic</a></span> (<span class="id">A</span> <span class="id">x</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">destruct</span> <span class="id">H1</span> <span class="kwd">as</span> [<span class="id">n1</span> <span class="id">H1</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> <span class="id">n1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">H1</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">destruct</span> <span class="id">H2</span> <span class="kwd">as</span> [<span class="id">n2</span> <span class="id">H2</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> <span class="id">n2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">H2</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;+ <span class="id">right</span>; <span class="id">left</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Equivalence.html#equiv">equiv</a></span>, <span class="id"><a href="CertRL.ProbSpace.html#event_equiv">event_equiv</a></span>; <span class="tactic">intros</span> <span class="id">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">intros</span> [<span class="id">n</span> <span class="id">cn</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H</span> <span class="id">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H</span> <span class="kwd">as</span> [<span class="id">eqq</span>|[<span class="id">eqq</span>|[<span class="id">eqq</span>|<span class="id">eqq</span>]]]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">apply</span> <span class="id">eqq</span> <span class="kwd">in</span> <span class="id">cn</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">intros</span> <span class="id">ax</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H1</span> <span class="kwd">as</span> [<span class="id">n1</span> <span class="id">H1</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> <span class="id">n1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">H1</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;+ <span class="id">right</span>; <span class="id">right</span>. <span class="id">left</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Equivalence.html#equiv">equiv</a></span>, <span class="id"><a href="CertRL.ProbSpace.html#event_equiv">event_equiv</a></span>; <span class="tactic">intros</span> <span class="id">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">intros</span> [<span class="id">n</span> <span class="id">cn</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H</span> <span class="id">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H</span> <span class="kwd">as</span> [<span class="id">eqq</span>|[<span class="id">eqq</span>|[<span class="id">eqq</span>|<span class="id">eqq</span>]]]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">apply</span> <span class="id">eqq</span> <span class="kwd">in</span> <span class="id">cn</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">intros</span> <span class="id">ax</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H2</span> <span class="kwd">as</span> [<span class="id">n2</span> <span class="id">H2</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> <span class="id">n2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">H2</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;+ <span class="id">left</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">split</span>; [| <span class="tactic">firstorder</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> [<span class="id">n</span> <span class="id">cn</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">H</span> <span class="id">n</span>) <span class="kwd">as</span> [<span class="id">eqq</span>|[<span class="id">eqq</span>|[<span class="id">eqq</span>|<span class="id">eqq</span>]]]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">apply</span> <span class="id">eqq</span> <span class="kwd">in</span> <span class="id">cn</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="tactic">firstorder</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2367')">Next Obligation.</div>
+<div class="proofscript" id="proof2367">
+&nbsp;&nbsp;<span class="tactic">replace</span> <span class="id"><a href="CertRL.ProbSpace.html#event_equiv">event_equiv</a></span> <span class="kwd">with</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Equivalence.html#equiv">equiv</a></span> <span class="kwd">in</span> * <span class="tactic">by</span> <span class="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#event_complement_swap_classic">event_complement_swap_classic</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.ProbSpace.html#event_not_not">event_not_not</a></span> <span class="tactic">by</span> <span class="tactic">auto</span> <span class="kwd">using</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#classic_event_lem">classic_event_lem</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">autorewrite</span> <span class="kwd">with</span> <span class="id">prob</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">tauto</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2368')">Next Obligation.</div>
+<div class="proofscript" id="proof2368">
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="id">right</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">reflexivity</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="is_partition">is_partition</a></span> {<span class="id">T</span>} (<span class="id">part</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>-&gt;<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>)<br/>
+&nbsp;&nbsp;:= <span class="id"><a href="CertRL.ProbSpace.html#collection_is_pairwise_disjoint">collection_is_pairwise_disjoint</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#part">part</a></span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/\ <span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#part">part</a></span> === Ω.<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="sub_partition">sub_partition</a></span> {<span class="id">T</span>} (<span class="id">part1</span> <span class="id">part2</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span> -&gt; <span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>)<br/>
+&nbsp;&nbsp;:= <span class="kwd">forall</span> <span class="id">n</span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#part1">part1</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span> === <span class="id"><a href="CertRL.SigmaAlgebras.html#part2">part2</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span> \/ <span class="id"><a href="CertRL.SigmaAlgebras.html#part1">part1</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span> === ∅.<br/>
+<br/>
+<span class="kwd">Instance</span> <span class="id"><a name="sub_partition_pre">sub_partition_pre</a></span> {<span class="id">T</span>} : <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.RelationClasses.html#PreOrder">PreOrder</a></span> (@<span class="id"><a href="CertRL.SigmaAlgebras.html#sub_partition">sub_partition</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2369')">Proof.</div>
+<div class="proofscript" id="proof2369">
+&nbsp;&nbsp;<span class="id">constructor</span>; <span class="tactic">red</span>; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#sub_partition">sub_partition</a></span>; <span class="tactic">intuition</span> <span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;- <span class="id">left</span>; <span class="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id">specialize</span> (<span class="id">H</span> <span class="id">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">H0</span> <span class="id">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">rewrite</span> <span class="id">H1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">tauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">rewrite</span> <span class="id">H1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">tauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="in_partition_union">in_partition_union</a></span> {<span class="id">T</span>} (<span class="id">part</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>-&gt;<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>) (<span class="id">f</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>) : <span class="kwd">Prop</span><br/>
+&nbsp;&nbsp;:= <span class="id">exists</span> <span class="id">subpart</span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#sub_partition">sub_partition</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#subpart">subpart</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#part">part</a></span> /\ (<span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#subpart">subpart</a></span>) === <span class="id"><a href="CertRL.SigmaAlgebras.html#f">f</a></span>.<br/>
+<br/>
+<span class="kwd">Instance</span> <span class="id"><a name="in_partition_union_proper">in_partition_union_proper</a></span> {<span class="id">T</span>} (<span class="id">part</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>-&gt;<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html#Proper">Proper</a></span> (<span class="id"><a href="CertRL.ProbSpace.html#event_equiv">event_equiv</a></span> ==&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#iff">iff</a></span>) (<span class="id"><a href="CertRL.SigmaAlgebras.html#in_partition_union">in_partition_union</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#part">part</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2370')">Proof.</div>
+<div class="proofscript" id="proof2370">
+&nbsp;&nbsp;<span class="tactic">cut</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html#Proper">Proper</a></span> (<span class="id"><a href="CertRL.ProbSpace.html#event_equiv">event_equiv</a></span> ==&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Program.Basics.html#impl">Basics.impl</a></span>) (<span class="id"><a href="CertRL.SigmaAlgebras.html#in_partition_union">in_partition_union</a></span> <span class="id">part</span>))<br/>
+&nbsp;&nbsp;; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#in_partition_union">in_partition_union</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Program.Basics.html#impl">Basics.impl</a></span>.<br/>
+&nbsp;&nbsp;{ <span class="tactic">intros</span> <span class="id">HH</span> <span class="id">x</span> <span class="id">y</span> <span class="id">xyeq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intuition</span> <span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">symmetry</span> <span class="kwd">in</span> <span class="id">xyeq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intuition</span> <span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">xyeq</span> [<span class="id">sub</span> [<span class="id">sp</span> <span class="id">uc</span>]].<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">xyeq</span> <span class="kwd">in</span> <span class="id">uc</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="sub_partition_diff">sub_partition_diff</a></span> {<span class="id">T</span>} (<span class="id">sub</span> <span class="id">part</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>-&gt;<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.SigmaAlgebras.html#sub_partition">sub_partition</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#sub">sub</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#part">part</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.SigmaAlgebras.html#sub_partition">sub_partition</a></span> (<span class="kwd">fun</span> <span class="id">x</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span> =&gt; <span class="id"><a href="CertRL.SigmaAlgebras.html#part">part</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#x">x</a></span> \ <span class="id"><a href="CertRL.SigmaAlgebras.html#sub">sub</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#x">x</a></span>) <span class="id"><a href="CertRL.SigmaAlgebras.html#part">part</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2371')">Proof.</div>
+<div class="proofscript" id="proof2371">
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">is_sub</span> <span class="id">n</span>.<br/>
+&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">is_sub</span> <span class="id">n</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">is_sub</span> <span class="kwd">as</span> [<span class="id">eqq</span>|<span class="id">eqq</span>]<br/>
+&nbsp;&nbsp;; <span class="tactic">rewrite</span> <span class="id">eqq</span><br/>
+&nbsp;&nbsp;; <span class="id">autorewrite</span> <span class="kwd">with</span> <span class="id">prob</span><br/>
+&nbsp;&nbsp;; <span class="tactic">intuition</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Program</span> <span class="kwd">Instance</span> <span class="id"><a name="countable_partition_sa">countable_partition_sa</a></span> {<span class="id">T</span>} (<span class="id">part</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>-&gt;<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>) (<span class="id">is_part</span>:<span class="id"><a href="CertRL.SigmaAlgebras.html#is_partition">is_partition</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#part">part</a></span>) : <span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span><br/>
+&nbsp;&nbsp;:= {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> := <span class="id"><a href="CertRL.SigmaAlgebras.html#in_partition_union">in_partition_union</a></span> <span class="id">part</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2372')">Next Obligation.</div>
+<div class="proofscript" id="proof2372">
+&nbsp;&nbsp;<span class="tactic">auto</span> <span class="kwd">using</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#classic_event_lem">classic_event_lem</a></span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2373')">Next Obligation.</div>
+<div class="proofscript" id="proof2373">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#in_partition_union">in_partition_union</a></span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#is_partition">is_partition</a></span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.ClassicalChoice.html#choice">choice</a></span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H</span> <span class="kwd">as</span> [<span class="id">partish</span> <span class="id">pH</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> (<span class="kwd">fun</span> <span class="id">n</span> =&gt; <span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id">partish</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#x">x</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">intros</span> <span class="id">n</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span>.<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#is_partition">is_partition</a></span> <span class="kwd">in</span> <span class="id">is_part</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Classical_Prop.html#classic">classic</a></span> ((<span class="kwd">fun</span> <span class="id">t</span> : <span class="id">T</span> =&gt; <span class="id">exists</span> <span class="id">n0</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>, <span class="id">partish</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n0">n0</a></span> <span class="id">n</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#t">t</a></span>) === ∅)); [<span class="tactic">eauto</span> | ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">left</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Classical_Pred_Type.html#not_all_ex_not">not_all_ex_not</a></span> <span class="kwd">in</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H</span> <span class="kwd">as</span> [<span class="id">nn</span> <span class="id">Hnn</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.ProbSpace.html#event_none">event_none</a></span> <span class="kwd">in</span> <span class="id">Hnn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">HH</span>':~ ~ (<span class="id">exists</span> <span class="id">n0</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>, <span class="id">partish</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n0">n0</a></span> <span class="id">n</span> <span class="id">nn</span>)) <span class="tactic">by</span> <span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Classical_Prop.html#NNPP">NNPP</a></span> <span class="kwd">in</span> <span class="id">HH</span>'.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">HH</span>' <span class="kwd">as</span> [<span class="id">nn2</span> <span class="id">pnn2</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">pH</span> <span class="id">nn2</span>) <span class="kwd">as</span> [<span class="id">HH1</span> <span class="id">HH2</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">red</span> <span class="kwd">in</span> <span class="id">HH1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">intros</span> [<span class="id">nn3</span> <span class="id">pnn3</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">pH</span> <span class="id">nn3</span>) <span class="kwd">as</span> [<span class="id">HH31</span> <span class="id">HH32</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">red</span> <span class="kwd">in</span> <span class="id">HH31</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">HH31</span> <span class="id">n</span>); <span class="tactic">apply</span> <span class="id">H</span> <span class="kwd">in</span> <span class="id">pnn3</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">vm_compute</span> <span class="kwd">in</span> <span class="id">pnn3</span>; <span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">intros</span> <span class="id">pnnn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">HH1</span> <span class="id">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">HH1</span> <span class="kwd">as</span> [<span class="id">eqq</span>|<span class="id">eqq</span>]; [ | <span class="tactic">apply</span> <span class="id">eqq</span> <span class="kwd">in</span> <span class="id">pnn2</span>; <span class="id">vm_compute</span> <span class="kwd">in</span> <span class="id">pnn2</span>; <span class="tactic">intuition</span> ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">eqq</span> <span class="kwd">in</span> <span class="id">pnnn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">intros</span> <span class="id">x</span>; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">intros</span> [<span class="id">n1</span> [<span class="id">n2</span> <span class="id">pnn</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> <span class="id">n2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">pH</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">intros</span> [<span class="id">n</span> <span class="id">cn</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">pH</span> <span class="kwd">in</span> <span class="id">cn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">cn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2374')">Next Obligation.</div>
+<div class="proofscript" id="proof2374">
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">is_part</span> <span class="kwd">as</span> [<span class="id">disj</span> <span class="id">tot</span>].<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H</span> <span class="kwd">as</span> [<span class="id">sub</span> [<span class="id">is_sub</span> <span class="id">uc2</span>]].<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> &lt;- <span class="id">uc2</span>.<br/>
+&nbsp;&nbsp;<span class="id">exists</span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id">part</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#x">x</a></span> \ <span class="id">sub</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#x">x</a></span>).<br/>
+&nbsp;&nbsp;<span class="tactic">split</span>.<br/>
+&nbsp;&nbsp;+ <span class="tactic">apply</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#sub_partition_diff">sub_partition_diff</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;+ <span class="tactic">intros</span> <span class="id">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span>, <span class="id"><a href="CertRL.ProbSpace.html#event_complement">event_complement</a></span>, <span class="id"><a href="CertRL.ProbSpace.html#event_diff">event_diff</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> [<span class="id">n</span> [<span class="id">part1</span> <span class="id">sub1</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> [<span class="id">nn</span> <span class="id">sub2</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">n</span> == <span class="id">nn</span>); <span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Equivalence.html#equiv">equiv</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.RelationClasses.html#complement">complement</a></span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">subst</span>; <span class="tactic">tauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">specialize</span> (<span class="id">disj</span> <span class="id">_</span> <span class="id">_</span> <span class="id">c</span> <span class="id">x</span> <span class="id">part1</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">is_sub</span> <span class="id">nn</span>); [ | <span class="tactic">firstorder</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">H</span> <span class="kwd">in</span> <span class="id">sub2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">tauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span> <span class="kwd">in</span> <span class="id">tot</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">xin</span>:Ω <span class="id">x</span>) <span class="tactic">by</span> <span class="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">tot</span> <span class="kwd">in</span> <span class="id">xin</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">xin</span> <span class="kwd">as</span> [<span class="id">n</span> <span class="id">partn</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> <span class="id">n</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">split</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">subx</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2375')">Next Obligation.</div>
+<div class="proofscript" id="proof2375">
+&nbsp;&nbsp;<span class="id">exists</span> <span class="id">part</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">is_part</span> <span class="kwd">as</span> [<span class="id">disj</span> <span class="id">tot</span>].<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">tot</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">split</span>; <span class="tactic">reflexivity</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Program</span> <span class="kwd">Instance</span> <span class="id"><a name="sigma_algebra_intersection">sigma_algebra_intersection</a></span> {<span class="id">T</span>} (<span class="id">coll</span>:<span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>-&gt;<span class="kwd">Prop</span>): <span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span><br/>
+&nbsp;&nbsp;:= { <span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> := <span class="kwd">fun</span> <span class="id">e</span> =&gt; <span class="kwd">forall</span> <span class="id">sa</span>, <span class="id">coll</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#sa">sa</a></span> -&gt; @<span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#sa">sa</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#e">e</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2376')">Next Obligation.</div>
+<div class="proofscript" id="proof2376">
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">xyeq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">split</span>; <span class="tactic">intros</span> <span class="id">HH</span> <span class="id">sa</span>.<br/>
+&nbsp;&nbsp;+ <span class="tactic">rewrite</span> &lt;- <span class="id">xyeq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">auto</span>.<br/>
+&nbsp;&nbsp;+ <span class="tactic">rewrite</span> <span class="id">xyeq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2377')">Next Obligation.</div>
+<div class="proofscript" id="proof2377">
+&nbsp;&nbsp;<span class="tactic">auto</span> <span class="kwd">using</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#classic_event_lem">classic_event_lem</a></span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2378')">Next Obligation.</div>
+<div class="proofscript" id="proof2378">
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.ProbSpace.html#sa_countable_union">sa_countable_union</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">auto</span>.<br/>
+Defined.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2379')">Next Obligation.</div>
+<div class="proofscript" id="proof2379">
+&nbsp;&nbsp;<span class="tactic">eauto</span> <span class="kwd">with</span> <span class="id">prob</span>.<br/>
+Defined.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2380')">Next Obligation.</div>
+<div class="proofscript" id="proof2380">
+&nbsp;&nbsp;<span class="tactic">eauto</span> <span class="kwd">with</span> <span class="id">prob</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="all_included">all_included</a></span> {<span class="id">T</span>} (<span class="id">F</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span> -&gt; <span class="kwd">Prop</span>) : <span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span> -&gt; <span class="kwd">Prop</span><br/>
+&nbsp;&nbsp;:= <span class="kwd">fun</span> <span class="id">sa</span> =&gt; <span class="kwd">forall</span> (<span class="id">e</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>), <span class="id"><a href="CertRL.SigmaAlgebras.html#F">F</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#e">e</a></span> -&gt; @<span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> <span class="id">_</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#sa">sa</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#e">e</a></span>.<br/>
+<br/>
+<span class="kwd">Instance</span> <span class="id"><a name="generated_sa">generated_sa</a></span> {<span class="id">T</span>} (<span class="id">F</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span> -&gt; <span class="kwd">Prop</span>) : <span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span><br/>
+&nbsp;&nbsp;:= <span class="id"><a href="CertRL.SigmaAlgebras.html#sigma_algebra_intersection">sigma_algebra_intersection</a></span> (<span class="id"><a href="CertRL.SigmaAlgebras.html#all_included">all_included</a></span> <span class="id">F</span>).<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="generated_sa_sub">generated_sa_sub</a></span> {<span class="id">T</span>} (<span class="id">F</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span> -&gt; <span class="kwd">Prop</span>) :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> <span class="id">x</span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#F">F</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#x">x</a></span> -&gt; @<span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> <span class="id">_</span> (<span class="id"><a href="CertRL.SigmaAlgebras.html#generated_sa">generated_sa</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#F">F</a></span>) <span class="id"><a href="CertRL.SigmaAlgebras.html#x">x</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2381')">Proof.</div>
+<div class="proofscript" id="proof2381">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#generated_sa">generated_sa</a></span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#sigma_algebra_intersection">sigma_algebra_intersection</a></span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#all_included">all_included</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="generated_sa_minimal">generated_sa_minimal</a></span> {<span class="id">T</span>} (<span class="id">F</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span> -&gt; <span class="kwd">Prop</span>) (<span class="id">sa</span>':<span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>) :<br/>
+&nbsp;&nbsp;(<span class="kwd">forall</span> <span class="id">x</span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#F">F</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#x">x</a></span> -&gt; @<span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> <span class="id">_</span> <span class="id">sa</span>' <span class="id"><a href="CertRL.SigmaAlgebras.html#x">x</a></span>) -&gt;<br/>
+&nbsp;&nbsp;(<span class="kwd">forall</span> <span class="id">x</span>, @<span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> <span class="id">_</span> (<span class="id"><a href="CertRL.SigmaAlgebras.html#generated_sa">generated_sa</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#F">F</a></span>) <span class="id"><a href="CertRL.SigmaAlgebras.html#x">x</a></span> -&gt; @<span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> <span class="id">_</span> <span class="id">sa</span>' <span class="id"><a href="CertRL.SigmaAlgebras.html#x">x</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2382')">Proof.</div>
+<div class="proofscript" id="proof2382">
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">ff</span> <span class="id">x</span> <span class="id">sax</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#generated_sa">generated_sa</a></span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#sigma_algebra_intersection">sigma_algebra_intersection</a></span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#all_included">all_included</a></span> <span class="kwd">in</span> <span class="id">sax</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="event_set_product">event_set_product</a></span> {<span class="id">T</span>₁ <span class="id">T</span>₂} (<span class="id">s</span>₁ : <span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id">T</span>₁ -&gt; <span class="kwd">Prop</span>) (<span class="id">s</span>₂ : <span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id">T</span>₂ -&gt; <span class="kwd">Prop</span>) : <span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> (<span class="id">T</span>₁ * <span class="id">T</span>₂) -&gt; <span class="kwd">Prop</span><br/>
+&nbsp;&nbsp;:= <span class="kwd">fun</span> (<span class="id">e</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> (<span class="id">T</span>₁ * <span class="id">T</span>₂)) =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> <span class="id">e</span>₁ <span class="id">e</span>₂,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">s</span>₁ <span class="id">e</span>₁ /\ <span class="id">s</span>₂ <span class="id">e</span>₂ -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.SigmaAlgebras.html#e">e</a></span> === (<span class="kwd">fun</span> '(<span class="id">x</span>₁, <span class="id">x</span>₂) =&gt; <span class="id">e</span>₁ <span class="id">x</span>₁ /\ <span class="id">e</span>₂ <span class="id">x</span>₂).<br/>
+<br/>
+<span class="kwd">Instance</span> <span class="id"><a name="product_sa">product_sa</a></span> {<span class="id">T</span>₁ <span class="id">T</span>₂} (<span class="id">sa</span>₁:<span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id">T</span>₁) (<span class="id">sa</span>₂:<span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id">T</span>₂) : <span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> (<span class="id">T</span>₁ * <span class="id">T</span>₂)<br/>
+&nbsp;&nbsp;:= <span class="id"><a href="CertRL.SigmaAlgebras.html#generated_sa">generated_sa</a></span> (<span class="id"><a href="CertRL.SigmaAlgebras.html#event_set_product">event_set_product</a></span> (@<span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> <span class="id">_</span> <span class="id">sa</span>₁) (@<span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> <span class="id">_</span> <span class="id">sa</span>₂)).<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="event_pullback">event_pullback</a></span> {<span class="id">X</span> <span class="id">Y</span>:<span class="kwd">Type</span>} (<span class="id">f</span>:<span class="id"><a href="CertRL.SigmaAlgebras.html#X">X</a></span>-&gt;<span class="id"><a href="CertRL.SigmaAlgebras.html#Y">Y</a></span>) (<span class="id">ex</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#X">X</a></span>) : <span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#Y">Y</a></span><br/>
+&nbsp;&nbsp;:= <span class="kwd">fun</span> <span class="id">y</span> =&gt; <span class="id">exists</span> <span class="id">x</span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#f">f</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#x">x</a></span> = <span class="id"><a href="CertRL.SigmaAlgebras.html#y">y</a></span>.<br/>
+<br/>
+<span class="kwd">Instance</span> <span class="id"><a name="event_pullback_proper">event_pullback_proper</a></span> {<span class="id">X</span> <span class="id">Y</span>:<span class="kwd">Type</span>} (<span class="id">f</span>:<span class="id"><a href="CertRL.SigmaAlgebras.html#X">X</a></span>-&gt;<span class="id"><a href="CertRL.SigmaAlgebras.html#Y">Y</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html#Proper">Proper</a></span> (<span class="id"><a href="CertRL.ProbSpace.html#event_equiv">event_equiv</a></span> ==&gt; <span class="id"><a href="CertRL.ProbSpace.html#event_equiv">event_equiv</a></span>) (<span class="id"><a href="CertRL.SigmaAlgebras.html#event_pullback">event_pullback</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#f">f</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2383')">Proof.</div>
+<div class="proofscript" id="proof2383">
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">red</span>; <span class="tactic">intuition</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Instance</span> <span class="id"><a name="pullback_sa">pullback_sa</a></span> {<span class="id">X</span> <span class="id">Y</span>:<span class="kwd">Type</span>} (<span class="id">sa</span>:<span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#Y">Y</a></span>) (<span class="id">f</span>:<span class="id"><a href="CertRL.SigmaAlgebras.html#X">X</a></span>-&gt;<span class="id"><a href="CertRL.SigmaAlgebras.html#Y">Y</a></span>) : <span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#X">X</a></span><br/>
+&nbsp;&nbsp;:= <span class="id"><a href="CertRL.SigmaAlgebras.html#generated_sa">generated_sa</a></span> (<span class="kwd">fun</span> <span class="id">e</span> =&gt; <span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> (<span class="id"><a href="CertRL.SigmaAlgebras.html#event_pullback">event_pullback</a></span> <span class="id">f</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#e">e</a></span>)).<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="is_countable">is_countable</a></span> {<span class="id">T</span>} (<span class="id">e</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>)<br/>
+&nbsp;&nbsp;:= <span class="id">exists</span> (<span class="id">coll</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span> -&gt; <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span> -&gt; <span class="kwd">Prop</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="kwd">forall</span> <span class="id">n</span> <span class="id">t1</span> <span class="id">t2</span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#coll">coll</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#t1">t1</a></span> -&gt; <span class="id"><a href="CertRL.SigmaAlgebras.html#coll">coll</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#t2">t2</a></span> -&gt; <span class="id"><a href="CertRL.SigmaAlgebras.html#t1">t1</a></span> = <span class="id"><a href="CertRL.SigmaAlgebras.html#t2">t2</a></span>) /\<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.SigmaAlgebras.html#e">e</a></span> === (<span class="kwd">fun</span> <span class="id">a</span> =&gt; <span class="id">exists</span> <span class="id">n</span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#coll">coll</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#a">a</a></span>).<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_countable_empty">is_countable_empty</a></span> {<span class="id">T</span>} : @<span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable">is_countable</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span> ∅.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2384')">Proof.</div>
+<div class="proofscript" id="proof2384">
+&nbsp;&nbsp;<span class="id">exists</span> (<span class="kwd">fun</span> <span class="id">n</span> <span class="id">t</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#False">False</a></span>).<br/>
+&nbsp;&nbsp;<span class="tactic">firstorder</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Instance</span> <span class="id"><a name="is_countable_proper_sub">is_countable_proper_sub</a></span> {<span class="id">T</span>} : <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html#Proper">Proper</a></span> (<span class="id"><a href="CertRL.ProbSpace.html#event_sub">event_sub</a></span> --&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Program.Basics.html#impl">Basics.impl</a></span>) (@<span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable">is_countable</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2385')">Proof.</div>
+<div class="proofscript" id="proof2385">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html#Proper">Proper</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html#respectful">respectful</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Program.Basics.html#impl">Basics.impl</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Program.Basics.html#flip">Basics.flip</a></span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable">is_countable</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">sub</span> [<span class="id">c</span> <span class="id">cx</span>].<br/>
+&nbsp;&nbsp;<span class="tactic">red</span> <span class="kwd">in</span> <span class="id">sub</span>.<br/>
+&nbsp;&nbsp;<span class="id">exists</span> (<span class="kwd">fun</span> <span class="id">n</span> <span class="id">t</span> =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">c</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#t">t</a></span> /\ <span class="id">y</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#t">t</a></span>).<br/>
+&nbsp;&nbsp;<span class="tactic">firstorder</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Instance</span> <span class="id"><a name="is_countable_proper">is_countable_proper</a></span> {<span class="id">T</span>} : <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html#Proper">Proper</a></span> (<span class="id"><a href="CertRL.ProbSpace.html#event_equiv">event_equiv</a></span> ==&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#iff">iff</a></span>) (@<span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable">is_countable</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2386')">Proof.</div>
+<div class="proofscript" id="proof2386">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html#Proper">Proper</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html#respectful">respectful</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">split</span>; <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">apply</span> (<span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable_proper_sub">is_countable_proper_sub</a></span> <span class="id">x</span> <span class="id">y</span>); <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.ProbSpace.html#event_equiv_sub">event_equiv_sub</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">symmetry</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">apply</span> (<span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable_proper_sub">is_countable_proper_sub</a></span> <span class="id">y</span> <span class="id">x</span>); <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.ProbSpace.html#event_equiv_sub">event_equiv_sub</a></span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="union_of_collection_sup">union_of_collection_sup</a></span> {<span class="id">T</span>} (<span class="id">coll</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>-&gt;<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>) <span class="id">n</span> : (<span class="id"><a href="CertRL.SigmaAlgebras.html#coll">coll</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span>) ≤ (<span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#coll">coll</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2387')">Proof.</div>
+<div class="proofscript" id="proof2387">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.ProbSpace.html#event_sub">event_sub</a></span>, <span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="F">F</a></span> {<span class="id">T</span>} (<span class="id">coll</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>-&gt;<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>) (<span class="id">n</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>) : ({<span class="id">x</span>:<span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span> | <span class="id"><a href="CertRL.SigmaAlgebras.html#coll">coll</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#x">x</a></span>} -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>) -&gt; <span class="kwd">Prop</span><br/>
+&nbsp;&nbsp;:= <span class="kwd">fun</span> <span class="id">f</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.FinFun.html#Injective">Injective</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#f">f</a></span>.<br/>
+<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="union_of_collection_is_countable">union_of_collection_is_countable</a></span> {<span class="id">T</span>} (<span class="id">coll</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>-&gt;<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span>) :<br/>
+&nbsp;&nbsp;(<span class="kwd">forall</span> <span class="id">n</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable">is_countable</a></span> (<span class="id"><a href="CertRL.SigmaAlgebras.html#coll">coll</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span>)) -&gt; <span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable">is_countable</a></span> (<span class="id"><a href="CertRL.ProbSpace.html#union_of_collection">union_of_collection</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#coll">coll</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2388')">Proof.</div>
+<div class="proofscript" id="proof2388">
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">isc</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.ClassicalChoice.html#choice">choice</a></span> <span class="kwd">in</span> <span class="id">isc</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">isc</span> <span class="kwd">as</span> [<span class="id">f</span> <span class="id">fprop</span>].<br/>
+&nbsp;&nbsp;<span class="id">exists</span> (<span class="kwd">fun</span> <span class="id">n</span> =&gt; <span class="kwd">let</span> '(<span class="id">n1</span>,<span class="id">n2</span>) := <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span> <span class="kwd">in</span> <span class="id">f</span> <span class="id">n1</span> <span class="id">n2</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">split</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">case_eq</span> (<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id">n</span>); <span class="tactic">intros</span> <span class="id">n1</span> <span class="id">n2</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">eqq</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">fprop</span> <span class="id">n1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">as</span> [<span class="id">HH1</span> <span class="id">HH2</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">eapply</span> <span class="id">HH1</span>; <span class="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">intros</span> <span class="id">x</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">intros</span> [<span class="id">n1</span> <span class="id">ncoll</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">fprop</span> <span class="id">n1</span>) <span class="kwd">as</span> [<span class="id">HH1</span> <span class="id">HH2</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">HH2</span> <span class="id">x</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">HH2</span> <span class="kwd">in</span> <span class="id">ncoll</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">ncoll</span> <span class="kwd">as</span> [<span class="id">n2</span> <span class="id">fx</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> (<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_f">iso_f</a></span> (<span class="id">n1</span>,<span class="id">n2</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b_f">iso_b_f</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">intros</span> [<span class="id">n</span> <span class="id">fx</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">case_eq</span> (<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">n1</span> <span class="id">n2</span> <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">eqq</span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">fprop</span> <span class="id">n1</span>) <span class="kwd">as</span> [<span class="id">HH1</span> <span class="id">HH2</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">HH2</span> <span class="id">x</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> <span class="id">n1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">HH2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Program</span> <span class="kwd">Instance</span> <span class="id"><a name="countable_sa">countable_sa</a></span> (<span class="id">T</span>:<span class="kwd">Type</span>) : <span class="id"><a href="CertRL.ProbSpace.html#SigmaAlgebra">SigmaAlgebra</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#T">T</a></span><br/>
+&nbsp;&nbsp;:= {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.ProbSpace.html#sa_sigma">sa_sigma</a></span> (<span class="id">f</span>:<span class="id"><a href="CertRL.ProbSpace.html#event">event</a></span> <span class="id">T</span>) := <span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable">is_countable</a></span> <span class="id"><a href="CertRL.SigmaAlgebras.html#f">f</a></span> \/ <span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable">is_countable</a></span> (¬ <span class="id"><a href="CertRL.SigmaAlgebras.html#f">f</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof2389')">Next Obligation.</div>
+<div class="proofscript" id="proof2389">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable">is_countable</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span> ?? <span class="id">eqq</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">split</span>; <span class="tactic">intros</span> [[? <span class="id">HH</span>]|[? <span class="id">HH</span>]]<br/>
+&nbsp;&nbsp;; <span class="tactic">rewrite</span> <span class="id">eqq</span> <span class="kwd">in</span> <span class="id">HH</span> || <span class="tactic">rewrite</span> &lt;- <span class="id">eqq</span> <span class="kwd">in</span> <span class="id">HH</span><br/>
+&nbsp;&nbsp;; <span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2390')">Next Obligation.</div>
+<div class="proofscript" id="proof2390">
+&nbsp;&nbsp;<span class="tactic">auto</span> <span class="kwd">using</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#classic_event_lem">classic_event_lem</a></span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2391')">Next Obligation.</div>
+<div class="proofscript" id="proof2391">
+&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Classical_Prop.html#classic">classic</a></span> (<span class="kwd">forall</span> <span class="id">n</span>, <span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable">is_countable</a></span> (<span class="id">collection</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#n">n</a></span>))).<br/>
+&nbsp;&nbsp;+ <span class="comment">(*&nbsp;they&nbsp;are&nbsp;all&nbsp;countable&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">left</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#union_of_collection_is_countable">union_of_collection_is_countable</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;+ <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Classical_Pred_Type.html#not_all_ex_not">not_all_ex_not</a></span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">H0</span> <span class="kwd">as</span> [<span class="id">n</span> <span class="id">ncn</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id">iscnn</span>:<span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable">is_countable</a></span> (¬ <span class="id">collection</span> <span class="id">n</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="tactic">destruct</span> (<span class="id">H</span> <span class="id">n</span>); <span class="tactic">intuition</span>. }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="CertRL.SigmaAlgebras.html#union_of_collection_sup">union_of_collection_sup</a></span> <span class="id">collection</span> <span class="id">n</span>); <span class="tactic">intros</span> <span class="id">subs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.ProbSpace.html#event_complement_sub_proper">event_complement_sub_proper</a></span> <span class="kwd">in</span> <span class="id">subs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> &lt;- <span class="id">subs</span> <span class="kwd">in</span> <span class="id">iscnn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">eauto</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2392')">Next Obligation.</div>
+<div class="proofscript" id="proof2392">
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.ProbSpace.html#event_not_not">event_not_not</a></span> <span class="tactic">by</span> <span class="tactic">auto</span> <span class="kwd">using</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#classic_event_lem">classic_event_lem</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">tauto</span>.<br/>
+Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof2393')">Next Obligation.</div>
+<div class="proofscript" id="proof2393">
+&nbsp;&nbsp;<span class="id">right</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="CertRL.ProbSpace.html#event_not_all">event_not_all</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.SigmaAlgebras.html#is_countable_empty">is_countable_empty</a></span>.<br/>
+Qed.</div>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

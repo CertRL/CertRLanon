@@ -1,0 +1,104 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.utils.Floatish.FloatishInterval</title>
+<meta name="description" content="Documentation of Coq module CertRL.utils.Floatish.FloatishInterval" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.utils.Floatish.FloatishInterval</h1>
+<div class="coq">
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.ZArith.BinInt.html">BinInt</a></span>.<br/>
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">Interval.Interval_xreal</span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">Interval.Interval_definitions</span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">Interval.Interval_float_sig</span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">Interval.Interval_interval</span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">Interval.Interval_interval_float</span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">Interval.Interval_transcend</span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">Interval.Interval_specific_ops</span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">Interval.Interval_stdz_carrier</span>.<br/>
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html">FloatishDef</a></span>.<br/>
+<br/>
+<span class="kwd">Module</span> <span class="id"><a name="F">F</a></span> := <span class="id">SpecificFloat</span> <span class="id">StdZRadix2</span>.<br/>
+<span class="kwd">Module</span> <span class="id"><a name="A">A</a></span> := <span class="id">TranscendentalFloatFast</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#F">F</a></span>.<br/>
+<br/>
+<span class="kwd">Local</span> <span class="kwd">Instance</span> <span class="id"><a name="floatish_interval_gen">floatish_interval_gen</a></span> (<span class="id">prec</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Numbers.BinNums.html#Z">Z</a></span>) : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#floatish">floatish</a></span> :=<br/>
+&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#type">F.type</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fzero">Fzero</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#zero">F.zero</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fopp">Fopp</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#neg">F.neg</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fplus">Fplus</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#add">F.add</a></span> <span class="id">rnd_NE</span> <span class="id">prec</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fminus">Fminus</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#sub">F.sub</a></span> <span class="id">rnd_NE</span> <span class="id">prec</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fmult">Fmult</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#mul">F.mul</a></span> <span class="id">rnd_NE</span> <span class="id">prec</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fdiv">Fdiv</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#div">F.div</a></span> <span class="id">rnd_NE</span> <span class="id">prec</span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fsqrt">Fsqrt</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#sqrt">F.sqrt</a></span> <span class="id">rnd_NE</span> <span class="id">prec</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fabs">Fabs</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#abs">F.abs</a></span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fexp">Fexp</a></span> <span class="id">x</span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#midpoint">A.I.midpoint</a></span>(<span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#exp_fast">A.exp_fast</a></span> <span class="id">prec</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#x">x</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fln">Fln</a></span> <span class="id">x</span>  := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#midpoint">A.I.midpoint</a></span>(<span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#ln_fast">A.ln_fast</a></span> <span class="id">prec</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#x">x</a></span>)<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fsin">Fsin</a></span> <span class="id">x</span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#midpoint">A.I.midpoint</a></span>(<span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#sin_fast">A.sin_fast</a></span> <span class="id">prec</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#x">x</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fcos">Fcos</a></span> <span class="id">x</span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#midpoint">A.I.midpoint</a></span>(<span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#cos_fast">A.cos_fast</a></span> <span class="id">prec</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#x">x</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fpi">Fpi</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#mul">F.mul</a></span> <span class="id">rnd_NE</span> <span class="id">prec</span> (<span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#fromZ">F.fromZ</a></span> 4) (<span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#midpoint">A.I.midpoint</a></span> (<span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#pi4">A.pi4</a></span> <span class="id">prec</span>))<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#FfromZ">FfromZ</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#fromZ">F.fromZ</a></span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Feq">Feq</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#type">F.type</a></span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:= (<span class="kwd">match</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#cmp">F.cmp</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#y">y</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">Xeq</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>)<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fneq">Fneq</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#type">F.type</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:= (<span class="kwd">match</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#cmp">F.cmp</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#y">y</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">Xeq</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>)<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Flt">Flt</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#type">F.type</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:= (<span class="kwd">match</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#cmp">F.cmp</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#y">y</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">Xlt</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>)<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fle">Fle</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#type">F.type</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:= (<span class="kwd">match</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#cmp">F.cmp</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#y">y</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">Xlt</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">Xeq</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span>                         <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>)<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fgt">Fgt</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#type">F.type</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:= (<span class="kwd">match</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#cmp">F.cmp</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#y">y</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">Xgt</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>)<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fge">Fge</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#type">F.type</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:= (<span class="kwd">match</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#cmp">F.cmp</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#y">y</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">Xgt</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">Xeq</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span>                         <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>)<br/>
+&nbsp;&nbsp;}.<br/>
+<br/>
+<br/>
+<span class="kwd">Local</span> <span class="kwd">Instance</span> <span class="id"><a name="floatish_interval">floatish_interval</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#floatish">floatish</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#floatish_interval_gen">floatish_interval_gen</a></span> 53.<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="FZF">FZF</a></span> (<span class="id">r</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span>) := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#nearbyint">F.nearbyint</a></span> <span class="id">rnd_NE</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#r">r</a></span>.<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="FZFscale">FZFscale</a></span> (<span class="id">n</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Numbers.BinNums.html#Z">Z</a></span>) (<span class="id">r</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span>) := <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#FZF">FZF</a></span> (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fmult">Fmult</a></span> (<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#FfromZ">FfromZ</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#n">n</a></span>) <span class="id"><a href="CertRL.utils.Floatish.FloatishInterval.html#r">r</a></span>).<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

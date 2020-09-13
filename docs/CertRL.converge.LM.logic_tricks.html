@@ -1,0 +1,157 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.converge.LM.logic_tricks</title>
+<meta name="description" content="Documentation of Coq module CertRL.converge.LM.logic_tricks" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.converge.LM.logic_tricks</h1>
+<div class="coq">
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Decidable.html">Decidable</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Arith.Arith.html">Arith</a></span>.<br/>
+<br/>
+<div class="doc">Intuitionistic tricks for decidability </div>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="LT">LT</a></span>.<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="logic_not_not">logic_not_not</a></span> : <span class="kwd">forall</span> <span class="id">Q</span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#False">False</a></span> &lt;-&gt; ((<span class="id"><a href="CertRL.converge.LM.logic_tricks.html#Q">Q</a></span> \/~<span class="id"><a href="CertRL.converge.LM.logic_tricks.html#Q">Q</a></span>) -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#False">False</a></span>).<br/>
+<span class="tactic">split</span>.<br/>
+<span class="id">now</span> <span class="tactic">intros</span> <span class="id">H</span> <span class="id">H</span>'.<br/>
+<span class="tactic">intros</span> <span class="id">H</span>'.<br/>
+<span class="tactic">apply</span> <span class="id">H</span>'.<br/>
+<span class="id">right</span>.<br/>
+<span class="tactic">intros</span> <span class="id">H</span>.<br/>
+<span class="tactic">apply</span> <span class="id">H</span>'.<br/>
+<span class="id">now</span> <span class="id">left</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="logic_notex_forall">logic_notex_forall</a></span> (<span class="id">T</span> : <span class="kwd">Type</span>) :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">P</span> : <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#T">T</a></span> -&gt; <span class="kwd">Prop</span>) (<span class="id">x</span> : <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#T">T</a></span>),<br/>
+&nbsp;(<span class="kwd">forall</span> <span class="id">x</span>, <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P">P</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#x">x</a></span>) -&gt; (~ <span class="id">exists</span> <span class="id">x</span>, ~ <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P">P</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#x">x</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1203')">Proof.</div>
+<div class="proofscript" id="proof1203">
+<span class="tactic">intros</span> <span class="id">P</span> <span class="id">x</span> <span class="id">H</span>.<br/>
+<span class="tactic">intro</span> <span class="id">H0</span>.<br/>
+<span class="tactic">destruct</span> <span class="id">H0</span> <span class="kwd">as</span> (<span class="id">t</span>,<span class="id">H0</span>).<br/>
+<span class="tactic">apply</span> <span class="id">H0</span>.<br/>
+<span class="tactic">apply</span> <span class="id">H</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="logic_dec_notnot">logic_dec_notnot</a></span> (<span class="id">T</span> : <span class="kwd">Type</span>) :<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> <span class="id">P</span> : <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#T">T</a></span> -&gt; <span class="kwd">Prop</span>, <span class="kwd">forall</span> <span class="id">x</span> : <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#T">T</a></span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Decidable.html#decidable">decidable</a></span> (<span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P">P</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#x">x</a></span>)) -&gt; (<span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P">P</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#x">x</a></span> &lt;-&gt; ~~ <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P">P</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#x">x</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1204')">Proof.</div>
+<div class="proofscript" id="proof1204">
+<span class="tactic">intros</span> <span class="id">P</span> <span class="id">x</span> <span class="id">Dec</span>.<br/>
+<span class="tactic">split</span>.<br/>
++ <span class="tactic">intro</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intuition</span>.<br/>
++ <span class="tactic">intro</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Decidable.html#decidable">decidable</a></span> <span class="kwd">in</span> <span class="id">Dec</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">Dec</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="id">exfalso</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">exact</span> <span class="id">H0</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="decidable_ext">decidable_ext</a></span>: <span class="kwd">forall</span> <span class="id">P</span> <span class="id">Q</span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Decidable.html#decidable">decidable</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P">P</a></span> -&gt; (<span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P">P</a></span> &lt;-&gt;<span class="id"><a href="CertRL.converge.LM.logic_tricks.html#Q">Q</a></span>) -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Decidable.html#decidable">decidable</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#Q">Q</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1205')">Proof.</div>
+<div class="proofscript" id="proof1205">
+<span class="tactic">intros</span> <span class="id">P</span> <span class="id">Q</span> <span class="id">HP</span> (<span class="id">H1</span>,<span class="id">H2</span>).<br/>
+<span class="tactic">case</span> <span class="id">HP</span>; <span class="tactic">intros</span> <span class="id">HP</span>'.<br/>
+<span class="id">left</span>; <span class="id">now</span> <span class="tactic">apply</span> <span class="id">H1</span>.<br/>
+<span class="id">right</span>; <span class="tactic">intros</span> <span class="id">HQ</span>.<br/>
+<span class="id">now</span> <span class="tactic">apply</span> <span class="id">HP</span>', <span class="id">H2</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="decidable_ext_aux">decidable_ext_aux</a></span>: <span class="kwd">forall</span> (<span class="id">T</span> : <span class="kwd">Type</span>), <span class="kwd">forall</span> <span class="id">P1</span> <span class="id">P2</span> <span class="id">Q</span>,<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Decidable.html#decidable">decidable</a></span> (<span class="id">exists</span> <span class="id">w</span>:<span class="id"><a href="CertRL.converge.LM.logic_tricks.html#T">T</a></span>, <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P1">P1</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#w">w</a></span>  /\ <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#Q">Q</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#w">w</a></span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="kwd">forall</span> <span class="id">x</span>, <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P1">P1</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#x">x</a></span> &lt;-&gt; <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P2">P2</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#x">x</a></span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Decidable.html#decidable">decidable</a></span> (<span class="id">exists</span> <span class="id">w</span>, <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P2">P2</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#w">w</a></span>  /\ <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#Q">Q</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#w">w</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1206')">Proof.</div>
+<div class="proofscript" id="proof1206">
+<span class="tactic">intros</span> <span class="id">T</span> <span class="id">P1</span> <span class="id">P2</span> <span class="id">Q</span> <span class="id">H</span> <span class="id">H1</span>.<br/>
+<span class="tactic">case</span> <span class="id">H</span>.<br/>
+<span class="tactic">intros</span> (<span class="id">w</span>,(<span class="id">Hw1</span>,<span class="id">Hw2</span>)).<br/>
+<span class="id">left</span>; <span class="id">exists</span> <span class="id">w</span>; <span class="tactic">split</span>; <span class="tactic">try</span> <span class="tactic">assumption</span>.<br/>
+<span class="id">now</span> <span class="tactic">apply</span> <span class="id">H1</span>.<br/>
+<span class="tactic">intros</span> <span class="id">H2</span>; <span class="id">right</span>; <span class="tactic">intros</span> (<span class="id">w</span>,(<span class="id">Hw1</span>,<span class="id">Hw2</span>)).<br/>
+<span class="tactic">apply</span> <span class="id">H2</span>; <span class="id">exists</span> <span class="id">w</span>; <span class="tactic">split</span>; <span class="tactic">try</span> <span class="tactic">assumption</span>.<br/>
+<span class="id">now</span> <span class="tactic">apply</span> <span class="id">H1</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="decidable_and">decidable_and</a></span>: <span class="kwd">forall</span> (<span class="id">T</span> : <span class="kwd">Type</span>), <span class="kwd">forall</span> <span class="id">P1</span> <span class="id">P2</span> (<span class="id">w</span> : <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#T">T</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Decidable.html#decidable">decidable</a></span> (<span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P1">P1</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#w">w</a></span>) -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Decidable.html#decidable">decidable</a></span> (<span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P2">P2</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#w">w</a></span>) -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Decidable.html#decidable">decidable</a></span> (<span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P1">P1</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#w">w</a></span> /\ <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P2">P2</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#w">w</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1207')">Proof.</div>
+<div class="proofscript" id="proof1207">
+<span class="tactic">intros</span> <span class="id">T</span> <span class="id">P1</span> <span class="id">P2</span> <span class="id">w</span> <span class="id">H1</span> <span class="id">H2</span>.<br/>
+<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.Decidable.html#decidable">decidable</a></span>.<br/>
+<span class="tactic">destruct</span> <span class="id">H1</span>.<br/>
+<span class="tactic">destruct</span> <span class="id">H2</span>.<br/>
+<span class="id">left</span>; <span class="tactic">intuition</span>.<br/>
+<span class="id">right</span>.<br/>
+<span class="tactic">intro</span>.<br/>
+<span class="id">now</span> <span class="tactic">apply</span> <span class="id">H0</span>.<br/>
+<span class="tactic">destruct</span> <span class="id">H2</span>.<br/>
+<span class="id">right</span>.<br/>
+<span class="tactic">intro</span>.<br/>
+<span class="id">now</span> <span class="tactic">apply</span> <span class="id">H</span>.<br/>
+<span class="id">right</span>.<br/>
+<span class="tactic">intro</span>.<br/>
+<span class="id">now</span> <span class="tactic">apply</span> <span class="id">H</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Strong induction </div>
+<br/>
+<span class="kwd">Theorem</span> <span class="id"><a name="strong_induction">strong_induction</a></span>:<br/>
+&nbsp;<span class="kwd">forall</span> <span class="id">P</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span> -&gt; <span class="kwd">Prop</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="kwd">forall</span> <span class="id">n</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>, (<span class="kwd">forall</span> <span class="id">k</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>, ((<span class="id"><a href="CertRL.converge.LM.logic_tricks.html#k">k</a></span> &lt; <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#n">n</a></span>)%<span class="id">nat</span> -&gt; <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P">P</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#k">k</a></span>)) -&gt; <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P">P</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#n">n</a></span>) -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">forall</span> <span class="id">n</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>, <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P">P</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#n">n</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1208')">Proof.</div>
+<div class="proofscript" id="proof1208">
+<span class="tactic">intros</span> <span class="id">P</span> <span class="id">H</span> <span class="id">n</span>.<br/>
+<span class="tactic">assert</span> (<span class="kwd">forall</span> <span class="id">k</span>, (<span class="id"><a href="CertRL.converge.LM.logic_tricks.html#k">k</a></span> &lt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id">n</span>)%<span class="id">nat</span> -&gt; <span class="id">P</span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#k">k</a></span>).<br/>
+<span class="tactic">induction</span> <span class="id">n</span>.<br/>
+<span class="tactic">intros</span> <span class="id">k</span> <span class="id">Hk</span>.<br/>
+<span class="tactic">replace</span> <span class="id">k</span> <span class="kwd">with</span> 0%<span class="id">nat</span>.<br/>
+<span class="tactic">apply</span> <span class="id">H</span>.<br/>
+<span class="tactic">intros</span> <span class="id">m</span> <span class="id">Hm</span>; <span class="id">contradict</span> <span class="id">Hm</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Arith.Lt.html#lt_n_0">lt_n_0</a></span>.<br/>
+<span class="tactic">generalize</span> <span class="id">Hk</span>; <span class="tactic">case</span> <span class="id">k</span>; <span class="tactic">trivial</span>.<br/>
+<span class="tactic">intros</span> <span class="id">m</span> <span class="id">Hm</span>; <span class="id">contradict</span> <span class="id">Hm</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Arith.Lt.html#le_not_lt">le_not_lt</a></span>.<br/>
+<span class="id">now</span> <span class="tactic">auto</span> <span class="kwd">with</span> <span class="id">arith</span>.<br/>
+<span class="tactic">intros</span> <span class="id">k</span> <span class="id">Hk</span>.<br/>
+<span class="tactic">apply</span> <span class="id">H</span>.<br/>
+<span class="tactic">intros</span> <span class="id">m</span> <span class="id">Hm</span>.<br/>
+<span class="tactic">apply</span> <span class="id">IHn</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Arith.Lt.html#lt_le_trans">lt_le_trans</a></span> <span class="kwd">with</span> (1:=<span class="id">Hm</span>).<br/>
+<span class="id">now</span> <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Arith.Gt.html#gt_S_le">gt_S_le</a></span>.<br/>
+<span class="tactic">apply</span> <span class="id">H0</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Peano.html#le_n">le_n</a></span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Equivalent definition for existence + uniqueness </div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="unique_existence1">unique_existence1</a></span>: <span class="kwd">forall</span> (<span class="id">A</span> : <span class="kwd">Type</span>) (<span class="id">P</span> : <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#A">A</a></span> -&gt; <span class="kwd">Prop</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">exists</span> <span class="id">x</span> : <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#A">A</a></span>, <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P">P</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#x">x</a></span>) /\ <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#uniqueness">uniqueness</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P">P</a></span> -&gt; (<span class="id">exists</span> ! <span class="id">x</span> : <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#A">A</a></span>, <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#P">P</a></span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#x">x</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1209')">Proof.</div>
+<div class="proofscript" id="proof1209">
+<span class="tactic">intros</span> <span class="id">A</span> <span class="id">P</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#unique_existence">unique_existence</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.converge.LM.logic_tricks.html#LT">LT</a></span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

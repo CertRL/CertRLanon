@@ -1,0 +1,253 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.converge.mdp_turtle</title>
+<meta name="description" content="Documentation of Coq module CertRL.converge.mdp_turtle" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.converge.mdp_turtle</h1>
+<div class="coq">
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html">String</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Reals.html">Reals</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html">Coq.Lists.List</a></span> <span class="id">Coquelicot.Series</span> <span class="id">Coquelicot.Hierarchy</span> <span class="id">Coquelicot.SF_seq</span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="CertRL.converge.pmf_monad.html">pmf_monad</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Permutation.html">Permutation</a></span> <span class="id"><a href="CertRL.converge.LM.fixed_point.html">fixed_point</a></span> <span class="id"><a href="CertRL.utils.Finite.html">Finite</a></span> <span class="id"><a href="CertRL.lib_utils.LibUtils.html">LibUtils</a></span>. <br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="CertRL.utils.Sums.html">Sums</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.ROrderedType.html">Coq.Reals.ROrderedType</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.micromega.Lra.html">micromega.Lra</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.FunctionalExtensionality.html">Coq.Logic.FunctionalExtensionality</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Equivalence.html">Equivalence</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.RelationClasses.html">RelationClasses</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.EquivDec.html">EquivDec</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.Morphisms.html">Morphisms</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.Streams.html">Streams</a></span> <span class="id"><a href="CertRL.utils.StreamAdd.html">StreamAdd</a></span>. <br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="CertRL.converge.mdp.html">mdp</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="CertRL.utils.Vector.html">Vector</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.micromega.Lia.html">Lia</a></span>.<br/>
+<span class="kwd">Import</span> <span class="id">ListNotations</span>. <br/>
+<span class="kwd">Set</span> <span class="id">Bullet</span> <span class="id">Behavior</span> "<span class="kwd">Strict</span> <span class="id">Subproofs</span>".<br/>
+<br/>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="turtle">turtle</a></span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Inductive</span> <span class="id"><a name="turtle_color">turtle_color</a></span> : <span class="kwd">Set</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a name="turtle_green">turtle_green</a></span><br/>
+&nbsp;&nbsp;| <span class="id"><a name="turtle_white">turtle_white</a></span><br/>
+&nbsp;&nbsp;| <span class="id"><a name="turtle_star">turtle_star</a></span><br/>
+&nbsp;&nbsp;| <span class="id"><a name="turtle_red">turtle_red</a></span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Instance</span> <span class="id"><a name="turtle_color_tostring">turtle_color_tostring</a></span> : <span class="id"><a href="CertRL.lib_utils.LibUtilsCoqLibAdd.html#ToString">ToString</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_color">turtle_color</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= {|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.lib_utils.LibUtilsCoqLibAdd.html#Build_ToString">toString</a></span> <span class="id">c</span> := <span class="kwd">match</span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#c">c</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_green">turtle_green</a></span> =&gt; "+"%<span class="id">string</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span> =&gt; " "%<span class="id">string</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_star">turtle_star</a></span> =&gt; "*"%<span class="id">string</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_red">turtle_red</a></span>  =&gt; "<span class="id">X</span>"%<span class="id">string</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|}.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="newline">newline</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#String">String</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.Ascii.html#ascii_of_N">Ascii.ascii_of_N</a></span> 10) <span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#EmptyString">EmptyString</a></span>.<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="kwd">Instance</span> <span class="id"><a name="turtle_color_dec">turtle_color_dec</a></span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.EquivDec.html#EqDec">EqDec</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_color">turtle_color</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#eq">eq</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1835')">Proof.</div>
+<div class="proofscript" id="proof1835">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">change</span> (<span class="kwd">forall</span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_color">turtle_color</a></span>), {<span class="id"><a href="CertRL.converge.mdp_turtle.html#x">x</a></span> = <span class="id"><a href="CertRL.converge.mdp_turtle.html#y">y</a></span>} + {<span class="id"><a href="CertRL.converge.mdp_turtle.html#x">x</a></span> &lt;&gt; <span class="id"><a href="CertRL.converge.mdp_turtle.html#y">y</a></span>}).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">decide</span> <span class="id">equality</span>.<br/>
+&nbsp;&nbsp;Defined.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="turtle_grid">turtle_grid</a></span> <span class="id">max_x</span> <span class="id">max_y</span> := <span class="id"><a href="CertRL.utils.Vector.html#Matrix">Matrix</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_color">turtle_color</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="string_bracket">string_bracket</a></span> (<span class="id">sstart</span> <span class="id">send</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span>) (<span class="id">smiddle</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#append">String.append</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#sstart">sstart</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#append">String.append</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#smiddle">smiddle</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#send">send</a></span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="vector_join">vector_join</a></span> {<span class="id">A</span>} (<span class="id">delim</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span>) (<span class="id">f</span>:<span class="id"><a href="CertRL.converge.mdp_turtle.html#A">A</a></span>-&gt;<span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span>) {<span class="id">n</span>} (<span class="id">v</span>:<span class="id"><a href="CertRL.utils.Vector.html#Vector">Vector</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#A">A</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#n">n</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#concat">String.concat</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#delim">delim</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">List.map</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#f">f</a></span> (<span class="id"><a href="CertRL.utils.Vector.html#vector_to_list">vector_to_list</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#v">v</a></span>)).<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="turtle_gridline_tostring">turtle_gridline_tostring</a></span> {<span class="id">n</span>} (<span class="id">v</span>:<span class="id"><a href="CertRL.utils.Vector.html#Vector">Vector</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_color">turtle_color</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#n">n</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="id"><a href="CertRL.converge.mdp_turtle.html#string_bracket">string_bracket</a></span> "| "%<span class="id">string</span> " |"%<span class="id">string</span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#vector_join">vector_join</a></span> " | "%<span class="id">string</span> <span class="id"><a href="CertRL.lib_utils.LibUtilsCoqLibAdd.html#toString">toString</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#v">v</a></span>).<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="turtle_grid_vline">turtle_grid_vline</a></span> <span class="id">max_x</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="id"><a href="CertRL.converge.mdp_turtle.html#string_bracket">string_bracket</a></span> "--"%<span class="id">string</span> "--"%<span class="id">string</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#concat">String.concat</a></span> "---"%<span class="id">string</span> (<span class="tactic">repeat</span> "-"%<span class="id">string</span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span>)).<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Instance</span> <span class="id"><a name="turtle_grid_tostring">turtle_grid_tostring</a></span> {<span class="id">max_x</span> <span class="id">max_y</span>} : <span class="id"><a href="CertRL.lib_utils.LibUtilsCoqLibAdd.html#ToString">ToString</a></span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_grid">turtle_grid</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= {|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.lib_utils.LibUtilsCoqLibAdd.html#Build_ToString">toString</a></span> <span class="id">m</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.mdp_turtle.html#string_bracket">string_bracket</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#append">String.append</a></span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_grid_vline">turtle_grid_vline</a></span> <span class="id">max_x</span>) <span class="id"><a href="CertRL.converge.mdp_turtle.html#newline">newline</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#append">String.append</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#newline">newline</a></span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_grid_vline">turtle_grid_vline</a></span> <span class="id">max_x</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="CertRL.converge.mdp_turtle.html#vector_join">vector_join</a></span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#string_bracket">string_bracket</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#newline">newline</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#newline">newline</a></span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_grid_vline">turtle_grid_vline</a></span> <span class="id">max_x</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="kwd">fun</span> <span class="id">line</span> =&gt; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_gridline_tostring">turtle_gridline_tostring</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#line">line</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="CertRL.utils.Vector.html#transpose">transpose</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#m">m</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|}.<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="turtle_state">turtle_state</a></span> <span class="id">max_x</span> <span class="id">max_y</span> :=  <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#prod">prod</a></span> ({<span class="id">x</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span> | <span class="id"><a href="CertRL.converge.mdp_turtle.html#x">x</a></span> &lt; <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span>}%<span class="id">nat</span>) ({<span class="id">y</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span> | <span class="id"><a href="CertRL.converge.mdp_turtle.html#y">y</a></span> &lt; <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>}%<span class="id">nat</span>).<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="kwd">Instance</span> <span class="id"><a name="turtle_state_dec">turtle_state_dec</a></span> <span class="id">max_x</span> <span class="id">max_y</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.EquivDec.html#EqDec">EqDec</a></span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state">turtle_state</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>) <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#eq">eq</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1836')">Proof.</div>
+<div class="proofscript" id="proof1836">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">intros</span> [[<span class="id">x1</span> <span class="id">pfx1</span>] [<span class="id">y1</span> <span class="id">pfy1</span>]] [[<span class="id">x2</span> <span class="id">pfx2</span>] [<span class="id">y2</span> <span class="id">pfy2</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id">x1</span> == <span class="id">x2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="tactic">destruct</span> (<span class="id">y1</span> == <span class="id">y2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">left</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">e</span>; <span class="tactic">destruct</span> <span class="id">e0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">erewrite</span> (<span class="id"><a href="CertRL.utils.Vector.html#index_pf_irrel">index_pf_irrel</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">pfx1</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">erewrite</span> (<span class="id"><a href="CertRL.utils.Vector.html#index_pf_irrel">index_pf_irrel</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">pfy1</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">right</span>; <span class="tactic">congruence</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id">right</span>; <span class="tactic">congruence</span>.<br/>
+&nbsp;&nbsp;Defined.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Inductive</span> <span class="id"><a name="turtle_action">turtle_action</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="id"><a name="Up">Up</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a name="Down">Down</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a name="Left">Left</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a name="Right">Right</a></span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Instance</span> <span class="id"><a name="turtle_action_dec">turtle_action_dec</a></span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.EquivDec.html#EqDec">EqDec</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_action">turtle_action</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#eq">eq</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1837')">Proof.</div>
+<div class="proofscript" id="proof1837">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">change</span> (<span class="kwd">forall</span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_action">turtle_action</a></span>), {<span class="id"><a href="CertRL.converge.mdp_turtle.html#x">x</a></span> = <span class="id"><a href="CertRL.converge.mdp_turtle.html#y">y</a></span>} + {<span class="id"><a href="CertRL.converge.mdp_turtle.html#x">x</a></span> &lt;&gt; <span class="id"><a href="CertRL.converge.mdp_turtle.html#y">y</a></span>}).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">decide</span> <span class="id">equality</span>.<br/>
+&nbsp;&nbsp;Defined.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Instance</span> <span class="id"><a name="turtle_state_finite">turtle_state_finite</a></span> <span class="id">max_x</span> <span class="id">max_y</span> : <span class="id"><a href="CertRL.utils.Finite.html#Finite">Finite</a></span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state">turtle_state</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1838')">Proof.</div>
+<div class="proofscript" id="proof1838">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.Finite.html#finite_prod">finite_prod</a></span>; <span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.Finite.html#bounded_nat_finite">bounded_nat_finite</a></span>.<br/>
+&nbsp;&nbsp;Defined.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Instance</span> <span class="id"><a name="turtle_action_finite">turtle_action_finite</a></span> : <span class="id"><a href="CertRL.utils.Finite.html#Finite">Finite</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_action">turtle_action</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1839')">Proof.</div>
+<div class="proofscript" id="proof1839">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#Up">Up</a></span>::<span class="id"><a href="CertRL.converge.mdp_turtle.html#Down">Down</a></span>::<span class="id"><a href="CertRL.converge.mdp_turtle.html#Left">Left</a></span>::<span class="id"><a href="CertRL.converge.mdp_turtle.html#Right">Right</a></span>::<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">x</span>; <span class="tactic">simpl</span>; <span class="tactic">tauto</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Program</span> <span class="kwd">Instance</span> <span class="id"><a name="turtle_state_nonempty">turtle_state_nonempty</a></span> <span class="id">max_x</span> <span class="id">max_y</span> : <span class="id"><a href="CertRL.converge.mdp.html#NonEmpty">NonEmpty</a></span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state">turtle_state</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= ((0, 0))%<span class="id">nat</span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1840')">Next Obligation.</div>
+<div class="proofscript" id="proof1840">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lia</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof1841')">Next Obligation.</div>
+<div class="proofscript" id="proof1841">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lia</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Instance</span> <span class="id"><a name="turtle_action_nonempty">turtle_action_nonempty</a></span> : <span class="id"><a href="CertRL.converge.mdp.html#NonEmpty">NonEmpty</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_action">turtle_action</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="id"><a href="CertRL.converge.mdp_turtle.html#Up">Up</a></span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="color_reward">color_reward</a></span> (<span class="id">c</span>:<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_color">turtle_color</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="kwd">match</span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#c">c</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_green">turtle_green</a></span> =&gt; 2<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span> =&gt; 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_star">turtle_star</a></span> =&gt; 1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_red">turtle_red</a></span> =&gt; -10<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="turtle_reward">turtle_reward</a></span> {<span class="id">max_x</span> <span class="id">max_y</span>} (<span class="id">grid</span>:<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_grid">turtle_grid</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>) (<span class="id">state</span>:<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state">turtle_state</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>): <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="kwd">let</span> '(<span class="id">x</span>,<span class="id">y</span>) := <span class="id"><a href="CertRL.converge.mdp_turtle.html#state">state</a></span> <span class="kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">let</span> <span class="id">color</span> := <span class="id"><a href="CertRL.converge.mdp_turtle.html#grid">grid</a></span> <span class="id">x</span> <span class="id">y</span> <span class="kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.mdp_turtle.html#color_reward">color_reward</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#color">color</a></span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Program</span> <span class="kwd">Definition</span> <span class="id"><a name="turtle_move">turtle_move</a></span> {<span class="id">max_x</span> <span class="id">max_y</span>} (<span class="id">s</span>:<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state">turtle_state</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>) (<span class="id">a</span>:<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_action">turtle_action</a></span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state">turtle_state</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= (<span class="kwd">let</span> '(<span class="id">x</span>,<span class="id">y</span>) := <span class="id"><a href="CertRL.converge.mdp_turtle.html#s">s</a></span> <span class="kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">match</span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#a">a</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#Up">Up</a></span> =&gt; <span class="kwd">if</span> <span class="id">y</span> == 0 <span class="kwd">then</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="kwd">else</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id">x</span>, <span class="id">y</span>-1)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#Down">Down</a></span> =&gt; <span class="kwd">if</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Arith.Compare_dec.html#lt_dec">lt_dec</a></span> (<span class="id">y</span>+1) <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span> <span class="kwd">then</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id">x</span>, <span class="id">y</span>+1) <span class="kwd">else</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#Left">Left</a></span> =&gt; <span class="kwd">if</span> <span class="id">x</span> == 0 <span class="kwd">then</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="kwd">else</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id">x</span>-1, <span class="id">y</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#Right">Right</a></span> =&gt; <span class="kwd">if</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Arith.Compare_dec.html#lt_dec">lt_dec</a></span> (<span class="id">x</span>+1) <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="kwd">then</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id">x</span>+1, <span class="id">y</span>) <span class="kwd">else</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>)%<span class="id">nat</span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1842')">Next Obligation.</div>
+<div class="proofscript" id="proof1842">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lia</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof1843')">Next Obligation.</div>
+<div class="proofscript" id="proof1843">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lia</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="turtle_action_opp">turtle_action_opp</a></span> (<span class="id">a</span>:<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_action">turtle_action</a></span>) : <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_action">turtle_action</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="kwd">match</span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#a">a</a></span> <span class="kwd">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#Up">Up</a></span> =&gt; <span class="id"><a href="CertRL.converge.mdp_turtle.html#Down">Down</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#Down">Down</a></span> =&gt; <span class="id"><a href="CertRL.converge.mdp_turtle.html#Up">Up</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#Left">Left</a></span> =&gt; <span class="id"><a href="CertRL.converge.mdp_turtle.html#Right">Right</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="CertRL.converge.mdp_turtle.html#Right">Right</a></span> =&gt; <span class="id"><a href="CertRL.converge.mdp_turtle.html#Left">Left</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Program</span> <span class="kwd">Definition</span> <span class="id"><a name="turtle_confused_outcomes">turtle_confused_outcomes</a></span> {<span class="id">max_x</span> <span class="id">max_y</span>} (<span class="id">correct_s</span> <span class="id">oops_s</span>:<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state">turtle_state</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>) : <span class="id"><a href="CertRL.converge.pmf_monad.html#Pmf">Pmf</a></span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state">turtle_state</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= {|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.pmf_monad.html#mkPmf">outcomes</a></span> := (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#mknonnegreal">mknonnegreal</a></span> 0.75 <span class="id">_</span>, <span class="id"><a href="CertRL.converge.mdp_turtle.html#correct_s">correct_s</a></span>)::(<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#mknonnegreal">mknonnegreal</a></span> 0.25 <span class="id">_</span>, <span class="id"><a href="CertRL.converge.mdp_turtle.html#oops_s">oops_s</a></span>)::<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|}.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1844')">Next Obligation.</div>
+<div class="proofscript" id="proof1844">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof1845')">Next Obligation.</div>
+<div class="proofscript" id="proof1845">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<div class="toggleproof" onclick="toggleDisplay('proof1846')">Next Obligation.</div>
+<div class="proofscript" id="proof1846">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="turtle_prob_t">turtle_prob_t</a></span> {<span class="id">max_x</span> <span class="id">max_y</span>} (<span class="id">s</span>:<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state">turtle_state</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>) (<span class="id">a</span>:<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_action">turtle_action</a></span>) : <span class="id"><a href="CertRL.converge.pmf_monad.html#Pmf">Pmf</a></span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state">turtle_state</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="kwd">let</span> '(<span class="id">x</span>,<span class="id">y</span>) := <span class="id"><a href="CertRL.converge.mdp_turtle.html#s">s</a></span> <span class="kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">match</span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_move">turtle_move</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#s">s</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#a">a</a></span>, <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_move">turtle_move</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#s">s</a></span> (<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_action_opp">turtle_action_opp</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#a">a</a></span>) <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">correct_s</span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">oops_s</span> =&gt; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_confused_outcomes">turtle_confused_outcomes</a></span> <span class="id">correct_s</span> <span class="id">oops_s</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">next_s</span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> =&gt; <span class="id"><a href="CertRL.converge.pmf_monad.html#Pmf_pure">Pmf_pure</a></span> <span class="id">next_s</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">next_s</span> =&gt; <span class="id"><a href="CertRL.converge.pmf_monad.html#Pmf_pure">Pmf_pure</a></span> <span class="id">next_s</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> =&gt; <span class="id"><a href="CertRL.converge.pmf_monad.html#Pmf_pure">Pmf_pure</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#s">s</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="turtle_mdp">turtle_mdp</a></span> {<span class="id">max_x</span> <span class="id">max_y</span>} (<span class="id">grid</span>:<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_grid">turtle_grid</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>)) : <span class="id"><a href="CertRL.converge.mdp.html#MDP">MDP</a></span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.mdp.html#mkMDP">state</a></span> := <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state">turtle_state</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">act</span> <span class="id">_</span> := <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_action">turtle_action</a></span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">st_eqdec</span> := <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state_dec">turtle_state_dec</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">fs</span> := <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state_finite">turtle_state_finite</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">fa</span> <span class="id">_</span> := <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_action_finite">turtle_action_finite</a></span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ne</span> := <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_state_nonempty">turtle_state_nonempty</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_x">max_x</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#max_y">max_y</a></span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">na</span> <span class="id">_</span> := <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_action_nonempty">turtle_action_nonempty</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">t</span> := <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_prob_t">turtle_prob_t</a></span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">reward</span> <span class="id">_</span> <span class="id">_</span> <span class="id">s</span>' := <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_reward">turtle_reward</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#grid">grid</a></span> <span class="id">s</span>'<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|}.<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="CeRtL_grid">CeRtL_grid</a></span> : <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_grid">turtle_grid</a></span> 5%<span class="id">nat</span> 5%<span class="id">nat</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:= <span class="id"><a href="CertRL.utils.Vector.html#transpose">transpose</a></span> (<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Vector.html#list_to_vector">list_to_vector</a></span> [<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Vector.html#list_to_vector">list_to_vector</a></span> [<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>] ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Vector.html#list_to_vector">list_to_vector</a></span> [<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_red">turtle_red</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_red">turtle_red</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_red">turtle_red</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_star">turtle_star</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>] ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Vector.html#list_to_vector">list_to_vector</a></span> [<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_star">turtle_star</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_red">turtle_red</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>] ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Vector.html#list_to_vector">list_to_vector</a></span> [<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_green">turtle_green</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_red">turtle_red</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>] ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Vector.html#list_to_vector">list_to_vector</a></span> [<span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_red">turtle_red</a></span>; <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_white">turtle_white</a></span>]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]).<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Definition</span> <span class="id"><a name="CeRtL_mdp">CeRtL_mdp</a></span> : <span class="id"><a href="CertRL.converge.mdp.html#MDP">MDP</a></span> := <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle_mdp">turtle_mdp</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#CeRtL_grid">CeRtL_grid</a></span>.<br/>
+<br/>
+<br/>
+&nbsp;&nbsp;<span class="kwd">Lemma</span> <span class="id"><a name="CeRtl_grid_correct">CeRtl_grid_correct</a></span> : <span class="id"><a href="CertRL.lib_utils.LibUtilsCoqLibAdd.html#toString">toString</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#CeRtL_grid">CeRtL_grid</a></span> =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Strings.String.html#concat">String.concat</a></span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#newline">newline</a></span> [<br/>
+"---------------------";<br/>
+"| &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |";<br/>
+"---------------------";<br/>
+"| <span class="id">X</span> | <span class="id">X</span> | <span class="id">X</span> | * | &nbsp; |";<br/>
+"---------------------";<br/>
+"| &nbsp; | &nbsp; | * | <span class="id">X</span> | &nbsp; |";<br/>
+"---------------------";<br/>
+"| + | <span class="id">X</span> | &nbsp; | &nbsp; | &nbsp; |";<br/>
+"---------------------";<br/>
+"| &nbsp; | &nbsp; | &nbsp; | <span class="id">X</span> | &nbsp; |";<br/>
+"---------------------"]%<span class="id">string</span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1847')">Proof.</div>
+<div class="proofscript" id="proof1847">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.converge.mdp_turtle.html#turtle">turtle</a></span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

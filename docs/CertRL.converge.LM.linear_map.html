@@ -1,0 +1,314 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.converge.LM.linear_map</title>
+<meta name="description" content="Documentation of Coq module CertRL.converge.LM.linear_map" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.converge.LM.linear_map</h1>
+<div class="coq">
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.FunctionalExtensionality.html">FunctionalExtensionality</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Export</span> <span class="id"><a href="CertRL.converge.LM.compatible.html">compatible</a></span>.<br/>
+<br/>
+<div class="doc">About functions from E to F </div>
+<br/>
+<div class="doc">Note that Coquelicot has: U UniformSpace, then T-&gt;U UniformSpace,
+   and similar for CompleteSpace </div>
+<br/>
+<div class="doc">Functions to a ModuleSpace are a ModuleSpace </div>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="Fcts">Fcts</a></span>.<br/>
+<br/>
+<span class="kwd">Context</span> {<span class="id">E</span> : <span class="kwd">Type</span>}.<br/>
+<span class="kwd">Context</span> {<span class="id">F</span> : <span class="id">ModuleSpace</span> <span class="id">R_Ring</span>}.<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="fct_plus">fct_plus</a></span> (<span class="id">f</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>) (<span class="id">g</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>) : (<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>) :=<br/>
+&nbsp;&nbsp;<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id">plus</span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span>) (<span class="id"><a href="CertRL.converge.LM.linear_map.html#g">g</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span>).<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="fct_scal">fct_scal</a></span> (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">f</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>) : (<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>) :=<br/>
+&nbsp;&nbsp;<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id">scal</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#l">l</a></span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span>).<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="fct_opp">fct_opp</a></span> (<span class="id">f</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>) : (<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span> -&gt; <span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>) :=<br/>
+&nbsp;&nbsp;<span class="kwd">fun</span> <span class="id">x</span> =&gt; <span class="id">opp</span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span>).<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="fct_zero">fct_zero</a></span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span> := <span class="kwd">fun</span> <span class="id">_</span> =&gt; <span class="id">zero</span>.<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="fct_plus_comm">fct_plus_comm</a></span>: <span class="kwd">forall</span> (<span class="id">f</span> <span class="id">g</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>), <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#g">g</a></span> = <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#g">g</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1188')">Proof.</div>
+<div class="proofscript" id="proof1188">
+<span class="tactic">intros</span> <span class="id">f</span> <span class="id">g</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.FunctionalExtensionality.html#functional_extensionality">functional_extensionality</a></span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span>; <span class="tactic">apply</span> <span class="id">plus_comm</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="fct_plus_assoc">fct_plus_assoc</a></span>:<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">f</span> <span class="id">g</span> <span class="id">h</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>), <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#g">g</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#h">h</a></span>) = <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#g">g</a></span>) <span class="id"><a href="CertRL.converge.LM.linear_map.html#h">h</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1189')">Proof.</div>
+<div class="proofscript" id="proof1189">
+<span class="tactic">intros</span> <span class="id">f</span> <span class="id">g</span> <span class="id">h</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.FunctionalExtensionality.html#functional_extensionality">functional_extensionality</a></span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span>; <span class="tactic">apply</span> <span class="id">plus_assoc</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="fct_plus_zero_r">fct_plus_zero_r</a></span>: <span class="kwd">forall</span> <span class="id">f</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>, <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_zero">fct_zero</a></span> = <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1190')">Proof.</div>
+<div class="proofscript" id="proof1190">
+<span class="tactic">intros</span> <span class="id">f</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.FunctionalExtensionality.html#functional_extensionality">functional_extensionality</a></span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span>; <span class="tactic">apply</span> <span class="id">plus_zero_r</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="fct_plus_opp_r">fct_plus_opp_r</a></span>: <span class="kwd">forall</span> <span class="id">f</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>, <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span>) = <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_zero">fct_zero</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1191')">Proof.</div>
+<div class="proofscript" id="proof1191">
+<span class="tactic">intros</span> <span class="id">f</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.FunctionalExtensionality.html#functional_extensionality">functional_extensionality</a></span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span>; <span class="tactic">apply</span> <span class="id">plus_opp_r</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="fct_AbelianGroup_mixin">fct_AbelianGroup_mixin</a></span> :=<br/>
+&nbsp;&nbsp;<span class="id">AbelianGroup.Mixin</span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>) <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_zero">fct_zero</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus_comm">fct_plus_comm</a></span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus_assoc">fct_plus_assoc</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus_zero_r">fct_plus_zero_r</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus_opp_r">fct_plus_opp_r</a></span>.<br/>
+<br/>
+<span class="id">Canonical</span> <span class="id"><a name="fct_AbelianGroup">fct_AbelianGroup</a></span> :=<br/>
+&nbsp;&nbsp;<span class="id">AbelianGroup.Pack</span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>) (<span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_AbelianGroup_mixin">fct_AbelianGroup_mixin</a></span>) (<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>).<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="fct_scal_assoc">fct_scal_assoc</a></span>: <span class="kwd">forall</span> <span class="id">x</span> <span class="id">y</span> (<span class="id">u</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal">fct_scal</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal">fct_scal</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#u">u</a></span>) = <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal">fct_scal</a></span> (<span class="id">mult</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span>) <span class="id"><a href="CertRL.converge.LM.linear_map.html#u">u</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1192')">Proof.</div>
+<div class="proofscript" id="proof1192">
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">u</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.FunctionalExtensionality.html#functional_extensionality">functional_extensionality</a></span>.<br/>
+<span class="tactic">intros</span> <span class="id">x0</span>; <span class="tactic">apply</span> <span class="id">scal_assoc</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="fct_scal_one">fct_scal_one</a></span>: <span class="kwd">forall</span> (<span class="id">u</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>), <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal">fct_scal</a></span> <span class="id">one</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#u">u</a></span> = <span class="id"><a href="CertRL.converge.LM.linear_map.html#u">u</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1193')">Proof.</div>
+<div class="proofscript" id="proof1193">
+<span class="tactic">intros</span> <span class="id">u</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.FunctionalExtensionality.html#functional_extensionality">functional_extensionality</a></span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span>; <span class="tactic">apply</span> <span class="id">scal_one</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="fct_scal_distr_l">fct_scal_distr_l</a></span>: <span class="kwd">forall</span> <span class="id">x</span> (<span class="id">u</span> <span class="id">v</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>), <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal">fct_scal</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> (<span class="id">plus</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#u">u</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#v">v</a></span>) = <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal">fct_scal</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#u">u</a></span>) (<span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal">fct_scal</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#v">v</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1194')">Proof.</div>
+<div class="proofscript" id="proof1194">
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">u</span> <span class="id">v</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.FunctionalExtensionality.html#functional_extensionality">functional_extensionality</a></span>.<br/>
+<span class="tactic">intros</span> <span class="id">x0</span>; <span class="tactic">apply</span> <span class="id">scal_distr_l</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="fct_scal_distr_r">fct_scal_distr_r</a></span>: <span class="kwd">forall</span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">u</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>), <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal">fct_scal</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Rplus">Rplus</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span>) <span class="id"><a href="CertRL.converge.LM.linear_map.html#u">u</a></span> = <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal">fct_scal</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#u">u</a></span>) (<span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal">fct_scal</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#u">u</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1195')">Proof.</div>
+<div class="proofscript" id="proof1195">
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">u</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Logic.FunctionalExtensionality.html#functional_extensionality">functional_extensionality</a></span>.<br/>
+<span class="tactic">intros</span> <span class="id">x0</span>.<br/>
+<span class="tactic">apply</span> (<span class="id">scal_distr_r</span> <span class="id">x</span> <span class="id">y</span>).<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="fct_ModuleSpace_mixin">fct_ModuleSpace_mixin</a></span> :=<br/>
+&nbsp;&nbsp;<span class="id">ModuleSpace.Mixin</span> <span class="id">R_Ring</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_AbelianGroup">fct_AbelianGroup</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal">fct_scal</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal_assoc">fct_scal_assoc</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal_one">fct_scal_one</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal_distr_l">fct_scal_distr_l</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal_distr_r">fct_scal_distr_r</a></span>.<br/>
+<br/>
+<span class="id">Canonical</span> <span class="id"><a name="fct_ModuleSpace">fct_ModuleSpace</a></span> :=<br/>
+&nbsp;&nbsp;<span class="id">ModuleSpace.Pack</span> <span class="id">R_Ring</span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id">ModuleSpace.Class</span> <span class="id">R_Ring</span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>) <span class="id">_</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_ModuleSpace_mixin">fct_ModuleSpace_mixin</a></span>) (<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts.F">F</a></span>).<br/>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#Fcts">Fcts</a></span>.<br/>
+<br/>
+<div class="doc">Linear Mapping </div>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="SSG_linear_mapping">SSG_linear_mapping</a></span>.<br/>
+<br/>
+<span class="kwd">Context</span> {<span class="id">E</span> : <span class="id">ModuleSpace</span> <span class="id">R_Ring</span>}.<br/>
+<span class="kwd">Context</span> {<span class="id">F</span> : <span class="id">ModuleSpace</span> <span class="id">R_Ring</span>}.<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="is_linear_mapping">is_linear_mapping</a></span> (<span class="id">phi</span>: <span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_linear_mapping.E">E</a></span> -&gt; <span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_linear_mapping.F">F</a></span>) :=<br/>
+&nbsp;&nbsp;(<span class="kwd">forall</span> (<span class="id">x</span> <span class="id">y</span> : <span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_linear_mapping.E">E</a></span>), <span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> (<span class="id">plus</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span>) = <span class="id">plus</span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span>) (<span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/\ (<span class="kwd">forall</span> (<span class="id">x</span> : <span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_linear_mapping.E">E</a></span>) (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>), <span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> (<span class="id">scal</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#l">l</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span>) = <span class="id">scal</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#l">l</a></span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span>)).<br/>
+<br/>
+<span class="kwd">Theorem</span> <span class="id"><a name="compatible_g_is_linear_mapping">compatible_g_is_linear_mapping</a></span>:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.compatible.html#compatible_g">compatible_g</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#is_linear_mapping">is_linear_mapping</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1196')">Proof.</div>
+<div class="proofscript" id="proof1196">
+<span class="tactic">split</span>.<br/>
+<span class="tactic">intros</span> <span class="id">f</span> <span class="id">g</span> (<span class="id">Hf1</span>,<span class="id">Hf2</span>) (<span class="id">Hg1</span>,<span class="id">Hg2</span>).<br/>
+<span class="tactic">split</span>.<br/>
+&nbsp;+ <span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">plus</span> <span class="tactic">at</span> 1 4 5; <span class="tactic">unfold</span> <span class="id">opp</span>; <span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span>, <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">Hf1</span>, <span class="id">Hg1</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">opp_plus</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> &lt;- <span class="id">plus_assoc</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id">plus_assoc</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#f_equal2">f_equal2</a></span>; <span class="tactic">try</span> <span class="id">easy</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">plus_comm</span>.<br/>
+&nbsp;+ <span class="tactic">intros</span> <span class="id">x</span> <span class="id">l</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">plus</span>, <span class="id">opp</span>;<span class="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span>, <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">Hf2</span>, <span class="id">Hg2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> &lt;- <span class="id">scal_opp_l</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">scal_distr_l</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">scal_opp_l</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">scal_opp_r</span>.<br/>
+&nbsp;+ <span class="id">exists</span> <span class="id">zero</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="tactic">split</span>; <span class="tactic">unfold</span> <span class="id">zero</span>; <span class="tactic">intros</span>; <span class="tactic">simpl</span>; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_zero">fct_zero</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">plus_zero_l</span>.<br/>
+&nbsp;&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">scal_zero_r</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_linear_mapping_zero">is_linear_mapping_zero</a></span>: <span class="kwd">forall</span> <span class="id">f</span>,<br/>
+&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.linear_map.html#is_linear_mapping">is_linear_mapping</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> -&gt; <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> <span class="id">zero</span> = <span class="id">zero</span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1197')">Proof.</div>
+<div class="proofscript" id="proof1197">
+<span class="tactic">intros</span> <span class="id">f</span> (<span class="id">Hf1</span>,<span class="id">Hf2</span>).<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#trans_eq">trans_eq</a></span> <span class="kwd">with</span> (<span class="id">f</span> (<span class="id">scal</span> <span class="id">zero</span> <span class="id">zero</span>)).<br/>
+<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">scal_zero_l</span>.<br/>
+<span class="tactic">rewrite</span> <span class="id">Hf2</span>.<br/>
+<span class="tactic">apply</span> <span class="id">scal_zero_l</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_linear_mapping_opp">is_linear_mapping_opp</a></span>: <span class="kwd">forall</span> <span class="id">f</span> <span class="id">x</span>,<br/>
+&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.linear_map.html#is_linear_mapping">is_linear_mapping</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> -&gt; <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> (<span class="id">opp</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span>) = <span class="id">opp</span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1198')">Proof.</div>
+<div class="proofscript" id="proof1198">
+<span class="tactic">intros</span> <span class="id">f</span> <span class="id">y</span> (<span class="id">Hf1</span>,<span class="id">Hf2</span>).<br/>
+<span class="tactic">rewrite</span> &lt;- <span class="id">scal_opp_one</span>.<br/>
+<span class="tactic">rewrite</span> <span class="id">Hf2</span>.<br/>
+<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">scal_opp_one</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_linear_mapping_f_zero">is_linear_mapping_f_zero</a></span>:<br/>
+&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.linear_map.html#is_linear_mapping">is_linear_mapping</a></span> (<span class="kwd">fun</span> (<span class="id">x</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_linear_mapping.E">E</a></span>) =&gt; @<span class="id">zero</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_linear_mapping.F">F</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1199')">Proof.</div>
+<div class="proofscript" id="proof1199">
+<span class="tactic">split</span>; <span class="tactic">intros</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#sym_eq">sym_eq</a></span>, <span class="id">plus_zero_l</span>.<br/>
+<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#sym_eq">sym_eq</a></span>, <span class="id">scal_zero_r</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_linear_mapping_f_opp">is_linear_mapping_f_opp</a></span>: <span class="kwd">forall</span> (<span class="id">f</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_linear_mapping.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_linear_mapping.F">F</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.linear_map.html#is_linear_mapping">is_linear_mapping</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.linear_map.html#is_linear_mapping">is_linear_mapping</a></span> (<span class="id">opp</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1200')">Proof.</div>
+<div class="proofscript" id="proof1200">
+<span class="tactic">intros</span> <span class="id">f</span> (<span class="id">H1</span>,<span class="id">H2</span>); <span class="tactic">split</span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span>; <span class="tactic">unfold</span> <span class="id">opp</span>; <span class="tactic">simpl</span>; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span>.<br/>
+<span class="tactic">rewrite</span> <span class="id">H1</span>.<br/>
+<span class="tactic">apply</span> <span class="id">opp_plus</span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">l</span>; <span class="tactic">unfold</span> <span class="id">opp</span>; <span class="tactic">simpl</span>; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span>.<br/>
+<span class="tactic">rewrite</span> <span class="id">H2</span>.<br/>
+<span class="id">now</span> <span class="tactic">rewrite</span> &lt;- <span class="id">scal_opp_r</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_linear_mapping_f_plus">is_linear_mapping_f_plus</a></span>: <span class="kwd">forall</span> (<span class="id">f</span> <span class="id">g</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_linear_mapping.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_linear_mapping.F">F</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.linear_map.html#is_linear_mapping">is_linear_mapping</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> -&gt; <span class="id"><a href="CertRL.converge.LM.linear_map.html#is_linear_mapping">is_linear_mapping</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#g">g</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.linear_map.html#is_linear_mapping">is_linear_mapping</a></span> (<span class="id">plus</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#g">g</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1201')">Proof.</div>
+<div class="proofscript" id="proof1201">
+<span class="tactic">intros</span> <span class="id">f</span> <span class="id">g</span> (<span class="id">H1</span>,<span class="id">K1</span>) (<span class="id">H2</span>,<span class="id">K2</span>); <span class="tactic">split</span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span>; <span class="tactic">unfold</span> <span class="id">plus</span> <span class="tactic">at</span> 1 4 5; <span class="tactic">simpl</span>; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span>.<br/>
+<span class="tactic">rewrite</span> <span class="id">H1</span>, <span class="id">H2</span>.<br/>
+<span class="tactic">rewrite</span> &lt;- 2!<span class="id">plus_assoc</span>; <span class="tactic">apply</span> <span class="tactic">f_equal</span>.<br/>
+<span class="tactic">rewrite</span> <span class="id">plus_comm</span>, <span class="id">plus_assoc</span>.<br/>
+<span class="tactic">rewrite</span> &lt;- 2!<span class="id">plus_assoc</span>; <span class="tactic">apply</span> <span class="tactic">f_equal</span>, <span class="id">plus_comm</span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">l</span>; <span class="tactic">unfold</span> <span class="id">plus</span>; <span class="tactic">simpl</span>; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span>.<br/>
+<span class="tactic">rewrite</span> <span class="id">K1</span>, <span class="id">K2</span>.<br/>
+<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">scal_distr_l</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="is_linear_mapping_f_scal">is_linear_mapping_f_scal</a></span>: <span class="kwd">forall</span> <span class="id">l</span>, <span class="kwd">forall</span> (<span class="id">f</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_linear_mapping.E">E</a></span>-&gt;<span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_linear_mapping.F">F</a></span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.linear_map.html#is_linear_mapping">is_linear_mapping</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> -&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.linear_map.html#is_linear_mapping">is_linear_mapping</a></span> (<span class="id">scal</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#l">l</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1202')">Proof.</div>
+<div class="proofscript" id="proof1202">
+<span class="tactic">intros</span> <span class="id">l</span> <span class="id">f</span> (<span class="id">H1</span>,<span class="id">H2</span>); <span class="tactic">split</span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span>; <span class="tactic">unfold</span> <span class="id">scal</span>; <span class="tactic">simpl</span>; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal">fct_scal</a></span>.<br/>
+<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">H1</span>, <span class="id">scal_distr_l</span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">k</span>.<br/>
+<span class="tactic">unfold</span> <span class="id">scal</span> <span class="tactic">at</span> 1 4; <span class="tactic">simpl</span>; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_scal">fct_scal</a></span>.<br/>
+<span class="tactic">rewrite</span> <span class="id">H2</span>, 2!<span class="id">scal_assoc</span>.<br/>
+<span class="tactic">unfold</span> <span class="id">mult</span>; <span class="tactic">simpl</span>.<br/>
+<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#Rmult_comm">Rmult_comm</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_linear_mapping">SSG_linear_mapping</a></span>.<br/>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="SSG_bilinear_mapping">SSG_bilinear_mapping</a></span>.<br/>
+<br/>
+<span class="kwd">Context</span> {<span class="id">E</span> : <span class="id">ModuleSpace</span> <span class="id">R_Ring</span>}.<br/>
+<span class="kwd">Context</span> {<span class="id">F</span> : <span class="id">ModuleSpace</span> <span class="id">R_Ring</span>}.<br/>
+<span class="kwd">Context</span> {<span class="id">G</span> : <span class="id">ModuleSpace</span> <span class="id">R_Ring</span>}.<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="is_bilinear_mapping">is_bilinear_mapping</a></span> (<span class="id">phi</span>: <span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_bilinear_mapping.E">E</a></span> -&gt; <span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_bilinear_mapping.F">F</a></span> -&gt; <span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_bilinear_mapping.G">G</a></span>) :=<br/>
+&nbsp;&nbsp;(<span class="kwd">forall</span> (<span class="id">x</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_bilinear_mapping.E">E</a></span>) (<span class="id">y</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_bilinear_mapping.F">F</a></span>) (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>), <span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> (<span class="id">scal</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#l">l</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span>) <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span> = <span class="id">scal</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#l">l</a></span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span>)) /\<br/>
+&nbsp;&nbsp;(<span class="kwd">forall</span> (<span class="id">x</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_bilinear_mapping.E">E</a></span>) (<span class="id">y</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_bilinear_mapping.F">F</a></span>) (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>), <span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> (<span class="id">scal</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#l">l</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span>) = <span class="id">scal</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#l">l</a></span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span>)) /\<br/>
+&nbsp;&nbsp;(<span class="kwd">forall</span> (<span class="id">x</span> <span class="id">y</span>: <span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_bilinear_mapping.E">E</a></span>) (<span class="id">z</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_bilinear_mapping.F">F</a></span>), <span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> (<span class="id">plus</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span>) <span class="id"><a href="CertRL.converge.LM.linear_map.html#z">z</a></span> = <span class="id">plus</span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#z">z</a></span>) (<span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#z">z</a></span>)) /\<br/>
+&nbsp;&nbsp;(<span class="kwd">forall</span> (<span class="id">x</span>:<span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_bilinear_mapping.E">E</a></span>) (<span class="id">y</span> <span class="id">z</span> : <span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_bilinear_mapping.F">F</a></span>), <span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> (<span class="id">plus</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#z">z</a></span>) = <span class="id">plus</span> (<span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span>) (<span class="id"><a href="CertRL.converge.LM.linear_map.html#phi">phi</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#z">z</a></span>)).<br/>
+<br/>
+<span class="kwd">Theorem</span> <span class="id"><a name="compatible_g_is_bilinear_mapping">compatible_g_is_bilinear_mapping</a></span>:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.converge.LM.compatible.html#compatible_g">compatible_g</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#is_bilinear_mapping">is_bilinear_mapping</a></span>.<br/>
+<span class="tactic">split</span>.<br/>
+<span class="tactic">intros</span> <span class="id">f</span> <span class="id">g</span> (<span class="id">Hf1</span>,(<span class="id">Hf2</span>,(<span class="id">Hf3</span>,<span class="id">Hf4</span>))) (<span class="id">Hg1</span>,(<span class="id">Hg2</span>,(<span class="id">Hg3</span>,<span class="id">Hg4</span>))).<br/>
+<span class="tactic">split</span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">l</span>;<span class="tactic">unfold</span> <span class="id">plus</span>; <span class="tactic">unfold</span> <span class="id">opp</span>; <span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span>, <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span>;<span class="tactic">unfold</span> <span class="id">plus</span>, <span class="id">opp</span>; <span class="tactic">simpl</span>;<br/>
+&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span>, <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span>;<span class="tactic">rewrite</span> <span class="id">Hf1</span>,<span class="id">Hg1</span>;<span class="tactic">rewrite</span> &lt;- <span class="id">scal_opp_r</span>;<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">scal_distr_l</span>.<br/>
+<span class="tactic">split</span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">l</span>;<span class="tactic">unfold</span> <span class="id">plus</span>; <span class="tactic">unfold</span> <span class="id">opp</span>; <span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span>, <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span>;<span class="tactic">unfold</span> <span class="id">plus</span>, <span class="id">opp</span>; <span class="tactic">simpl</span>;<br/>
+&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span>, <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span>;<span class="tactic">rewrite</span> <span class="id">Hf2</span>,<span class="id">Hg2</span>;<span class="tactic">rewrite</span> &lt;- <span class="id">scal_opp_r</span>;<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">scal_distr_l</span>.<br/>
+<span class="tactic">split</span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">z</span>; <span class="tactic">unfold</span> <span class="id">plus</span> <span class="tactic">at</span> 1 4 5; <span class="tactic">unfold</span> <span class="id">opp</span>;<span class="tactic">simpl</span>; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span>, <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span>;<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">plus</span> <span class="tactic">at</span> 1 5 6;<span class="tactic">unfold</span> <span class="id">opp</span>;<span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span>, <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span>;<span class="tactic">rewrite</span> <span class="id">Hf3</span>,<span class="id">Hg3</span>;<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">opp_plus</span>;<span class="tactic">rewrite</span> <span class="id">plus_assoc</span>;<span class="tactic">rewrite</span> <span class="id">plus_assoc</span>;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#f_equal2">f_equal2</a></span>;<span class="tactic">trivial</span>.<br/>
+&nbsp;<span class="tactic">rewrite</span> &lt;- <span class="id">plus_assoc</span>;<span class="tactic">rewrite</span> (<span class="id">plus_comm</span> (<span class="id">f</span> <span class="id">y</span> <span class="id">z</span>) (<span class="id">opp</span> (<span class="id">g</span> <span class="id">x</span> <span class="id">z</span>)));<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">plus_assoc</span>.<br/>
+<span class="tactic">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">z</span>; <span class="tactic">unfold</span> <span class="id">plus</span> <span class="tactic">at</span> 1 4 5; <span class="tactic">unfold</span> <span class="id">opp</span>;<span class="tactic">simpl</span>; <span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span>, <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">plus</span> <span class="tactic">at</span> 1 4 5;<span class="tactic">unfold</span> <span class="id">opp</span>;<span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_plus">fct_plus</a></span>, <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_opp">fct_opp</a></span>. <span class="tactic">rewrite</span> <span class="id">Hf4</span>,<span class="id">Hg4</span>;<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">opp_plus</span>;<span class="tactic">rewrite</span> <span class="id">plus_assoc</span>;<span class="tactic">rewrite</span> <span class="id">plus_assoc</span>;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#f_equal2">f_equal2</a></span>;<span class="tactic">trivial</span>.<br/>
+&nbsp;<span class="tactic">rewrite</span> &lt;- <span class="id">plus_assoc</span>;<span class="tactic">rewrite</span> (<span class="id">plus_comm</span> (<span class="id">f</span> <span class="id">x</span> <span class="id">z</span>) (<span class="id">opp</span> (<span class="id">g</span> <span class="id">x</span> <span class="id">y</span>)));<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">plus_assoc</span>.<br/>
+<span class="id">exists</span> <span class="id">zero</span>;<span class="tactic">split</span>.<br/>
+<span class="tactic">unfold</span> <span class="id">zero</span>;<span class="tactic">intros</span>;<span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_zero">fct_zero</a></span>; <span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id">zero</span>;<span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_zero">fct_zero</a></span>;<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">scal_zero_r</span>.<br/>
+<span class="tactic">split</span>.<br/>
+<span class="tactic">unfold</span> <span class="id">zero</span>;<span class="tactic">intros</span>;<span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_zero">fct_zero</a></span>; <span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id">zero</span>;<span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_zero">fct_zero</a></span>;<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">scal_zero_r</span>.<br/>
+<span class="tactic">split</span>.<br/>
+<span class="tactic">unfold</span> <span class="id">zero</span>;<span class="tactic">intros</span>;<span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_zero">fct_zero</a></span>; <span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id">zero</span>;<span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_zero">fct_zero</a></span>;<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">plus_zero_l</span>.<br/>
+<span class="tactic">unfold</span> <span class="id">zero</span>;<span class="tactic">intros</span>;<span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_zero">fct_zero</a></span>; <span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id">zero</span>;<span class="tactic">simpl</span>;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#fct_zero">fct_zero</a></span>;<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="tactic">rewrite</span> <span class="id">plus_zero_l</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#SSG_bilinear_mapping">SSG_bilinear_mapping</a></span>.<br/>
+<br/>
+<div class="doc">Injections, surjections, bijections </div>
+<br/>
+<span class="kwd">Section</span> <span class="id"><a name="Inj_Surj_Bij">Inj_Surj_Bij</a></span>.<br/>
+<br/>
+<span class="kwd">Context</span> {<span class="id">E</span> : <span class="id">ModuleSpace</span> <span class="id">R_Ring</span>}.<br/>
+<span class="kwd">Context</span> {<span class="id">F</span> : <span class="id">ModuleSpace</span> <span class="id">R_Ring</span>}.<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="is_injective">is_injective</a></span> (<span class="id">f</span>: <span class="id"><a href="CertRL.converge.LM.linear_map.html#Inj_Surj_Bij.E">E</a></span> -&gt; <span class="id"><a href="CertRL.converge.LM.linear_map.html#Inj_Surj_Bij.F">F</a></span>) :=<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">x</span> <span class="id">y</span> : <span class="id"><a href="CertRL.converge.LM.linear_map.html#Inj_Surj_Bij.E">E</a></span>), <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> = <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span> -&gt; <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> = <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span>.<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="is_surjective">is_surjective</a></span> (<span class="id">f</span>: <span class="id"><a href="CertRL.converge.LM.linear_map.html#Inj_Surj_Bij.E">E</a></span> -&gt; <span class="id"><a href="CertRL.converge.LM.linear_map.html#Inj_Surj_Bij.F">F</a></span>) :=<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> (<span class="id">y</span> : <span class="id"><a href="CertRL.converge.LM.linear_map.html#Inj_Surj_Bij.F">F</a></span>), <span class="id">exists</span> (<span class="id">x</span> : <span class="id"><a href="CertRL.converge.LM.linear_map.html#Inj_Surj_Bij.E">E</a></span>), <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#x">x</a></span> = <span class="id"><a href="CertRL.converge.LM.linear_map.html#y">y</a></span>.<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="is_bijective">is_bijective</a></span> (<span class="id">f</span>: <span class="id"><a href="CertRL.converge.LM.linear_map.html#Inj_Surj_Bij.E">E</a></span> -&gt; <span class="id"><a href="CertRL.converge.LM.linear_map.html#Inj_Surj_Bij.F">F</a></span>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="CertRL.converge.LM.linear_map.html#is_injective">is_injective</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span>) /\ (<span class="id"><a href="CertRL.converge.LM.linear_map.html#is_surjective">is_surjective</a></span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#f">f</a></span>).<br/>
+<br/>
+<span class="kwd">End</span> <span class="id"><a href="CertRL.converge.LM.linear_map.html#Inj_Surj_Bij">Inj_Surj_Bij</a></span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

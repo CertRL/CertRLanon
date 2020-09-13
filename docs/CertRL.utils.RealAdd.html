@@ -1,0 +1,369 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.utils.RealAdd</title>
+<meta name="description" content="Documentation of Coq module CertRL.utils.RealAdd" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.utils.RealAdd</h1>
+<div class="coq">
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbase.html">Coq.Reals.Rbase</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RList.html">Coq.Reals.RList</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rfunctions.html">Coq.Reals.Rfunctions</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Ranalysis_reg.html">Ranalysis_reg</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Integration.html">Reals.Integration</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rtrigo_def.html">Rtrigo_def</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html">List</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.EquivDec.html">EquivDec</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Nat.html">Nat</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.omega.Omega.html">Omega</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.micromega.Lra.html">Lra</a></span>.<br/>
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="CertRL.lib_utils.LibUtils.html">LibUtils</a></span> <span class="id"><a href="CertRL.utils.ListAdd.html">ListAdd</a></span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Relations.Relation_Definitions.html">Relation_Definitions</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html">Sorted</a></span>.<br/>
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="CertRL.utils.Isomorphism.html">Isomorphism</a></span>.<br/>
+<br/>
+<span class="kwd">Import</span> <span class="id">ListNotations</span>.<br/>
+<br/>
+<span class="kwd">Local</span> <span class="kwd">Open</span> <span class="kwd">Scope</span> <span class="id">R</span>.<br/>
+<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="INR_nzero">INR_nzero</a></span> {<span class="id">n</span>} :<br/>
+&nbsp;&nbsp;(<span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span> &gt; 0)%<span class="id">nat</span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#INR">INR</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span> &lt;&gt; 0.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1427')">Proof.</div>
+<div class="proofscript" id="proof1427">
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">n</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#S_INR">S_INR</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#pos_INR">pos_INR</a></span> <span class="id">n</span>); <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="INR_nzero_eq">INR_nzero_eq</a></span> {<span class="id">n</span>} :<br/>
+&nbsp;&nbsp;(~ <span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span> = 0)%<span class="id">nat</span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#INR">INR</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span> &lt;&gt; 0.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1428')">Proof.</div>
+<div class="proofscript" id="proof1428">
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">n</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#S_INR">S_INR</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#pos_INR">pos_INR</a></span> <span class="id">n</span>); <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="INR_zero_lt">INR_zero_lt</a></span> {<span class="id">n</span>} :<br/>
+&nbsp;&nbsp;(<span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span> &gt; 0)%<span class="id">nat</span> -&gt; 0 &lt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#INR">INR</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1429')">Proof.</div>
+<div class="proofscript" id="proof1429">
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">n</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#S_INR">S_INR</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#pos_INR">pos_INR</a></span> <span class="id">n</span>); <span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Rinv_pos">Rinv_pos</a></span> <span class="id">n</span> :<br/>
+&nbsp;&nbsp;0 &lt; <span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span> -&gt;<br/>
+&nbsp;&nbsp;0 &lt; / <span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1430')">Proof.</div>
+<div class="proofscript" id="proof1430">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> &lt;- (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#Rmult_1_l">Rmult_1_l</a></span> ( / <span class="id">n</span>)).<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rdiv_lt_0_compat">Rdiv_lt_0_compat</a></span>; <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="pos_Rl_nth">pos_Rl_nth</a></span> (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) <span class="id">n</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RList.html#pos_Rl">pos_Rl</a></span> (<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span>) <span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span> 0.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1431')">Proof.</div>
+<div class="proofscript" id="proof1431">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">n</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">destruct</span> <span class="id">n</span>; <span class="tactic">simpl</span> <span class="kwd">in</span> *; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Rlength_length">Rlength_length</a></span> (<span class="id">l</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RList.html#Rlength">Rlength</a></span> (<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span>) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1432')">Proof.</div>
+<div class="proofscript" id="proof1432">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span> <span class="kwd">in</span> *; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHl</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Hint</span> <span class="id">Rewrite</span> <span class="id"><a href="CertRL.utils.RealAdd.html#pos_Rl_nth">pos_Rl_nth</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#Rlength_length">Rlength_length</a></span> : <span class="id">R_iso</span>.<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="Rlt_le_sub">Rlt_le_sub</a></span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Classes.RelationClasses.html#subrelation">subrelation</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Rlt">Rlt</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#Rle">Rle</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1433')">Proof.</div>
+<div class="proofscript" id="proof1433">
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">red</span>; <span class="tactic">intuition</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="find_bucket_nth_finds_Rle">find_bucket_nth_finds_Rle</a></span> <span class="id">needle</span> <span class="id">l</span> <span class="id">idx</span> <span class="id">d1</span> <span class="id">d2</span>:<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Sorting.Sorted.html#StronglySorted">StronglySorted</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#Rle">Rle</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span> -&gt;<br/>
+&nbsp;&nbsp;(<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#idx">idx</a></span> &lt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#length">length</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span>)%<span class="id">nat</span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#idx">idx</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#d1">d1</a></span> &lt; <span class="id"><a href="CertRL.utils.RealAdd.html#needle">needle</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#needle">needle</a></span> &lt;= <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#idx">idx</a></span>) <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#d2">d2</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#find_bucket">find_bucket</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rle_dec">Rle_dec</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#needle">needle</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span> = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#idx">idx</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#d1">d1</a></span>, <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#nth">nth</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#idx">idx</a></span>) <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#d2">d2</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1434')">Proof.</div>
+<div class="proofscript" id="proof1434">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.ListAdd.html#find_bucket_nth_finds">find_bucket_nth_finds</a></span>; <span class="tactic">trivial</span><br/>
+&nbsp;&nbsp;; <span class="tactic">repeat</span> <span class="tactic">red</span>; <span class="tactic">intros</span>; <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="find_bucket_bounded_Rle_exists">find_bucket_bounded_Rle_exists</a></span> {<span class="id">a</span> <span class="id">b</span> <span class="id">needle</span>} :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#a">a</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#needle">needle</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#b">b</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> <span class="id">l</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exists</span> <span class="id">lower</span> <span class="id">upper</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.ListAdd.html#find_bucket">find_bucket</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rle_dec">Rle_dec</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#needle">needle</a></span> (<span class="id"><a href="CertRL.utils.RealAdd.html#a">a</a></span>::<span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span>++[<span class="id"><a href="CertRL.utils.RealAdd.html#b">b</a></span>]) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="CertRL.utils.RealAdd.html#lower">lower</a></span>, <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1435')">Proof.</div>
+<div class="proofscript" id="proof1435">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.ListAdd.html#find_bucket_bounded_le_exists">find_bucket_bounded_le_exists</a></span>; <span class="tactic">intros</span>; <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="telescope_plus_fold_right_sub_seq">telescope_plus_fold_right_sub_seq</a></span> <span class="id">f</span> <span class="id">s</span> <span class="id">n</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Rplus">Rplus</a></span> 0 (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; (<span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#INR">INR</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span>)) -  (<span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#INR">INR</a></span> (<span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span>+1)))) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#seq">seq</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#s">s</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span>)) = (<span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#INR">INR</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#s">s</a></span>)) - (<span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#INR">INR</a></span> (<span class="id"><a href="CertRL.utils.RealAdd.html#s">s</a></span>+<span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span>))).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1436')">Proof.</div>
+<div class="proofscript" id="proof1436">
+&nbsp;&nbsp;<span class="id">Opaque</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#INR">INR</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">n</span>; <span class="tactic">simpl</span>; <span class="tactic">intros</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">replace</span> (<span class="id">s</span>+0)%<span class="id">nat</span> <span class="kwd">with</span> <span class="id">s</span> <span class="tactic">by</span> <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+&nbsp;&nbsp;- <span class="id">specialize</span> (<span class="id">IHn</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id">s</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#Rminus">Rminus</a></span> <span class="kwd">in</span> *.    <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#Rplus_assoc">Rplus_assoc</a></span> <span class="kwd">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">simpl</span> <span class="kwd">in</span> <span class="id">IHn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> (<span class="id">s</span> + <span class="id">n</span>))%<span class="id">nat</span> <span class="kwd">with</span> (<span class="id">s</span> + (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id">n</span>))%<span class="id">nat</span> <span class="kwd">in</span> <span class="id">IHn</span> <span class="tactic">by</span> <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">replace</span> (<span class="id">s</span>+1)%<span class="id">nat</span> <span class="kwd">with</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id">s</span>) <span class="tactic">by</span> <span class="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Transparent</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#INR">INR</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="fold_right_Rplus_mult_const">fold_right_Rplus_mult_const</a></span> {<span class="id">A</span>:<span class="kwd">Type</span>} (<span class="id">f</span>:<span class="id"><a href="CertRL.utils.RealAdd.html#A">A</a></span>-&gt;<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) <span class="id">c</span> <span class="id">l</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Rplus">Rplus</a></span> 0 (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> <span class="id">x</span> : <span class="id"><a href="CertRL.utils.RealAdd.html#A">A</a></span> =&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> * <span class="id"><a href="CertRL.utils.RealAdd.html#c">c</a></span>) <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span>) =<br/>
+&nbsp;&nbsp;(<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Rplus">Rplus</a></span> 0 (<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> <span class="id">x</span> : <span class="id"><a href="CertRL.utils.RealAdd.html#A">A</a></span> =&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span>) <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span>))*<span class="id"><a href="CertRL.utils.RealAdd.html#c">c</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1437')">Proof.</div>
+<div class="proofscript" id="proof1437">
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="bounded_dist_le">bounded_dist_le</a></span>  <span class="id">x</span> <span class="id">lower</span> <span class="id">upper</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#lower">lower</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rfunctions.html#R_dist">R_dist</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span> &lt;= <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rfunctions.html#R_dist">R_dist</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#lower">lower</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1438')">Proof.</div>
+<div class="proofscript" id="proof1438">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rfunctions.html#R_dist_sym">R_dist_sym</a></span> <span class="id">x</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rfunctions.html#R_dist_sym">R_dist_sym</a></span> <span class="id">lower</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rfunctions.html#R_dist">R_dist</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs_pos_eq">Rabs_pos_eq</a></span> <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="bounded_dist_le_P2">bounded_dist_le_P2</a></span>  <span class="id">x</span> <span class="id">lower</span> <span class="id">upper</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#lower">lower</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rfunctions.html#R_dist">R_dist</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#lower">lower</a></span> &lt;= <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rfunctions.html#R_dist">R_dist</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#lower">lower</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1439')">Proof.</div>
+<div class="proofscript" id="proof1439">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rfunctions.html#R_dist">R_dist</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs_pos_eq">Rabs_pos_eq</a></span> <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="interval_increasing">interval_increasing</a></span> <span class="id">f</span> (<span class="id">a</span> <span class="id">b</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : <span class="kwd">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> <span class="id">x</span> <span class="id">y</span> :<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>, <span class="id"><a href="CertRL.utils.RealAdd.html#a">a</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#b">b</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span>&lt;=<span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span>.<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="interval_decreasing">interval_decreasing</a></span> <span class="id">f</span> (<span class="id">a</span> <span class="id">b</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) : <span class="kwd">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="kwd">forall</span> <span class="id">x</span> <span class="id">y</span> :<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>, <span class="id"><a href="CertRL.utils.RealAdd.html#a">a</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#b">b</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span>&lt;=<span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span>.<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="bounded_increasing_dist_le">bounded_increasing_dist_le</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) <span class="id">x</span> <span class="id">lower</span> <span class="id">upper</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#interval_increasing">interval_increasing</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#lower">lower</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#lower">lower</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rfunctions.html#R_dist">R_dist</a></span> (<span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span>) (<span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span>) &lt;= <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rfunctions.html#R_dist">R_dist</a></span> (<span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#lower">lower</a></span>) (<span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1440')">Proof.</div>
+<div class="proofscript" id="proof1440">
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">df</span> <span class="id">xin</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.RealAdd.html#bounded_dist_le">bounded_dist_le</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">xin</span> <span class="kwd">as</span> [<span class="id">ltx</span> <span class="id">gtx</span>].<br/>
+&nbsp;&nbsp;<span class="tactic">red</span> <span class="kwd">in</span> <span class="id">df</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">split</span>; <span class="tactic">apply</span> <span class="id">df</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rle_refl">Rle_refl</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rle_refl">Rle_refl</a></span>.  <br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="bounded_decreasing_dist_le">bounded_decreasing_dist_le</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) <span class="id">x</span> <span class="id">lower</span> <span class="id">upper</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#interval_decreasing">interval_decreasing</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#lower">lower</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#lower">lower</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rfunctions.html#R_dist">R_dist</a></span> (<span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span>) (<span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span>) &lt;= <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rfunctions.html#R_dist">R_dist</a></span> (<span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#lower">lower</a></span>) (<span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#upper">upper</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1441')">Proof.</div>
+<div class="proofscript" id="proof1441">
+&nbsp;&nbsp;<span class="tactic">intros</span> <span class="id">df</span> <span class="id">xin</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.RealAdd.html#bounded_dist_le_P2">bounded_dist_le_P2</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">xin</span> <span class="kwd">as</span> [<span class="id">ltx</span> <span class="id">gtx</span>].<br/>
+&nbsp;&nbsp;<span class="tactic">red</span> <span class="kwd">in</span> <span class="id">df</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">split</span>; <span class="tactic">apply</span> <span class="id">df</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rle_refl">Rle_refl</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rle_refl">Rle_refl</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="subinterval_increasing">subinterval_increasing</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">a</span> <span class="id">b</span> <span class="id">x</span> <span class="id">y</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#a">a</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#b">b</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#interval_increasing">interval_increasing</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#a">a</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#b">b</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#interval_increasing">interval_increasing</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1442')">Proof.</div>
+<div class="proofscript" id="proof1442">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">red</span> <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">red</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">cut</span> (<span class="id">y0</span> &lt;= <span class="id">b</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">cut</span> (<span class="id">a</span> &lt;= <span class="id">x0</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="subinterval_decreasing">subinterval_decreasing</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">a</span> <span class="id">b</span> <span class="id">x</span> <span class="id">y</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#a">a</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#b">b</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#interval_decreasing">interval_decreasing</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#a">a</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#b">b</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#interval_decreasing">interval_decreasing</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1443')">Proof.</div>
+<div class="proofscript" id="proof1443">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">red</span> <span class="kwd">in</span> <span class="id">H2</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">red</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">cut</span> (<span class="id">y0</span> &lt;= <span class="id">b</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">cut</span> (<span class="id">a</span> &lt;= <span class="id">x0</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+&nbsp;&nbsp;<span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="increasing_decreasing_opp">increasing_decreasing_opp</a></span> (<span class="id">f</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) (<span class="id">a</span> <span class="id">b</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#a">a</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#b">b</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#interval_increasing">interval_increasing</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#a">a</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#b">b</a></span> -&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#interval_decreasing">interval_decreasing</a></span> (<span class="kwd">fun</span> <span class="id">x</span> =&gt; -<span class="id"><a href="CertRL.utils.RealAdd.html#f">f</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span>) <span class="id"><a href="CertRL.utils.RealAdd.html#a">a</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#b">b</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1444')">Proof.</div>
+<div class="proofscript" id="proof1444">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.utils.RealAdd.html#interval_increasing">interval_increasing</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="CertRL.utils.RealAdd.html#interval_decreasing">interval_decreasing</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Ropp_le_contravar">Ropp_le_contravar</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Fixpoint</span> <span class="id">Int_SF</span>' (<span class="id">l</span> <span class="id">k</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) {<span class="kwd">struct</span> <span class="id">l</span>} : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span> :=<br/>
+&nbsp;&nbsp;<span class="kwd">match</span> <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;| <span class="id">nil</span> =&gt; 0<br/>
+&nbsp;&nbsp;| <span class="id">a</span>::<span class="id">l</span>' =&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">match</span> <span class="id"><a href="CertRL.utils.RealAdd.html#k">k</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">nil</span> =&gt; 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">x</span>::<span class="id">nil</span> =&gt; 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">x</span>::<span class="id">y</span>::<span class="id">k</span>' =&gt; <span class="id">a</span> * (<span class="id">y</span> - <span class="id">x</span>) + <span class="id">Int_SF</span>' <span class="id">l</span>' (<span class="id">y</span>:: <span class="id">k</span>')<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span><br/>
+&nbsp;&nbsp;<span class="kwd">end</span>.<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id">Int_SF</span>'<span class="id">_eq</span> <span class="id">l</span> <span class="id">k</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RiemannInt_SF.html#Int_SF">Int_SF</a></span> (<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span>) (<span class="id"><a href="CertRL.utils.Isomorphism.html#iso_b">iso_b</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#k">k</a></span>) = <span class="id">Int_SF</span>' <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#k">k</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1445')">Proof.</div>
+<div class="proofscript" id="proof1445">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">k</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">k</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">k</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> &lt;- <span class="id">IHl</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Definition</span> <span class="id">Int_SF</span>'<span class="id">_alt</span> <span class="id">l</span> <span class="id">k</span><br/>
+&nbsp;&nbsp;:= <span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Rplus">Rplus</a></span> 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> '(<span class="id">x</span>,<span class="id">y</span>) =&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> * <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#combine">combine</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="http://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> (<span class="kwd">fun</span> '(<span class="id">x</span>,<span class="id">y</span>) =&gt; <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span> - <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span>) (<span class="id"><a href="CertRL.utils.ListAdd.html#adjacent_pairs">adjacent_pairs</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#k">k</a></span>)))).<br/>
+<br/>
+<span class="kwd">Lemma</span> <span class="id">Int_SF</span>'<span class="id">_alt_eq</span> <span class="id">l</span> <span class="id">k</span> :<br/>
+&nbsp;&nbsp;<span class="id">Int_SF</span>' <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#k">k</a></span> = <span class="id">Int_SF</span>'<span class="id">_alt</span> <span class="id"><a href="CertRL.utils.RealAdd.html#l">l</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#k">k</a></span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1446')">Proof.</div>
+<div class="proofscript" id="proof1446">
+&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id">Int_SF</span>'<span class="id">_alt</span>.<br/>
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">k</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">induction</span> <span class="id">l</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">k</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> <span class="id">k</span>; <span class="tactic">simpl</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id">IHl</span>; <span class="tactic">trivial</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="up_IZR">up_IZR</a></span> <span class="id">n</span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#up">up</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#IZR">IZR</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span>) = (<span class="id"><a href="http://coq.inria.fr/library/Coq.ZArith.BinInt.html#Z.succ">Z.succ</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#n">n</a></span>)%<span class="id">Z</span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1447')">Proof.</div>
+<div class="proofscript" id="proof1447">
+&nbsp;&nbsp;<span class="tactic">symmetry</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.R_Ifp.html#tech_up">tech_up</a></span>; <span class="tactic">try</span> <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#succ_IZR">succ_IZR</a></span>; <span class="id">lra</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="up0">up0</a></span> : <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#up">up</a></span> 0 = 1%<span class="id">Z</span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1448')">Proof.</div>
+<div class="proofscript" id="proof1448">
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="CertRL.utils.RealAdd.html#up_IZR">up_IZR</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="up_pos">up_pos</a></span> (<span class="id">r</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#r">r</a></span>&gt;0 -&gt; ((<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#up">up</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#r">r</a></span>) &gt; 0)%<span class="id">Z</span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1449')">Proof.</div>
+<div class="proofscript" id="proof1449">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">destruct</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#archimed">archimed</a></span> <span class="id">r</span>) <span class="kwd">as</span> [<span class="id">lb</span> <span class="id">ub</span>].<br/>
+&nbsp;&nbsp;<span class="tactic">assert</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#IZR">IZR</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#up">up</a></span> <span class="id">r</span>) &gt; 0) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#lt_IZR">lt_IZR</a></span> <span class="kwd">in</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">omega</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="up_nonneg">up_nonneg</a></span> (<span class="id">r</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#r">r</a></span>&gt;=0 -&gt; ((<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#up">up</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#r">r</a></span>) &gt;= 0)%<span class="id">Z</span>.<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1450')">Proof.</div>
+<div class="proofscript" id="proof1450">
+&nbsp;&nbsp;<span class="tactic">inversion</span> 1.<br/>
+&nbsp;&nbsp;- <span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.ZArith.BinInt.html#Z.ge">Z.ge</a></span>; <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.RealAdd.html#up_pos">up_pos</a></span>; <span class="tactic">congruence</span>.<br/>
+&nbsp;&nbsp;- <span class="tactic">subst</span>. <span class="tactic">rewrite</span> <span class="id"><a href="CertRL.utils.RealAdd.html#up0">up0</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">omega</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="INR_up_pos">INR_up_pos</a></span> <span class="id">r</span> :<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#r">r</a></span> &gt;= 0 -&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#INR">INR</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.ZArith.BinInt.html#Z.to_nat">Z.to_nat</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#up">up</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#r">r</a></span>)) = <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#IZR">IZR</a></span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#up">up</a></span> <span class="id"><a href="CertRL.utils.RealAdd.html#r">r</a></span>).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1451')">Proof.</div>
+<div class="proofscript" id="proof1451">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#INR_IZR_INZ">INR_IZR_INZ</a></span>.<br/>
+&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.ZArith.Znat.html#Z2Nat.id">Z2Nat.id</a></span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">generalize</span> (<span class="id"><a href="CertRL.utils.RealAdd.html#up_nonneg">up_nonneg</a></span> <span class="id">_</span> <span class="id">H</span>).<br/>
+&nbsp;&nbsp;<span class="tactic">omega</span>.<br/>
+Qed.</div>
+<br/>
+<span class="kwd">Lemma</span> <span class="id"><a name="frac_max_frac_le">frac_max_frac_le</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span>) :<br/>
+&nbsp;&nbsp;1 &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span> -&gt;<br/>
+&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> / (<span class="id"><a href="CertRL.utils.RealAdd.html#x">x</a></span> + 1) &lt;= <span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span> / (<span class="id"><a href="CertRL.utils.RealAdd.html#y">y</a></span> + 1).<br/>
+<div class="toggleproof" onclick="toggleDisplay('proof1452')">Proof.</div>
+<div class="proofscript" id="proof1452">
+&nbsp;&nbsp;<span class="tactic">intros</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">assert</span> (1 &lt;= <span class="id">x</span>) <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;<span class="tactic">cut</span> (<span class="id">x</span> * (<span class="id">y</span> + 1) &lt;= <span class="id">y</span> * (<span class="id">x</span> + 1)).<br/>
+&nbsp;&nbsp;- <span class="tactic">intros</span> <span class="id">HH</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rmult_le_compat_r">Rmult_le_compat_r</a></span> (/ (<span class="id">x</span>+1))) <span class="kwd">in</span> <span class="id">HH</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rinv_r_simpl_l">Rinv_r_simpl_l</a></span> <span class="kwd">in</span> <span class="id">HH</span> <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> (<span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rmult_le_compat_r">Rmult_le_compat_r</a></span> (/ (<span class="id">y</span>+1))) <span class="kwd">in</span> <span class="id">HH</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="tactic">eapply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rle_trans">Rle_trans</a></span>; <span class="tactic">try</span> <span class="id">eassumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">unfold</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#Rdiv">Rdiv</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">repeat</span> <span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#Rmult_assoc">Rmult_assoc</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rmult_le_compat_l">Rmult_le_compat_l</a></span>; [<span class="id">lra</span> | ].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> &lt;- <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Raxioms.html#Rmult_assoc">Rmult_assoc</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tactic">rewrite</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rinv_r_simpl_m">Rinv_r_simpl_m</a></span> <span class="tactic">by</span> <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">right</span>; <span class="tactic">trivial</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <span class="id">left</span>; <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rinv_0_lt_compat">Rinv_0_lt_compat</a></span>; <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id">left</span>; <span class="tactic">apply</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rinv_0_lt_compat">Rinv_0_lt_compat</a></span>; <span class="id">lra</span>.<br/>
+&nbsp;&nbsp;- <span class="id">lra</span>.<br/>
+Qed.</div>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

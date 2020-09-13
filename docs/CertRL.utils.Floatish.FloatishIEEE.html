@@ -1,0 +1,116 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.utils.Floatish.FloatishIEEE</title>
+<meta name="description" content="Documentation of Coq module CertRL.utils.Floatish.FloatishIEEE" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.utils.Floatish.FloatishIEEE</h1>
+<div class="coq">
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.ZArith.BinInt.html">BinInt</a></span>.<br/>
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">Flocq.IEEE754.Binary</span>.<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">Flocq.IEEE754.Bits</span>.<br/>
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html">FloatishDef</a></span>.<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_float">IEEE_float</a></span> := <span class="id">binary64</span>.<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_zero">IEEE_zero</a></span> := <span class="id">B754_zero</span> 53 1024 <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span>.<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_opp">IEEE_opp</a></span> := <span class="id">b64_opp</span>.<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_plus">IEEE_plus</a></span> := <span class="id">b64_plus</span> <span class="id">mode_NE</span>.<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_minus">IEEE_minus</a></span> := <span class="id">b64_minus</span> <span class="id">mode_NE</span>.<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_mult">IEEE_mult</a></span> := <span class="id">b64_mult</span> <span class="id">mode_NE</span>.<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_div">IEEE_div</a></span> := <span class="id">b64_div</span> <span class="id">mode_NE</span>.<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_sqrt">IEEE_sqrt</a></span> := <span class="id">b64_sqrt</span> <span class="id">mode_NE</span>.<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_abs">IEEE_abs</a></span> := <span class="id">b64_abs</span>.<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_fromZ">IEEE_fromZ</a></span> <span class="id">i</span> := <span class="id">binary_normalize</span> 53 1024 (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#eq_refl">eq_refl</a></span> <span class="id">_</span>) (<span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Logic.html#eq_refl">eq_refl</a></span> <span class="id">_</span>) <span class="id">mode_NE</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#i">i</a></span> 0 <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span>.<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_eq">IEEE_eq</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span>)<br/>
+&nbsp;&nbsp;:= (<span class="kwd">match</span> <span class="id">b64_compare</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#y">y</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Eq">Eq</a></span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>).      <br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_neq">IEEE_neq</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span>)<br/>
+&nbsp;&nbsp;:= (<span class="kwd">match</span> <span class="id">b64_compare</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#y">y</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Eq">Eq</a></span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>).      <br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_lt">IEEE_lt</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span>)<br/>
+&nbsp;&nbsp;:= (<span class="kwd">match</span> <span class="id">b64_compare</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#y">y</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Lt">Lt</a></span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>).                               <br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_le">IEEE_le</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span>)<br/>
+&nbsp;&nbsp;:= (<span class="kwd">match</span> <span class="id">b64_compare</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#y">y</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Lt">Lt</a></span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Eq">Eq</a></span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span>                         <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>).                               <br/>
+<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_gt">IEEE_gt</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span>)<br/>
+&nbsp;&nbsp;:= (<span class="kwd">match</span> <span class="id">b64_compare</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#y">y</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Gt">Gt</a></span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>).                               <br/>
+<br/>
+<br/>
+<span class="kwd">Definition</span> <span class="id"><a name="IEEE_ge">IEEE_ge</a></span> (<span class="id">x</span> <span class="id">y</span>:<span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span>)<br/>
+&nbsp;&nbsp;:= (<span class="kwd">match</span> <span class="id">b64_compare</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#y">y</a></span> <span class="kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Gt">Gt</a></span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#Eq">Eq</a></span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span>                         <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id">_</span> =&gt; <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">end</span>).                               <br/>
+<br/>
+<span class="kwd">Axiom</span> <span class="id"><a name="IEEE_exp">IEEE_exp</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span>.<br/>
+<span class="kwd">Axiom</span> <span class="id"><a name="IEEE_ln">IEEE_ln</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span>.<br/>
+<span class="kwd">Axiom</span> <span class="id"><a name="IEEE_pi">IEEE_pi</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span>.<br/>
+<span class="kwd">Axiom</span> <span class="id"><a name="IEEE_sin">IEEE_sin</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span>.<br/>
+<span class="kwd">Axiom</span> <span class="id"><a name="IEEE_cos">IEEE_cos</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span> -&gt; <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span>.  <br/>
+<br/>
+<br/>
+<span class="kwd">Local</span> <span class="kwd">Instance</span> <span class="id"><a name="floatish_IEEE">floatish_IEEE</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#floatish">floatish</a></span> :=<br/>
+&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_float">IEEE_float</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fzero">Fzero</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_zero">IEEE_zero</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fopp">Fopp</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_opp">IEEE_opp</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fplus">Fplus</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_plus">IEEE_plus</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fminus">Fminus</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_minus">IEEE_minus</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fmult">Fmult</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_mult">IEEE_mult</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fdiv">Fdiv</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_div">IEEE_div</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fsqrt">Fsqrt</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_sqrt">IEEE_sqrt</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fabs">Fabs</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_abs">IEEE_abs</a></span> <br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fexp">Fexp</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_exp">IEEE_exp</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fln">Fln</a></span>  := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_ln">IEEE_ln</a></span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fpi">Fpi</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_pi">IEEE_pi</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fsin">Fsin</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_sin">IEEE_sin</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fcos">Fcos</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_cos">IEEE_cos</a></span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#FfromZ">FfromZ</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_fromZ">IEEE_fromZ</a></span><br/>
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Feq">Feq</a></span>  := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_eq">IEEE_eq</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fneq">Fneq</a></span> := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_neq">IEEE_neq</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Flt">Flt</a></span>  := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_lt">IEEE_lt</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fle">Fle</a></span>  := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_le">IEEE_le</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fgt">Fgt</a></span>  := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_gt">IEEE_gt</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fge">Fge</a></span>  := <span class="id"><a href="CertRL.utils.Floatish.FloatishIEEE.html#IEEE_ge">IEEE_ge</a></span><br/>
+&nbsp;&nbsp;}.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>

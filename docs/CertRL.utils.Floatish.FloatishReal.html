@@ -1,0 +1,53 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CertRL.utils.Floatish.FloatishReal</title>
+<meta name="description" content="Documentation of Coq module CertRL.utils.Floatish.FloatishReal" />
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="hideAll('proofscript')">
+<h1 class="title">Module CertRL.utils.Floatish.FloatishReal</h1>
+<div class="coq">
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.ZArith.BinInt.html">BinInt</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Reals.html">Reals</a></span> <span class="id"><a href="http://coq.inria.fr/library/Coq.micromega.Lra.html">Lra</a></span>.<br/>
+<br/>
+<span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html">FloatishDef</a></span>.<br/>
+<br/>
+<span class="kwd">Local</span> <span class="kwd">Instance</span> <span class="id"><a name="floatish_R">floatish_R</a></span> : <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#floatish">floatish</a></span> :=<br/>
+&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#float">float</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.R">R</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fzero">Fzero</a></span> := 0%<span class="id">R</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fopp">Fopp</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Ropp">Ropp</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fplus">Fplus</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Rplus">Rplus</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fminus">Fminus</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#Rminus">Rminus</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fmult">Fmult</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#RbaseSymbolsImpl.Rmult">Rmult</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fdiv">Fdiv</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#Rdiv">Rdiv</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fsqrt">Fsqrt</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.R_sqrt.html#sqrt">sqrt</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fabs">Fabs</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rbasic_fun.html#Rabs">Rabs</a></span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fexp">Fexp</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rtrigo_def.html#exp">exp</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fln">Fln</a></span>  := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rpower.html#ln">ln</a></span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fpi">Fpi</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rtrigo1.html#PI">PI</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fsin">Fsin</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rtrigo_def.html#sin">sin</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fcos">Fcos</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rtrigo_def.html#cos">cos</a></span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#FfromZ">FfromZ</a></span> := <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.Rdefinitions.html#IZR">IZR</a></span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Feq">Feq</a></span> <span class="id">x</span> <span class="id">y</span> := <span class="kwd">if</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Req_EM_T">Req_EM_T</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishReal.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishReal.html#y">y</a></span> <span class="kwd">then</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="kwd">else</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fneq">Fneq</a></span> <span class="id">x</span> <span class="id">y</span> := <span class="kwd">if</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Req_EM_T">Req_EM_T</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishReal.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishReal.html#y">y</a></span> <span class="kwd">then</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span> <span class="kwd">else</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Flt">Flt</a></span> <span class="id">x</span> <span class="id">y</span> := <span class="kwd">if</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rlt_dec">Rlt_dec</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishReal.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishReal.html#y">y</a></span> <span class="kwd">then</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="kwd">else</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fle">Fle</a></span> <span class="id">x</span> <span class="id">y</span> := <span class="kwd">if</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rle_dec">Rle_dec</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishReal.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishReal.html#y">y</a></span> <span class="kwd">then</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="kwd">else</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fgt">Fgt</a></span> <span class="id">x</span> <span class="id">y</span> := <span class="kwd">if</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rgt_dec">Rgt_dec</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishReal.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishReal.html#y">y</a></span> <span class="kwd">then</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="kwd">else</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;; <span class="id"><a href="CertRL.utils.Floatish.FloatishDef.html#Fge">Fge</a></span> <span class="id">x</span> <span class="id">y</span> := <span class="kwd">if</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Reals.RIneq.html#Rge_dec">Rge_dec</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishReal.html#x">x</a></span> <span class="id"><a href="CertRL.utils.Floatish.FloatishReal.html#y">y</a></span> <span class="kwd">then</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="kwd">else</span> <span class="id"><a href="http://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;}.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/xavierleroy/coq2html/">coq2html</a></div>
+</body>
+</html>
